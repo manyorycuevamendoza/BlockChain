@@ -7,8 +7,6 @@
 
 #endif //PROYECTO_SHA256_H
 
-
-#include <string>
 #include <array>
 #include <cstring>
 #include <sstream>
