@@ -1,5 +1,19 @@
-#include "blockchain.h"
+
+//realizando una hash table
+#include <iostream>
+#include <string>
+#include "SHA256.h"
+using namespace std;
 
 int main(){
-    return 0;
+        string s = "hello world";
+        SHA256 sha;
+        sha.update(s);
+        uint8_t * digest = sha.digest();
+
+        std::cout << SHA256::toString(digest) << std::endl;
+
+        delete[] digest; 
+        return 0;
+
 }
