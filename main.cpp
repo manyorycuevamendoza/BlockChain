@@ -3,10 +3,12 @@
 #include <iostream>
 #include <string>
 #include "SHA256.h"
+#include "lectura.h"
 using namespace std;
 
 int main(){
-        string s = "hello world";
+        /*
+                string s = "hello world";
         SHA256 sha;
         sha.update(s);
         uint8_t * digest = sha.digest();
@@ -14,6 +16,10 @@ int main(){
         std::cout << SHA256::toString(digest) << std::endl;
 
         delete[] digest; 
+        return 0;
+        */
+
+       readCSV("test1_bchain.csv");
         return 0;
 
 }
