@@ -11,6 +11,8 @@
 ### ¿Qué es BlockChain?
 El BlockChain es una cadena secuencial de registros, donde cada uno de estos registros es denominado Block. En cada Block se almacenan datos que son muy dificil de modificar, ya que, cada uno tiene un codigo hash único
 
+<p align="center"> <img src="https://raw.githubusercontent.com/manyorycuevamendoza/BlockChain/main/images/blockchain_composicion.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
 ### ¿Qué es SHA-256?
 SHA-256, que significa Algoritmo de Hash Seguro de 256 bits, es una función de hash criptográfica. Es un algoritmo matemático que toma un mensaje de entrada de cualquier longitud y produce una salida de tamaño fijo, que tiene una longitud de 256 bits. Esta salida se conoce comúnmente como hash o código hash.
 

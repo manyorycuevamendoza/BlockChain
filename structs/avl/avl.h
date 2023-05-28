@@ -8,7 +8,7 @@
 #endif //PROYECTO_PRUEBA_H
 
 #include "nodeavl.h"
-
+#include <stack>
 template <typename TK, typename TV>
 class AVLTree2 {
 private:
