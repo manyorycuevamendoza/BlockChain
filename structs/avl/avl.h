@@ -1,106 +1,128 @@
-#ifndef AVLTree_H
-#define AVLTree_H
-#include "nodeAVL.h"
+//
+// Created by Dario on 25/05/2023.
+//
 
-using namespace std;
+#ifndef PROYECTO_PRUEBA_H
+#define PROYECTO_PRUEBA_H
 
-template <typename T>
-class AVLTree
-{
+#endif //PROYECTO_PRUEBA_H
+
+#include "nodeavl.h"
+
+template <typename TK, typename TV>
+class AVLTree2 {
 private:
-    NodeBT<T> *root;
+    NodeT<TK, TV>* root;
 
 public:
-    AVLTree() : root(nullptr) {}
-    void insert(T value)
-    {
-        insert(this->root, value);
+    AVLTree2() : root(nullptr) {}
+    void insert(TK key, TV value) {
+        Entry<TK, TV> entry(key, value);
+        insert(this->root, entry);
     }
-    bool find(T value)
-    {
+    bool find(TK value) {
         return find(this->root, value);
     }
-   
-    string getInOrder(){
+
+    string getInOrder() {
         return getInOrder(this->root);
     }
 
-    int height()
-    {
+    int height() {
         return height(this->root);
     }
 
-    T minValue()
-    {
+    Entry<TK, TV> minValue() {
         return minValue(this->root);
     }
 
-    T maxValue()
-    {
+    Entry<TK, TV> maxValue() {
         return maxValue(this->root);
     }
 
-    bool isBalanced()
-    {
+    bool isBalanced() {
         return isBalanced(this->root);
     }
 
-    int size()
-    {
+    int size() {
         return size(this->root);
     }
 
-    void remove(T value)
-    {
-        remove(this->root, value);
+    void remove(TK key) {
+        remove(this->root, key);
     }
 
-    void displayPretty()
-    {
+    void displayPretty() {
         displayPretty(this->root, 1);
     }
 
-    ~AVLTree(){
-        if(this->root != nullptr){
+    TK successor(TK key) {
+        Entry<TK, TV> entry(key, TV());
+        return successor(root, entry).key;
+    }
+
+    TK if_not_found_succesor(TV value) {
+        Entry<TK, TV> entry(TK(), value);
+        return if_not_found_succesor(root, entry).value;
+    }
+
+    TK if_not_found_predecesor(TV value) {
+        Entry<TK, TV> entry(TK(), value);
+        return if_not_found_predecesor(root, entry).value;
+    }
+
+    string search_by_range(TV begin, TV end) {
+        if (!find(begin))
+            begin = if_not_found_succesor(begin);
+        if (!find(end))
+            end = if_not_found_predecesor(end);
+        return search_by_range(root, begin, end);
+    }
+
+    ~AVLTree2() {
+        if (this->root != nullptr) {
             this->root->killSelf();
         }
     }
 
 private:
-    string getInOrder(NodeBT<T> *node);
-    void insert(NodeBT<T> *&node, T value);
-    bool find(NodeBT<T> *node, T value);
-    int height(NodeBT<T> *node);
-    bool isBalanced(NodeBT<T> *node);
-    T minValue(NodeBT<T> *node);
-    T maxValue(NodeBT<T> *node);
-    int size(NodeBT<T> *node);
-    void remove(NodeBT<T> *&node, T value);
-    void displayPretty(NodeBT<T> *node, int level);
+    string getInOrder(NodeT<TK, TV>* node);
+    void insert(NodeT<TK, TV>*& node, Entry<TK, TV> entry);
+    bool find(NodeT<TK, TV>* node, TV value);
+    int height(NodeT<TK, TV>* node);
+    bool isBalanced(NodeT<TK, TV>* node);
+    Entry<TK, TV> minValue(NodeT<TK, TV>* node);
+    Entry<TK, TV> maxValue(NodeT<TK, TV>* node);
+    int size(NodeT<TK, TV>* node);
+    void remove(NodeT<TK, TV>*& node, TK key);
+    void displayPretty(NodeT<TK, TV>* node, int level);
+    Entry<TK, TV> successor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 
-    /*add for avl*/    
-    int balancingFactor(NodeBT<T> *node);
-    void updateHeight(NodeBT<T> *node);
-    void balance(NodeBT<T> *&node);
-    void left_rota(NodeBT<T> *&node);
-    void right_rota(NodeBT<T> *&node);
+    /*add for avl*/
+    int balancingFactor(NodeT<TK, TV>* node);
+    void updateHeight(NodeT<TK, TV>* node);
+    void balance(NodeT<TK, TV>*& node);
+    void left_rota(NodeT<TK, TV>*& node);
+    void right_rota(NodeT<TK, TV>*& node);
+    string search_by_range(NodeT<TK, TV>* node, TV begin, TV end);
+    Entry<TK, TV> if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
+    Entry<TK, TV> if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 };
 
-template <typename T>
-bool AVLTree<T>::find(NodeBT<T> *node, T value)
-{
+template <typename TK, typename TV>
+bool AVLTree2<TK, TV>::find(NodeT<TK, TV>* node, TV value) {
     if (node == nullptr)
         return false;
-    else if (value < node->data)
+    else if (value < node->data.value)
         return find(node->left, value);
-    else if (value > node->data)
+    else if (value > node->data.value)
         return find(node->right, value);
     else
         return true;
 }
 
-template <typename T>
-bool AVLTree<T>::isBalanced(NodeBT<T> *node) //O(n^2)
+template <typename TK, typename TV>
+bool AVLTree2<TK, TV>::isBalanced(NodeT<TK, TV>* node) //O(n^2)
 {
     if (node == nullptr)
         return true;
@@ -108,9 +130,8 @@ bool AVLTree<T>::isBalanced(NodeBT<T> *node) //O(n^2)
         return abs(height(node->left) - height(node->right)) <= 1 && isBalanced(node->left) && isBalanced(node->right);
 }
 
-template <typename T>
-T AVLTree<T>::minValue(NodeBT<T> *node)
-{
+template <typename TK, typename TV>
+Entry<TK, TV> AVLTree2<TK, TV>::minValue(NodeT<TK, TV>* node) {
     if (node == nullptr)
         throw("The tree is empty");
     else if (node->left == nullptr)
@@ -119,9 +140,8 @@ T AVLTree<T>::minValue(NodeBT<T> *node)
         return minValue(node->left);
 }
 
-template <typename T>
-T AVLTree<T>::maxValue(NodeBT<T> *node)
-{
+template <typename TK, typename TV>
+Entry<TK, TV> AVLTree2<TK, TV>::maxValue(NodeT<TK, TV>* node) {
     if (node == nullptr)
         throw("The tree is empty");
     else if (node->right == nullptr)
@@ -130,162 +150,192 @@ T AVLTree<T>::maxValue(NodeBT<T> *node)
         return maxValue(node->right);
 }
 
-template <typename T>
-int AVLTree<T>::size(NodeBT<T> *node)
-{
+template <typename TK, typename TV>
+int AVLTree2<TK, TV>::size(NodeT<TK, TV>* node) {
     if (node == nullptr)
         return 0;
     else
         return 1 + size(node->left) + size(node->right);
 }
 
-template <typename T>
-string AVLTree<T>::getInOrder(NodeBT<T> *node)
-{
+template <typename TK, typename TV>
+string AVLTree2<TK, TV>::getInOrder(NodeT<TK, TV>* node) {
     string result = "";
-    if (node != nullptr){
+    if (node != nullptr) {
         result += getInOrder(node->left);
-        result +=  std::to_string(node->data) + " ";
+        result += to_string(node->data.key) + " - " + to_string(node->data.value) + ' ';
         result += getInOrder(node->right);
     }
     return result;
 }
 
-template <typename T>
-void AVLTree<T>::insert(NodeBT<T> *&node, T value)
-{
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::insert(NodeT<TK, TV>*& node, Entry<TK, TV> entry) {
     if (node == nullptr)
-        node = new NodeBT<T>(value);
-    else if (value < node->data)
-        insert(node->left, value);
+        node = new NodeT<TK, TV>(entry);
+    else if (entry.value < node->data.value)
+        insert(node->left, entry);
     else
-        insert(node->right, value);    
-    
+        insert(node->right, entry);
+
     //regreso de la recursividad
-    updateHeight(node);  
-    balance(node);           
+    updateHeight(node);
+    balance(node);
 }
 
-template <typename T>
-int AVLTree<T>::height(NodeBT<T> *node)
-{
+template <typename TK, typename TV>
+int AVLTree2<TK, TV>::height(NodeT<TK, TV>* node) {
     if (node == nullptr) return -1;
     else return node->height;
 }
 
-template <typename T>
-int AVLTree<T>::balancingFactor(NodeBT<T> *node){
+template <typename TK, typename TV>
+int AVLTree2<TK, TV>::balancingFactor(NodeT<TK, TV>* node) {
     return height(node->left) - height(node->right);
 }
 
-template <typename T>
-void AVLTree<T>::updateHeight(NodeBT<T> *node)
-{    
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::updateHeight(NodeT<TK, TV>* node) {
     node->height = max(height(node->left), height(node->right)) + 1;
 }
 
-template <typename T>
-void AVLTree<T>::balance(NodeBT<T> *&node)
-{
-    int hb = balancingFactor(node);
-    if(hb >= 2){ //esta cargado a la izquierda
-        if(balancingFactor(node->left) < 0)//verifica rotacion doble
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::balance(NodeT<TK, TV>*& node) {
+    int bf = balancingFactor(node);
+    if (bf >= 2) { //esta cargado a la izquierda
+        if (balancingFactor(node->left) < 0) //verifica rotacion doble
             left_rota(node->left);
         right_rota(node);
     }
-    else if(hb <= -2){//esta cargado a la derecha
-        if(balancingFactor(node->right) > 0)//verifica rotacion doble
+    else if (bf <= -2) { //esta cargado a la derecha
+        if (balancingFactor(node->right) > 0) //verifica rotacion doble
             right_rota(node->right);
         left_rota(node);
-    }    
+    }
 }
 
-template <typename T>
-void AVLTree<T>::left_rota(NodeBT<T> *&parent)
-{
-    NodeBT<T> *child  = parent->right;
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::left_rota(NodeT<TK, TV>*& parent) {
+    NodeT<TK, TV>* child = parent->right;
     parent->right = child->left;
-    child->left = parent;    
+    child->left = parent;
     //update height
     updateHeight(parent);
     updateHeight(child);
     parent = child;
 }
 
-template <typename T>
-void AVLTree<T>::right_rota(NodeBT<T> *&parent)
-{
-    NodeBT<T> *child  = parent->left;
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::right_rota(NodeT<TK, TV>*& parent) {
+    NodeT<TK, TV>* child = parent->left;
     parent->left = child->right;
-    child->right = parent;    
+    child->right = parent;
     //update height
     updateHeight(parent);
     updateHeight(child);
     parent = child;
 }
 
-template <typename T>
-void AVLTree<T>::remove(NodeBT<T> *&node, T value){
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::remove(NodeT<TK, TV>*& node, TK key) {
     if (node == nullptr)
         return;
-    else if (value < node->data)
-        remove(node->left, value);
-    else if (value > node->data)
-        remove(node->right, value);
-    else
-    {
-        if (node->left == nullptr && node->right == nullptr)
-        {
-            delete node; //free
+    else if (key < node->data.key)
+        remove(node->left, key);
+    else if (key > node->data.key)
+        remove(node->right, key);
+    else {
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
             node = nullptr;
         }
-        else if (node->left == nullptr)
-        {
-            NodeBT<T> *temp = node;
-            node = node->right;
-            delete temp;
-        }
-        else if (node->right == nullptr)
-        {
-            NodeBT<T> *temp = node;
+        else if (node->left != nullptr && node->right == nullptr) {
+            NodeT<TK, TV>* temp = node;
             node = node->left;
             delete temp;
         }
-        else
-        {
-            T temp = maxValue(node->left);
-            node->data = temp;
-            remove(node->left, temp);
+        else if (node->left == nullptr && node->right != nullptr) { //only right child
+            NodeT<TK, TV>* temp = node;
+            node = node->right;
+            delete temp;
         }
-    }
+        else { //two children
+            Entry<TK, TV> succesor = minValue(node->right);
+            node->data = succesor;
+            remove(node->right, succesor.key);
+        }
 
-    if(node){
         updateHeight(node);
         balance(node);
     }
 }
 
-template <typename T>
-void AVLTree<T>::displayPretty(NodeBT<T> *node, int level)
-{
-    if (node == nullptr)
-        return;
-    displayPretty(node->right, level + 1);
-    cout << endl;
-    if (node == this->root)
-        cout << "Root->:  ";
-    else
-    {
-        for (int i = 0; i < level; i++)
-            cout << "       ";
+template <typename TK, typename TV>
+void AVLTree2<TK, TV>::displayPretty(NodeT<TK, TV>* node, int level) {
+    if (node != nullptr) {
+        displayPretty(node->right, level + 1);
+        cout << endl;
+        if (node == root)
+            cout << "Root -> ";
+        for (int i = 0; i < level && node != root; i++)
+            cout << "        ";
+        cout << node->data.key << '|' << node->data.value;
+        displayPretty(node->left, level + 1);
     }
-    cout << node->data << "("<<node->height<<") ";
-    displayPretty(node->left, level + 1);
-
-
-    //Para imprimir an una sola fila al final
-    
 }
 
-#endif
+template <typename TK, typename TV>
+Entry<TK, TV> AVLTree2<TK, TV>::successor(NodeT<TK, TV>* node, Entry<TK, TV> entry) {
+    if (node == nullptr)
+        return entry;
+    if (entry.value < node->data.value) {
+        entry = node->data;
+        return successor(node->left, entry);
+    }
+    else
+        return successor(node->right, entry);
+}
 
+template <typename TK, typename TV>
+Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry) {
+    stack<Entry<TK,TV>> mstack;
+    while(node!= nullptr){
+        if(node->data.value > entry.value){
+            mstack.push(node->data);
+            node = node -> left;
+        }
+        else if(node->data.value < entry.value){
+            node = node->right;
+        }
+    }
+    return mstack.top();
+}
+
+template <typename TK, typename TV>
+Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry) {
+    stack<Entry<TK,TV>> mstack;
+    while(node!= nullptr){
+        if(node->data.value > entry.value){
+            node = node -> left;
+        }
+        else if(node->data.value < entry.value){
+            mstack.push(node->data);
+            node = node->right;
+        }
+    }
+    return mstack.top();
+}
+
+template <typename TK, typename TV>
+string AVLTree2<TK, TV>::search_by_range(NodeT<TK, TV>* node, TV begin, TV end) {
+    string result = "";
+    if (node != nullptr) {
+        if (node->data.value > begin)
+            result += search_by_range(node->left, begin, end);
+        if (node->data.value >= begin && node->data.value <= end)
+            result += to_string(node->data.key) + " - " + to_string(node->data.value) + ' ';
+        if (node->data.value < end)
+            result += search_by_range(node->right, begin, end);
+    }
+    return result;
+}
