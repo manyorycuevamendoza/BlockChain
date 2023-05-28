@@ -23,7 +23,7 @@ struct RecordHash {
 };
 
 int main() {
-    std::ifstream file("test1.csv");
+    std::ifstream file("test1_bchain.csv");
     if (!file.is_open()) {
         std::cout << "Failed to open the file." << std::endl;
         return 1;

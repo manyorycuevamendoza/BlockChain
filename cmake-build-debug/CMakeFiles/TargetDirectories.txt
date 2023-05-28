@@ -1,0 +1,3 @@
+C:/Users/ASUS/OneDrive - UNIVERSIDAD DE INGENIERIA Y TECNOLOGIA/Escritorio/proyecto-Algoritmos/BlockChain/cmake-build-debug/CMakeFiles/Blockchain.dir
+C:/Users/ASUS/OneDrive - UNIVERSIDAD DE INGENIERIA Y TECNOLOGIA/Escritorio/proyecto-Algoritmos/BlockChain/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ASUS/OneDrive - UNIVERSIDAD DE INGENIERIA Y TECNOLOGIA/Escritorio/proyecto-Algoritmos/BlockChain/cmake-build-debug/CMakeFiles/rebuild_cache.dir

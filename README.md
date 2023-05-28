@@ -1,7 +1,7 @@
 # BlockChain
 
 ## Miembros
-- Mariana Capuñay
+- Mariana Aurora Capuñay Correa
 - Manyory Cueva
 - Gustavo Deza
 - Noe Paredes

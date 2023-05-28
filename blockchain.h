@@ -37,6 +37,8 @@ class BlockChain{
          	this -> clear();
             delete this -> head;          
         }
+
+        //insertar_bloque (vector){ nonce, }
 };
 
 

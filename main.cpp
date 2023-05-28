@@ -4,6 +4,7 @@
 #include <string>
 #include "SHA256.h"
 #include "lectura.h"
+
 using namespace std;
 
 int main(){
@@ -19,7 +20,6 @@ int main(){
         return 0;
         */
 
-       readCSV("test1_bchain.csv");
+       readCSV("test1.csv");
         return 0;
-
 }

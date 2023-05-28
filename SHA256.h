@@ -208,3 +208,5 @@ std::string SHA256::toString(const uint8_t * digest) {
 
     return s.str();
 }
+
+constexpr std::array<uint32_t, 64> SHA256::K;
