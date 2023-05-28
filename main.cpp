@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-//realizando una hash table
->>>>>>> 995cecee05b84e5fc402997ee109f94d98fefc00
 #include <iostream>
 #include <fstream>
 #include <sstream>
