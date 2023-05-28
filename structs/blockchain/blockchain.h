@@ -17,11 +17,10 @@ class BlockChain{
             this->head->next=this->head;
             this->head->prev=this->head;
             this->nodes=0;
-            
         }
 
-        void insert(initializer_list<T> data,int nro){
-            Block<T>* temp = new Block<T>(data,nro);
+        void insert(initializer_list<T> data){
+            Block<T>* temp = new Block<T>(data,this->nodes);
             temp->next=this->head; //hacemos que el nodo se cuelgue
             temp->prev=this->head->prev; //hacemos que el nodo se cueelgue del prev del head
             this->head->prev->next=temp;//hacemos que el nodo se cuelgue siguiente y atrás
@@ -33,6 +32,7 @@ class BlockChain{
           temp->huella_padre = temp->prev->huella;
 
           // hallar la huella
+          /*
           SHA256 sha;
           string huella = temp->huella+temp->huella_padre;
           uint8_t * digest = sha.digest();
@@ -42,7 +42,15 @@ class BlockChain{
           temp->huella = huella;
           delete[] digest;
         
-  
+          */
+
+          SHA256 sha;
+          uint8_t * digest = sha.digest();
+
+          //actualizando huella y nonce
+          temp->nonce=sha.SHA256::findNonce(temp->huella+temp->huella_padre,temp->huella);
+          delete[] digest;
+        
         }
 
         void print_huellas(){

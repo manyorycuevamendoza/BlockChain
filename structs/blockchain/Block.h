@@ -19,6 +19,7 @@ struct Block
     Block(){
         huella_padre = huella = nonce = "";
     }
+    
     Block(initializer_list<T> _data,int _nro) {
         nro = _nro;
         nonce = "";
@@ -33,7 +34,7 @@ struct Block
         huella_padre="";
     }
 
-    void print(){
+    void print_huella(){
         for (auto x:data) cout<<x<<" ";
         cout<<" Huella: "<<huella<<endl;
     }

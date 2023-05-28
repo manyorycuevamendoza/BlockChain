@@ -13,6 +13,7 @@
 
 using namespace std;
 
+/*
 int main(){
     
 
@@ -71,5 +72,64 @@ int main(){
     vector <int> res = avl2.search_by_range(convertToUnixTimestamp("2001-01-01"),convertToUnixTimestamp("2004-01-01"));
     for (auto x:res) cout<<x<<" ";
     cout<<"Size: "<<res.size()<<endl;
+    return 0;
+}
+ */
+
+//realizando una hash table
+
+//#include "SHA256.h"
+//#include "lectura.h"
+using namespace std;
+//g++ main.cpp -o main
+/*
+int main(){
+
+        string s = "hello world";
+        SHA256 sha;
+        sha.update(s);
+        uint8_t * digest = sha.digest();
+
+        std::cout << SHA256::toString(digest) << std::endl;
+
+        delete[] digest;
+        return 0;
+
+
+       //readCSV("t.csv");
+
+      //Block<string> a({"a","b","g","f"});
+      //a.print();
+/*
+	BlockChain<string> b;
+	b.insert({"a","b","c","d"},10);
+	b.insert({"e", "f","j","h"},310);
+	b.insert({"z", "y","x","w"},4);
+	b.insert({"z", "y","x","w"},8);
+	b.insert({"z", "y","x","w"},19);
+	b.insert({},19);
+	b.insert({"z", "y","x","w"},39);
+	b.insert({"z", "y","x","w"},49);
+	b.insert({"z", "y","x","w"},59);
+	b.insert({"z", "y","x","w"},109);
+	b.insert({"z", "y","x","w"},9);
+
+  b.print_huellas();
+	return 0;
+}
+*/
+
+int main(){
+    BlockChain<string> b;
+    b.insert({"arf","bdfvd","c","d"});
+    b.insert({"e", "f","j","h"});
+    b.insert({"z", "y","x","w"});
+    b.insert({"z", "y","x","w"});
+    b.insert({"z", "y","x","w"});
+    b.insert({"e","h","e","h"});
+    b.insert({"e","h","e","h"});
+
+
+    b.print_huellas();
     return 0;
 }
