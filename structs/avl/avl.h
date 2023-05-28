@@ -8,7 +8,8 @@
 #endif //PROYECTO_PRUEBA_H
 
 #include "nodeavl.h"
-
+#include <vector>
+#include <stack>
 template <typename TK, typename TV>
 class AVLTree2 {
 private:
@@ -71,12 +72,13 @@ public:
         return if_not_found_predecesor(root, entry).value;
     }
 
-    string search_by_range(TV begin, TV end) {
+    vector<TK> search_by_range(TV begin, TV end) {
+        vector<TK> result;
         if (!find(begin))
             begin = if_not_found_succesor(begin);
         if (!find(end))
             end = if_not_found_predecesor(end);
-        return search_by_range(root, begin, end);
+        return search_by_range(result,root, begin, end);
     }
 
     ~AVLTree2() {
@@ -104,7 +106,7 @@ private:
     void balance(NodeT<TK, TV>*& node);
     void left_rota(NodeT<TK, TV>*& node);
     void right_rota(NodeT<TK, TV>*& node);
-    string search_by_range(NodeT<TK, TV>* node, TV begin, TV end);
+    vector<TK> search_by_range(vector <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
     Entry<TK, TV> if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
     Entry<TK, TV> if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 };
@@ -327,6 +329,19 @@ Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Ent
 }
 
 template <typename TK, typename TV>
+vector<TK> AVLTree2<TK, TV>::search_by_range(vector<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
+    if (node != nullptr) {
+        if (node->data.value > begin)
+            search_by_range(vec,node->left, begin, end);
+        if (node->data.value >= begin && node->data.value <= end)
+            vec.push_back(node->data.key);
+        if (node->data.value < end)
+            search_by_range(vec,node->right, begin, end);
+    }
+    return vec;
+}
+/*
+template <typename TK, typename TV>
 string AVLTree2<TK, TV>::search_by_range(NodeT<TK, TV>* node, TV begin, TV end) {
     string result = "";
     if (node != nullptr) {
@@ -339,3 +354,4 @@ string AVLTree2<TK, TV>::search_by_range(NodeT<TK, TV>* node, TV begin, TV end) 
     }
     return result;
 }
+*/
