@@ -2,26 +2,26 @@
 using namespace std;
 
 template<typename TK,typename  TV>
-struct Entry{
+struct Entry2{
     TK key;
     TV value;
 
-    Entry(){
+    Entry2(){
         key = TK();
         value = TV();
     }
 
-    Entry(TK k, TV v) {
+    Entry2(TK k, TV v) {
         this->key = k;
         this->value = v;
     }
 
-    bool same_key(Entry a){
+    bool same_key(Entry2 a){
         return a.key==this->key;
     }
 
 
-    friend ostream& operator<<(ostream& salida, Entry<TK,TV> e){
+    friend ostream& operator<<(ostream& salida, Entry2<TK,TV> e){
         salida<<e.key<<" "<<e.value;
         return salida;
     }

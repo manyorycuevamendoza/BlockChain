@@ -13,7 +13,7 @@ const int maxColision = 10;
 template<typename TK, typename TV>
 class ChainHash{
 private:
-    ForwardList<Entry<TK,TV>>* array;//array de listas
+    ForwardList<Entry2<TK,TV>>* array;//array de listas
     int capacity;//tamanio del array
     int size;//cantidad total de elementos
     hash<TK> hasher;//hash de string
@@ -22,13 +22,13 @@ public:
     ChainHash(int cap = 13){
         this->capacity = cap;
         this->size = 0;
-        array = new ForwardList<Entry<TK,TV>>[capacity]; //sese borra porque se tiene que generar con el fores list de l aclase sha
+        array = new ForwardList<Entry2<TK,TV>>[capacity]; //sese borra porque se tiene que generar con el fores list de l aclase sha
     }
 
     void insert(TK key, TV value){
         int index = hasher(key)%capacity;
         if (size*1.0/(maxColision*capacity)>=maxFillFactor) {cout<<"rehashing\n"; rehashing();}
-        array[index].push_front(Entry<TK,TV>(key,value));
+        array[index].push_front(Entry2<TK,TV>(key,value));
 
         //array[index].display();
         size++;
@@ -40,7 +40,7 @@ public:
 
     bool find(TK key){ // busca si existe uno o mas elementos con ese key, en el chain
         int index = hasher(key)%capacity;
-        return array[index].find(Entry<TK,TV>(key,TV())); //ingresa al forwrd list. 
+        return array[index].find(Entry2<TK,TV>(key,TV())); //ingresa al forwrd list. 
     }
 
     //retorna el id value
@@ -49,7 +49,7 @@ public:
             cerr << "Error";
         }
         int index=hasher(key)%capacity;
-        Entry<TK,TV> entry (key,TV());
+        Entry2<TK,TV> entry (key,TV());
         return array[index].top(entry).value; //porque nosostros "si ingresamos un mismo key debe salir el mismo código"--->ESTABILIDAD
 
     }
@@ -78,19 +78,19 @@ public:
 private: // ver rehashing
     void rehashing(){
         int newCapacity = capacity*2;//se duplica el tamanio del array int newCpacity=capacity*2
-        ForwardList<Entry<TK,TV>>* newArray = new ForwardList<Entry<TK,TV>>[newCapacity];//se crea un nuevo array con el doble  de tamañio
+        ForwardList<Entry2<TK,TV>>* newArray = new ForwardList<Entry2<TK,TV>>[newCapacity];//se crea un nuevo array con el doble  de tamañio
         for(int i=0; i<bucket_count();i++){ //
             for(int j=0; j<bucket_size(i);j++){
                 TK key = array[i][j].key;
                 TV value = array[i][j].value;
                 int index = hasher(key)%newCapacity;
-                newArray[index].push_front(Entry<TK,TV>(key,value));
+                newArray[index].push_front(Entry2<TK,TV>(key,value));
             }
         }
 
         delete [] array;
         this->capacity*=2;
-        this->array = new ForwardList<Entry<TK,TV>>[capacity];
+        this->array = new ForwardList<Entry2<TK,TV>>[capacity];
 
         for(int i=0;i<bucket_count();i++){
             array[i] = newArray[i];

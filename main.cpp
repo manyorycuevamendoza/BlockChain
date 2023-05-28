@@ -5,7 +5,7 @@
 #include <vector>
 #include "structs/avl/avl.h"
 #include "structs/blockchain/blockchain.h"
-//#include "structs/tabla_hash/chainhash.h"
+#include "structs/tabla_hash/chainhash.h"
 
 
 //#include "SHA256.h"
