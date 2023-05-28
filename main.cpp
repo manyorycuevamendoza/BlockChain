@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+//realizando una hash table
+>>>>>>> 995cecee05b84e5fc402997ee109f94d98fefc00
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -6,6 +10,7 @@
 #include "structs/avl/avl.h"
 #include "structs/blockchain/blockchain.h"
 //#include "structs/tabla_hash/chainhash.h"
+
 
 //#include "SHA256.h"
 //#include "lectura.h"
@@ -33,7 +38,9 @@ int main(){
         //monto
         std::getline(ss, item, ',');
         int number=stoi(item);
-        avl.insert(count,number); // key: nro bloque - value: monto
+
+        avl.insert(count,number);
+
         //--fecha
         std::getline(ss, item, ',');
         count ++;
@@ -42,7 +49,8 @@ int main(){
     }
 
     file.close();
-    avl.displayPretty();
+
+    //avl.displayPretty();
     cout<<endl;
     vector <int> result = avl.search_by_range(0,5);
     for (auto x:result) cout<<x<<" ";
@@ -50,9 +58,6 @@ int main(){
 
 
 
-
-    //----------------------------------------------------------------
-        
 
     return 0;
 }
