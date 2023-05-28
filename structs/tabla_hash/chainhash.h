@@ -27,7 +27,9 @@ public:
 
     void insert(TK key, TV value){
         int index = hasher(key)%capacity;
-        if (size*1.0/(maxColision*capacity)>=maxFillFactor) {cout<<"rehashing\n"; rehashing();}
+        if (size*1.0/(maxColision*capacity)>=maxFillFactor) {
+            //cout<<"rehashing\n"; 
+            rehashing();}
         array[index].push_front(Entry2<TK,TV>(key,value));
 
         //array[index].display();
@@ -51,7 +53,7 @@ public:
         int index=hasher(key)%capacity;
         Entry2<TK,TV> entry (key,TV());
         return array[index].top(entry).value; //porque nosostros "si ingresamos un mismo key debe salir el mismo código"--->ESTABILIDAD
-
+        return TV();
     }
 
 
