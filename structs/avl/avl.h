@@ -332,11 +332,11 @@ Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Ent
 template <typename TK, typename TV>
 vector<TK> AVLTree2<TK, TV>::search_by_range(vector<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
     if (node != nullptr) {
-        if (node->data.value > begin)
+        if (node->data.value >= begin)
             search_by_range(vec,node->left, begin, end);
         if (node->data.value >= begin && node->data.value <= end)
             vec.push_back(node->data.key);
-        if (node->data.value < end)
+        if (node->data.value <= end)
             search_by_range(vec,node->right, begin, end);
     }
     return vec;

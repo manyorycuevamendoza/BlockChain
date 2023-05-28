@@ -14,7 +14,7 @@
 using namespace std;
 
 int main(){
-    std::ifstream file("test1.csv");
+    std::ifstream file("test2.csv");
     if (!file.is_open()) {
         std::cout << "Failed to open the file." << std::endl;
         return 1;
@@ -36,22 +36,24 @@ int main(){
         int number=stoi(item);
 
         avl.insert(count,number);
-
+        //cout<<number<<"|";
         //--fecha
         std::getline(ss, item, ',');
         count ++;
         //std::cout << item<<std::endl;
 
     }
+    cout<<"\nCount: "<<count<<endl;
 
     file.close();
 
     //avl.displayPretty();
     cout<<endl;
-    vector <int> result = avl.search_by_range(0,5);
-    for (auto x:result) cout<<x<<" ";
+    vector <int> result = avl.search_by_range(0,1000);
+    //for (auto x:result) cout<<x<<" ";
+    cout<<result.size()<<endl;
 
-
+    cout<<avl.size();
 
 
 
