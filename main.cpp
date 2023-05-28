@@ -7,7 +7,7 @@
 #include "structs/blockchain/blockchain.h"
 #include "structs/tabla_hash/chainhash.h"
 #include "structs/avl/date.h"
-
+#include <initializer_list>
 //#include "SHA256.h"
 //#include "lectura.h"
 
@@ -121,7 +121,9 @@ int main(){
 
 int main(){
     BlockChain<string> b;
-    b.insert({"arf","bdfvd","c","d"});
+    vector <string> v1 = {"arf","bdfvd","c","d"};
+
+    b.insert(v1);  // Pasar el initializer_list a la función insert()
     b.insert({"e", "f","j","h"});
     b.insert({"z", "y","x","w"});
     b.insert({"z", "y","x","w"});

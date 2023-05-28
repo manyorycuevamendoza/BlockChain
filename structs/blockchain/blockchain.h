@@ -19,7 +19,7 @@ class BlockChain{
             this->nodes=0;
         }
 
-        void insert(initializer_list<T> data){
+        void insert(vector<T> data){
             Block<T>* temp = new Block<T>(data,this->nodes);
             temp->next=this->head; //hacemos que el nodo se cuelgue
             temp->prev=this->head->prev; //hacemos que el nodo se cueelgue del prev del head

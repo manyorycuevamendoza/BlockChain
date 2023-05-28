@@ -20,7 +20,7 @@ struct Block
         huella_padre = huella = nonce = "";
     }
     
-    Block(initializer_list<T> _data,int _nro) {
+    Block(vector<T> _data,int _nro) {
         nro = _nro;
         nonce = "";
         next = prev = nullptr;
