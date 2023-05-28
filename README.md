@@ -2,7 +2,7 @@
 
 ## Miembros
 - Mariana Aurora Capuñay Correa
-- Manyory Cueva
+- Manyory EStefany Cueva Mendoza
 - Gustavo Deza
 - Noe Paredes
 - Dario Ricardo Nuñez Villacorta
