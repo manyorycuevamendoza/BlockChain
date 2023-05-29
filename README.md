@@ -1,8 +1,25 @@
 # BlockChain
 
-## Miembros
+<details>
+  <summary>Tabla de contenidos</summary>
+  
+  - [Integrantes](#integrantes)
+  - [Introducción](#introducción)
+    - [¿Qué es BlockChain?](#qué-es-blockchain)
+    - [¿Qué es SHA-256?](#qué-es-sha-256)
+      - [¿Cúal es su propósito?](#cual-es-su-proposito)
+  - [Objetivo](#objetivo)
+  - [Propuesta](#propuesta)
+    - [¿Qué estructuras usamos?](#qué-estructuras-usamos)
+      1. [AVL](#avl)
+      2. [Tabla hash](#tabla-hash)
+      3. [Blockchain](#blockchain)
+  - [Bibliografía](#bibliografía)
+</details>
+
+## Integrantes
 - Mariana Aurora Capuñay Correa
-- Manyory EStefany Cueva Mendoza
+- Manyory Estefany Cueva Mendoza
 - Gustavo Deza
 - Noé Ananias Paredes Rauraico
 - Dario Ricardo Nuñez Villacorta
@@ -11,13 +28,21 @@
 ### ¿Qué es BlockChain?
 Un blockchain, o cadena de bloques, es un tipo de estructura de datos que se utiliza para almacenar y verificar registros de transacciones de manera segura y descentralizada. Se compone de una serie de bloques que están enlazados entre sí de manera cronológica y forman una cadena continua.
 
-<p align="center"> <img src="images/blockchain_main2.png?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+<p align="center"> 
+  <img src="images/blockchain_main2.png" width="400"> 
+</p>
 
 Cada bloque contiene información sobre las transacciones realizadas, como la fecha, la hora, las partes involucradas y los detalles específicos de la transacción. Además, cada bloque contiene un identificador único llamado "hash" que se calcula utilizando una función de hash criptográfica. El hash de un bloque también incluye el hash del bloque anterior en la cadena, lo que crea un enlace entre los bloques y garantiza la integridad de la cadena.
-<p align="center"> <img src="images/blockchain_composicion.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
+<p align="center">
+  <img src="images/blockchain_composicion.jpg" width="400"> 
+</p>
 
 Una de las características más importantes de un blockchain es su descentralización. En lugar de tener una autoridad central que controle y verifique las transacciones, un blockchain permite que múltiples participantes, llamados nodos, mantengan una copia completa de la cadena y verifiquen las transacciones de forma colectiva. Esto elimina la necesidad de confiar en una sola entidad y mejora la seguridad y la transparencia.
-<p align="center"> <img src="images/blockchain_funcionamiento.png?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
+<p align="center">
+  <img src="images/blockchain_funcionamiento.png" width="400"> 
+</p>
 
 Además, la tecnología blockchain utiliza algoritmos criptográficos avanzados para asegurar la privacidad y la autenticidad de las transacciones. Cada transacción se firma digitalmente con claves criptográficas y se registra de forma inmutable en la cadena de bloques, lo que significa que no se puede modificar o eliminar sin dejar rastro. Esto proporciona un alto nivel de seguridad y confianza en la integridad de los datos almacenados en el blockchain.
 
@@ -27,8 +52,12 @@ En resumen, un blockchain es una estructura de datos descentralizada y segura qu
 
 ### ¿Qué es SHA-256?
 SHA-256, que significa Algoritmo de Hash Seguro de 256 bits, es una función de hash criptográfica. Es un algoritmo matemático que toma un mensaje de entrada de cualquier longitud y produce una salida de tamaño fijo, que tiene una longitud de 256 bits. Esta salida se conoce comúnmente como hash o código hash.
-<p align="center"> <img src="images/sha256_seguridad.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
 
+<p align="center"> 
+  <img src="images/sha256_seguridad.jpg" width="300"> 
+</p>
+
+#### ¿Cúal es su propósito?
 El propósito principal de SHA-256 es asegurar la integridad de los datos y proporcionar una huella digital para un mensaje dado. Esto se logra aplicando una serie de operaciones matemáticas y transformaciones complejas al mensaje de entrada. Estas operaciones incluyen operaciones lógicas a nivel de bits, aritmética modular y funciones lógicas como XOR, AND y OR.
 
 El código hash resultante es único para cada mensaje de entrada único. Incluso un pequeño cambio en el mensaje de entrada producirá un código hash significativamente diferente. Además, el algoritmo SHA-256 está diseñado de tal manera que es computacionalmente inviable invertir el proceso y obtener el mensaje original a partir de su código hash. Esta propiedad se conoce como resistencia a la preimagen, lo que hace que SHA-256 sea una función unidireccional.
@@ -39,27 +68,31 @@ La longitud de 256 bits del código hash proporciona un gran número de posibles
 
 En resumen, SHA-256 es una función de hash criptográfica que transforma un mensaje de entrada en un código hash de tamaño fijo, proporcionando integridad de datos, identificación única y un alto nivel de seguridad para diversas aplicaciones que requieren un procesamiento de datos seguro y confiable.
 
-###Objetivo
+### Objetivo
 El objetivo del proyecto es implementar un sistema informático transaccional que interactue con datos utilizando una estructura de datos basada en cadenas de bloques (blockchain) para asegurar la integridad y seguridad de los datos. Esta implementacion permitira la carga de datos transaccionales como retiros de dinero, transefencias bancarias o ventas de productos. Tambien, permitira diferentes criterios de busqueda para acceder a la informacion de manera eficiente y rapida.
 
-##Propuesta
-###¿Qué estructuras usamos?
-1. AVL:
+## Propuesta
+### ¿Qué estructuras usamos?
+####  AVL:
 El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1.
 Usamos esta estructura para insertar, buscar y recorrer de manera eficiente el conjunto de datos el cual necesitamos mantener ordenado y balanceado.
 
 <p align="center">
-  <img src="images/avl.png">
+  <img src="images/avl.png" alt="AVL" width="400">
 </p>
 
-2 Tabla hash:
+
+#### Tabla hash:
 Esta estructura se utiliza para implementar eficientemenete una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rapiso a los valores a traves de las claves unicas que existen. 
 <p align="center">
-  <img src="images/blockchain_blocks.png">
+  <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
 
-3. Blockchain:
+#### Blockchain:
 Simula un blockchain basandose en el circular list con sentinela, la estructura Block y la funcion de hash SHA256. Cada bloque cotiene datos, una huella que se calcula a partir de la huella del bloke anterior y los datos actuales y un nonce que encontramos mediante la funcion SHA256 para cumplir con el requisito de dificultad.
 <p align="center">
-  <img src="images/nonce.png">
+  <img src="images/nonce.png" alt="nonce0000" width="400">
 </p>
+
+
+## Bibliografía
