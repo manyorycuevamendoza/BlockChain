@@ -20,7 +20,7 @@
 ## Integrantes
 - Mariana Aurora Capuñay Correa
 - Manyory Estefany Cueva Mendoza
-- Gustavo Deza
+- Gustavo Oscar Deza Raygada
 - Noé Ananias Paredes Rauraico
 - Dario Ricardo Nuñez Villacorta
 
