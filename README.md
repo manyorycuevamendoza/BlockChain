@@ -66,6 +66,8 @@ SHA-256 se utiliza ampliamente en diversas aplicaciones, como el almacenamiento 
 
 La longitud de 256 bits del código hash proporciona un gran número de posibles valores de hash, lo que dificulta enormemente que dos mensajes diferentes produzcan el mismo código hash (lo que se conoce como colisión). Esta propiedad mejora la seguridad y confiabilidad de SHA-256 en la protección de información confidencial.
 
+<img src="images/hash_funcion.jpg" width="300">
+
 En resumen, SHA-256 es una función de hash criptográfica que transforma un mensaje de entrada en un código hash de tamaño fijo, proporcionando integridad de datos, identificación única y un alto nivel de seguridad para diversas aplicaciones que requieren un procesamiento de datos seguro y confiable.
 
 ### Objetivo
