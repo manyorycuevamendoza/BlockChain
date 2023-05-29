@@ -61,5 +61,9 @@ class BlockChain{
             temp = temp->next;
           }
         }
+
+        ~BlockChain(){
+            if(head) head->killSelf();
+        }
 };
 #endif

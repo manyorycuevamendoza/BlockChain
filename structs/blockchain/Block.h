@@ -16,6 +16,11 @@ struct Block
     Block* prev;
 
     public:
+    void killSelf(){
+        if(next != nullptr) next->killSelf();
+        delete this;
+    }
+
     Block(){
         huella_padre = huella = nonce = "";
     }
