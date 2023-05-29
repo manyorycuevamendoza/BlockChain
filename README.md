@@ -4,17 +4,30 @@
 - Mariana Aurora Capuñay Correa
 - Manyory EStefany Cueva Mendoza
 - Gustavo Deza
-- Noe Paredes
+- Noé Ananias Paredes Rauraico
 - Dario Ricardo Nuñez Villacorta
 
 ## Introducción
 ### ¿Qué es BlockChain?
-El BlockChain es una cadena secuencial de registros, donde cada uno de estos registros es denominado Block. En cada Block se almacenan datos que son muy dificil de modificar, ya que, cada uno tiene un codigo hash único
+Un blockchain, o cadena de bloques, es un tipo de estructura de datos que se utiliza para almacenar y verificar registros de transacciones de manera segura y descentralizada. Se compone de una serie de bloques que están enlazados entre sí de manera cronológica y forman una cadena continua.
 
-<p align="center"> <img src="https://raw.githubusercontent.com/manyorycuevamendoza/BlockChain/main/images/blockchain_composicion.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+<p align="center"> <img src="images/blockchain_main2.png?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
+Cada bloque contiene información sobre las transacciones realizadas, como la fecha, la hora, las partes involucradas y los detalles específicos de la transacción. Además, cada bloque contiene un identificador único llamado "hash" que se calcula utilizando una función de hash criptográfica. El hash de un bloque también incluye el hash del bloque anterior en la cadena, lo que crea un enlace entre los bloques y garantiza la integridad de la cadena.
+<p align="center"> <img src="images/blockchain_composicion.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
+Una de las características más importantes de un blockchain es su descentralización. En lugar de tener una autoridad central que controle y verifique las transacciones, un blockchain permite que múltiples participantes, llamados nodos, mantengan una copia completa de la cadena y verifiquen las transacciones de forma colectiva. Esto elimina la necesidad de confiar en una sola entidad y mejora la seguridad y la transparencia.
+<p align="center"> <img src="images/blockchain_funcionamiento.png?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
+
+Además, la tecnología blockchain utiliza algoritmos criptográficos avanzados para asegurar la privacidad y la autenticidad de las transacciones. Cada transacción se firma digitalmente con claves criptográficas y se registra de forma inmutable en la cadena de bloques, lo que significa que no se puede modificar o eliminar sin dejar rastro. Esto proporciona un alto nivel de seguridad y confianza en la integridad de los datos almacenados en el blockchain.
+
+Un blockchain tiene numerosas aplicaciones en diversos campos. Por ejemplo, es ampliamente utilizado en las criptomonedas, como Bitcoin, como un libro de contabilidad público y transparente para registrar todas las transacciones. También se utiliza en contratos inteligentes, sistemas de votación electrónica, seguimiento de la cadena de suministro y verificación de documentos, entre otros casos de uso.
+
+En resumen, un blockchain es una estructura de datos descentralizada y segura que almacena registros de transacciones en bloques enlazados cronológicamente. Proporciona transparencia, seguridad y confianza en la verificación de las transacciones, y tiene diversas aplicaciones en múltiples industrias.
 
 ### ¿Qué es SHA-256?
 SHA-256, que significa Algoritmo de Hash Seguro de 256 bits, es una función de hash criptográfica. Es un algoritmo matemático que toma un mensaje de entrada de cualquier longitud y produce una salida de tamaño fijo, que tiene una longitud de 256 bits. Esta salida se conoce comúnmente como hash o código hash.
+<p align="center"> <img src="images/sha256_seguridad.jpg?token=GHSAT0AAAAAACBOTRT7P7A45LMH3XN435JMZDTSLTA" width="700"> </p>
 
 El propósito principal de SHA-256 es asegurar la integridad de los datos y proporcionar una huella digital para un mensaje dado. Esto se logra aplicando una serie de operaciones matemáticas y transformaciones complejas al mensaje de entrada. Estas operaciones incluyen operaciones lógicas a nivel de bits, aritmética modular y funciones lógicas como XOR, AND y OR.
 
@@ -25,3 +38,28 @@ SHA-256 se utiliza ampliamente en diversas aplicaciones, como el almacenamiento 
 La longitud de 256 bits del código hash proporciona un gran número de posibles valores de hash, lo que dificulta enormemente que dos mensajes diferentes produzcan el mismo código hash (lo que se conoce como colisión). Esta propiedad mejora la seguridad y confiabilidad de SHA-256 en la protección de información confidencial.
 
 En resumen, SHA-256 es una función de hash criptográfica que transforma un mensaje de entrada en un código hash de tamaño fijo, proporcionando integridad de datos, identificación única y un alto nivel de seguridad para diversas aplicaciones que requieren un procesamiento de datos seguro y confiable.
+
+###Objetivo
+El objetivo del proyecto es implementar un sistema informático transaccional que interactue con datos utilizando una estructura de datos basada en cadenas de bloques (blockchain) para asegurar la integridad y seguridad de los datos. Esta implementacion permitira la carga de datos transaccionales como retiros de dinero, transefencias bancarias o ventas de productos. Tambien, permitira diferentes criterios de busqueda para acceder a la informacion de manera eficiente y rapida.
+
+##Propuesta
+###¿Qué estructuras usamos?
+1. AVL:
+El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1.
+Usamos esta estructura para insertar, buscar y recorrer de manera eficiente el conjunto de datos el cual necesitamos mantener ordenado y balanceado.
+
+<p align="center">
+  <img src="images/avl.png">
+</p>
+
+2 Tabla hash:
+Esta estructura se utiliza para implementar eficientemenete una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rapiso a los valores a traves de las claves unicas que existen. 
+<p align="center">
+  <img src="images/blockchain_blocks.png">
+</p>
+
+3. Blockchain:
+Simula un blockchain basandose en el circular list con sentinela, la estructura Block y la funcion de hash SHA256. Cada bloque cotiene datos, una huella que se calcula a partir de la huella del bloke anterior y los datos actuales y un nonce que encontramos mediante la funcion SHA256 para cumplir con el requisito de dificultad.
+<p align="center">
+  <img src="images/nonce.png">
+</p>
