@@ -1,16 +1,5 @@
-/*
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-#include "structs/blockchain/blockchain.h"
-#include "structs/tabla_hash/chainhash.h"
-#include "structs/avl/date.h"
-#include <initializer_list>
-using namespace std;
-*/
-#include "funciones.h"
+#include "funcionamiento_structs.h"
+
 /*
 int main(){
     
@@ -83,9 +72,14 @@ int main(){
 }
 */ 
 int main(){
-    //begin();
-    
-    BlockChain<string>* cadena_bloques = new BlockChain<string>(); // blockchain
+    begin();
+    /*
+    string* s= new string[4];
+    s[0] ="emisor";
+    s[1]="receptor";
+    s[2]= "monto";
+    s[3]="fecha";
+    BlockChain<string>* cadena_bloques = new BlockChain<string>(s,4); // blockchain
     vector<string> a = {"a","g","hb","s"};
     cadena_bloques->insert(a);
     cadena_bloques->insert(vector <string>{"a","agf","afvg","agvsb"});
@@ -94,7 +88,9 @@ int main(){
     cadena_bloques->insert_string("xd","afvg","agvsb","agv","ags","af"," ");
     
     cadena_bloques->insert_string("a","b","5000","sf");
-    cadena_bloques->print_huellas();
     
+    //cadena_bloques->print_huellas();
+    cadena_bloques->display();
+    */
 }
  

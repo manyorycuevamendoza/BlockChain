@@ -9,14 +9,25 @@ class BlockChain{
     private:
         Block<T>* head;//sentinel
         int nodes; 
+        string* atributos;
+        int values; // cantidad de atributos
 
-    
     public:
         BlockChain(){ 
             this->head=new Block<T>();//Node() es el sentinela
             this->head->next=this->head;
             this->head->prev=this->head;
             this->nodes=0;
+        }
+
+        BlockChain(string* _atributos, int _n){ 
+          this->head=new Block<T>();//Node() es el sentinela
+          this->head->next=this->head;
+          this->head->prev=this->head;
+          this->nodes=0;
+          values = _n;
+          atributos = new string[_n];
+          for (int i = 0; i<_n; i++) atributos[i] = _atributos[i];  
         }
 
 
@@ -87,6 +98,23 @@ class BlockChain{
           }
         }
 
+        void display(){
+          Block<T>* temp = head->next;
+          while(temp!=head) {
+            cout<<"Bloque nro: "<<temp->nro<<endl;
+            int cant = temp->data.size();
+            for (int i=0;i<cant;i++){//recorriendo cada atributo
+              cout<<atributos[i%values]<<": "<<temp->data[i]<<" - "; 
+              if (i%values==values-1){ // ultimo elemento
+                cout<<endl;
+              }
+            }
+            cout<<"Nonce: "<<temp->nonce<<endl;
+            cout<<" ---------------------------------- "<<endl;
+            temp = temp->next;
+          }
+        }
+
         bool proof_of_work(){
           Block<T>* temp = head->next->next; // empezamos desde segundo
           while (temp!=head){
@@ -98,6 +126,7 @@ class BlockChain{
 
         ~BlockChain(){
             if(head) head->killSelf();
+            delete [] atributos;
         }
 };
 #endif
