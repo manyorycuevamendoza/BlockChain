@@ -59,8 +59,12 @@ void console(){
         5. buscar por atributo[3]
         6. buscar por rango en atributo[2] // monto 
         7. buscar por rango en atributo[3] // fecha
-        8. mostrar todos los bloques (blockchain->print(huellas))
-        9. recalculo en cascada
+        8. buscar minimo por atributo[2] // monto 
+        9. buscar minimo por atributo[3]// fecha
+        10. buscar maximo por atributo[2]// monto 
+        11. buscar maximo por atributo[3]// fecha
+        12. mostrar todos los bloques (blockchain->print(huellas))
+        13. recalculo en cascada
     */
 }
 
