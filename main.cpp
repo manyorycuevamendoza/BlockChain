@@ -1,18 +1,16 @@
+/*
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
-//#include "structs/avl/avl.h"
 #include "structs/blockchain/blockchain.h"
 #include "structs/tabla_hash/chainhash.h"
 #include "structs/avl/date.h"
 #include <initializer_list>
-//#include "SHA256.h"
-//#include "lectura.h"
-
 using namespace std;
-
+*/
+#include "funciones.h"
 /*
 int main(){
     
@@ -22,10 +20,18 @@ int main(){
         std::cout << "Failed to open the file." << std::endl;
         return 1;
     }
-    //añandiendo arbol y isertando ----------------------------------
-    AVLTree2<int,int> avl1;
-    AVLTree2<int,time_t> avl2;
-    ChainHash<string,int> s1;
+    //añandiendo arbol y insertando ----------------------------------
+    AVLTree2<int,int> avl1; // id monto
+    AVLTree2<int,time_t> avl2; //id fechas
+
+
+    // hash 
+    ChainHash<string,int> string1; //primer string
+    ChainHash<string,int> string2; //segundo string
+    ChainHash<int,int> numero; //para monto id/monto
+    ChainHash<long,int> fecha; //para fecha/id 
+
+    
 
     int count =0;
     std::string line;
@@ -35,34 +41,33 @@ int main(){
         std::stringstream ss(line);
         std::string item;
         std::getline(ss, item, ','); // primer string
-        s1.insert(item,count);
-        //std::cout<< item<<" ,";
-        std::getline(ss, item, ',');
-        //std::cout << item << " ,";
-        //monto
-        std::getline(ss, item, ',');
-        int number=stoi(item);
-
-        avl1.insert(count,number); // key: nro bloque   //  value:monto -- lo ordena por monto(por value)
-        //cout<<number<<"|";
-        //--fecha
-        std::getline(ss, item, ',');
-        time_t fecha = convertToUnixTimestamp(item);
-        avl2.insert(count,fecha); // key: nro bloque   //  value:fecha -- lo ordena por fecha(por value)
-        //std::cout << item<<std::endl;
+        string1.insert(item,count); 
+        
+        std::getline(ss, item, ','); 
+        string2.insert(item,count);
+        
+        std::getline(ss, item, ',');//monto
+        int number=stoi(item); 
+        avl1.insert(count,number); // key: nro bloque  //  value:monto -- lo ordena por monto(por value)
+        numero.insert(number,count);
+       
+        std::getline(ss, item, ','); //--fecha
+        time_t date = convertToUnixTimestamp(item); 
+        avl2.insert(count,date); // key: nro bloque   //  value:fecha -- lo ordena por fecha(por value)
+        numero.insert(date,count);
 
         count ++; // nro de bloque aumenta
-    }
+    } 
 
-    file.close();
+    file.close(); 
 
     //avl.displayPretty();
-    cout<<endl;
-    vector <int> result = avl1.search_by_range(0,1000);
-    //for (auto x:result) cout<<x<<" ";
-    cout<<result.size()<<endl;
+    cout<<endl; 
+    vector <int> result = avl1.search_by_range(0,1000); 
+    //for (auto x:result) cout<<x<<" "; 
+    cout<<result.size()<<endl; 
 
-    cout<<avl1.size();
+    cout<<avl1.size()<<endl; 
 
     //cout<<"Size: "<<s1.get_size();
     //cout<<endl<<s1.search("Lily");
@@ -70,68 +75,15 @@ int main(){
     
     cout<<"\nSize - fechas: "<<avl2.size()<<endl;
     vector <int> res = avl2.search_by_range(convertToUnixTimestamp("2001-01-01"),convertToUnixTimestamp("2004-01-01"));
+    cout<<"Mínimo: "<<avl1.minValue().key<<endl;
+    cout<<"Máximo: "<<avl1.maxValue().key<<endl;
     for (auto x:res) cout<<x<<" ";
     cout<<"Size: "<<res.size()<<endl;
     return 0;
 }
- */
-
-//realizando una hash table
-
-//#include "SHA256.h"
-//#include "lectura.h"
-using namespace std;
-//g++ main.cpp -o main
-/*
+*/ 
 int main(){
-
-        string s = "hello world";
-        SHA256 sha;
-        sha.update(s);
-        uint8_t * digest = sha.digest();
-
-        std::cout << SHA256::toString(digest) << std::endl;
-
-        delete[] digest;
-        return 0;
-
-
-       //readCSV("t.csv");
-
-      //Block<string> a({"a","b","g","f"});
-      //a.print();
-/*
-	BlockChain<string> b;
-	b.insert({"a","b","c","d"},10);
-	b.insert({"e", "f","j","h"},310);
-	b.insert({"z", "y","x","w"},4);
-	b.insert({"z", "y","x","w"},8);
-	b.insert({"z", "y","x","w"},19);
-	b.insert({},19);
-	b.insert({"z", "y","x","w"},39);
-	b.insert({"z", "y","x","w"},49);
-	b.insert({"z", "y","x","w"},59);
-	b.insert({"z", "y","x","w"},109);
-	b.insert({"z", "y","x","w"},9);
-
-  b.print_huellas();
-	return 0;
+    begin();
+    
 }
-*/
-
-int main(){
-    BlockChain<string> b;
-    vector <string> v1 = {"arf","bdfvd","c","d"};
-
-    b.insert(v1);  // Pasar el initializer_list a la función insert()
-    b.insert({"e", "f","j","h"});
-    b.insert({"z", "y","x","w"});
-    b.insert({"z", "y","x","w"});
-    b.insert({"z", "y","x","w"});
-    b.insert({"e","h","e","h"});
-    b.insert({"e","h","e","h"});
-
-
-    b.print_huellas();
-    return 0;
-}
+ 

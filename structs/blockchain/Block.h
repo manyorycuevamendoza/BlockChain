@@ -17,8 +17,9 @@ struct Block
 
     public:
     void killSelf(){
-        if(next != nullptr) next->killSelf();
-        delete this;
+        if(next) next->killSelf();
+        delete next;
+        delete prev;
     }
 
     Block(){
@@ -42,6 +43,10 @@ struct Block
     void print_huella(){
         for (auto x:data) cout<<x<<" ";
         cout<<" Huella: "<<huella<<endl;
+    }
+
+    vector<T> get_data(){
+        return data;
     }
 
 };

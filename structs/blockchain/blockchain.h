@@ -53,6 +53,14 @@ class BlockChain{
         
         }
 
+        vector <T> get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
+                Block<T>* temp = head->next;
+                for (int i=0;i<ind;i++){
+                    temp = temp->next;
+                }
+                return temp->get_data();
+        }
+
         void print_huellas(){
           Block<T>* temp = head->next;
           while(temp!=head) {
