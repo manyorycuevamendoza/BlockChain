@@ -19,6 +19,26 @@ class BlockChain{
             this->nodes=0;
         }
 
+
+        template <class... Typenames>
+        void insert_str(vector<T> data, T data1,Typenames... data_extra){
+          data.push_back(data1);
+          insert_str(data, data_extra...);
+        }
+
+        template <class... Typenames>
+        void insert_string(string data,Typenames... data_extra){
+          vector <T> result;
+          result.push_back(data);
+          insert_str(result, data_extra...);
+        }
+
+        
+        void insert_str(vector<T> data, T data1){ // caso para 2
+          data.push_back(data1);
+          insert(data);
+        }
+
         void insert(vector<T> data){
             Block<T>* temp = new Block<T>(data,this->nodes);
             temp->next=this->head; //hacemos que el nodo se cuelgue
@@ -31,19 +51,6 @@ class BlockChain{
           //actualizar huella del padre
           temp->huella_padre = temp->prev->huella;
 
-          // hallar la huella
-          /*
-          SHA256 sha;
-          string huella = temp->huella+temp->huella_padre;
-          uint8_t * digest = sha.digest();
-
-          //actualizando huella y nonce
-					temp->nonce=sha.SHA256::findNonce(huella,huella); 
-          temp->huella = huella;
-          delete[] digest;
-        
-          */
-
           SHA256 sha;
           uint8_t * digest = sha.digest();
 
@@ -52,6 +59,16 @@ class BlockChain{
           delete[] digest;
         
         }
+       /*
+        string insert(T s1,T s2, T s3, T s4){
+          return s1 + insert(...data_extra);;
+        }
+
+        template <class... Typenames> // caso general
+        string insert(T s1, Typenames... data_extra){
+          return s1 + "," insert(...data_extra);;
+        }
+        */
 
         vector <T> get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
                 Block<T>* temp = head->next;
@@ -68,6 +85,15 @@ class BlockChain{
             cout<<" - Nonce: "<<temp->nonce<<endl;
             temp = temp->next;
           }
+        }
+
+        bool proof_of_work(){
+          Block<T>* temp = head->next->next; // empezamos desde segundo
+          while (temp!=head){
+            if (temp->prev->huella!=temp->huella_padre) return false;
+            temp = temp->next;
+          }
+          return true;
         }
 
         ~BlockChain(){

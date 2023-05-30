@@ -83,7 +83,18 @@ int main(){
 }
 */ 
 int main(){
-    begin();
+    //begin();
+    
+    BlockChain<string>* cadena_bloques = new BlockChain<string>(); // blockchain
+    vector<string> a = {"a","g","hb","s"};
+    cadena_bloques->insert(a);
+    cadena_bloques->insert(vector <string>{"a","agf","afvg","agvsb"});
+    //cadena_bloques->insert(vector <string>{"a","agf","afvg","agvsb"},a);
+    //cadena_bloques->insert(vector <string>{"a","agf","afvg","agvsb"},{"a","ghb","fg","rf"},a);
+    cadena_bloques->insert_string("xd","afvg","agvsb","agv","ags","af"," ");
+    
+    cadena_bloques->insert_string("a","b","5000","sf");
+    cadena_bloques->print_huellas();
     
 }
  

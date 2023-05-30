@@ -9,6 +9,7 @@
 #include <initializer_list>
 using namespace std;
 
+BlockChain<string>* cadena_bloques = new BlockChain<string>(); // blockchain
 
 void readCSV(const string, AVLTree2<int,int>* , AVLTree2<int,long>* , ChainHash<string,int>* , ChainHash<string,int>* , ChainHash<int,int>* , ChainHash<long,int>* );
 
