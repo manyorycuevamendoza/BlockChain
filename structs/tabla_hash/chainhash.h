@@ -48,7 +48,7 @@ public:
     //retorna el id value
     TV search(TK key) {
         if (!find(key)) {
-            cerr << "Error";
+            cerr <<"Elemento no encontrado\n";
         }
         int index=hasher(key)%capacity;
         Entry2<TK,TV> entry (key,TV());

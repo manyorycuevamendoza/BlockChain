@@ -22,7 +22,7 @@ template <class TK,class TV>
 vector <TK> range_search(AVLTree2<TK,TV>* arbol, TV begin, TV end);
 
 
-void readCSV(const string archivo, string* atributos, BlockChain<string>* cadena_bloques, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha){
+void readCSV(const string archivo, string* atributos,int col, BlockChain<string>* cadena_bloques, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha){
     std::ifstream file(archivo);
     if (!file.is_open()) {
         std::cout << "Failed to open the file." << std::endl;
@@ -38,6 +38,7 @@ void readCSV(const string archivo, string* atributos, BlockChain<string>* cadena
         std::getline(ss, item, ','); // primer string
         atributos[i] = item;
     }
+    cadena_bloques->set_atributos(atributos,col);
     
     while (std::getline(file, line)) {
         vector <string> values;

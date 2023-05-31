@@ -27,9 +27,14 @@ class BlockChain{
           this->nodes=0;
           values = _n;
           atributos = new string[_n];
-          for (int i = 0; i<_n; i++) atributos[i] = _atributos[i];  
+          for (int i = 0; i<values; i++) atributos[i] = _atributos[i];
         }
 
+        void set_atributos(string* _atributos, int _n){
+            values = _n;
+            atributos = new string[_n];
+            for (int i = 0; i<values; i++) atributos[i] = _atributos[i];
+        }
 
         template <class... Typenames>
         void insert_str(vector<T> data, T data1,Typenames... data_extra){
@@ -84,6 +89,7 @@ class BlockChain{
                     }
                     i++;
                 }
+                cout<<"\n";
         }
 
         void print_huellas(){
@@ -101,12 +107,13 @@ class BlockChain{
             cout<<"Bloque nro: "<<temp->nro<<endl;
             int cant = temp->data.size();
             for (int i=0;i<cant;i++){//recorriendo cada atributo
-              cout<<atributos[i%values]<<": "<<temp->data[i]<<" - "; 
+              cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
               if (i%values==values-1){ // ultimo elemento
                 cout<<endl;
               }
             }
-            cout<<"Nonce: "<<temp->nonce<<endl;
+            cout<<"Nonce: "<<temp->nonce<<"\t";
+            cout<<"Huella: "<<temp->huella<<endl;
             cout<<" ---------------------------------- "<<endl;
             temp = temp->next;
           }
