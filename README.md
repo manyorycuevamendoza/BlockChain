@@ -66,8 +66,9 @@ SHA-256 se utiliza ampliamente en diversas aplicaciones, como el almacenamiento 
 
 La longitud de 256 bits del código hash proporciona un gran número de posibles valores de hash, lo que dificulta enormemente que dos mensajes diferentes produzcan el mismo código hash (lo que se conoce como colisión). Esta propiedad mejora la seguridad y confiabilidad de SHA-256 en la protección de información confidencial.
 
-<img src="images/hash_funcion.jpg" width="300">
-
+<p align="center"> 
+  <img src="images/hash_funcion.jpg" width="300">
+</p>
 En resumen, SHA-256 es una función de hash criptográfica que transforma un mensaje de entrada en un código hash de tamaño fijo, proporcionando integridad de datos, identificación única y un alto nivel de seguridad para diversas aplicaciones que requieren un procesamiento de datos seguro y confiable.
 
 ### Objetivo
@@ -95,6 +96,10 @@ Simula un blockchain basandose en el circular list con sentinela, la estructura 
 <p align="center">
   <img src="images/nonce.png" alt="nonce0000" width="400">
 </p>
+
+## Interfaz grafica
+Usamos la interfaz gráfica de usuario GUI, ya que es una interfaz que permite a los usuarios interactuar con un sistema o programa utilizando elementos visuales, como ventanas, botones, menús y otros componentes gráficos. Tambien, proporciona una forma intuitiva y visualmente atractiva de interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
+
 
 
 ## Bibliografía
