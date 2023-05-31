@@ -14,6 +14,7 @@
       1. [AVL](#avl)
       2. [Tabla hash](#tabla-hash)
       3. [Blockchain](#blockchain)
+  - [Interfaz grafica](#Interfaz-grafica)
   - [Bibliografía](#bibliografía)
 </details>
 
@@ -98,7 +99,23 @@ Simula un blockchain basandose en el circular list con sentinela, la estructura 
 </p>
 
 ## Interfaz grafica
-Usamos la interfaz gráfica de usuario GUI, ya que es una interfaz que permite a los usuarios interactuar con un sistema o programa utilizando elementos visuales, como ventanas, botones, menús y otros componentes gráficos. Tambien, proporciona una forma intuitiva y visualmente atractiva de interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
+Usamos la interfaz gráfica de usuario GUI, ya que es una interfaz que nos permite interactuar con elun sistema utilizando elementos visuales, como ventanas, botones, menús y otros componentes gráficos. Tambien, proporciona una forma intuitiva y visualmente atractiva de interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
+
+En la interfas grafica creamos un "menu" con opciones para crear un bloque o ver los archivos.
+<p align="center">
+  <img src="images/gui_entrada.jpg" alt="nonce0000" width="400">
+</p>
+
+En el bloque tenemos el numero del bloque, el numero del nonce, los datos u el codigo hash
+
+<p align="center">
+  <img src="images/gui_bloques.jpg" alt="nonce0000" width="400">
+</p>
+
+Los datos que tenemos en este caso son datos de una transaccion, tenemos el cliente, el lugar, el monto y la fecha.
+<p align="center">
+  <img src="images/gui_datos.jpg" alt="nonce0000" width="400">
+</p>
 
 
 
