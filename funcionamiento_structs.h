@@ -22,12 +22,12 @@ void begin(){
     console();
 }
 
-long long pedir_fecha(){
-    int dia, mes, anho;
+time_t pedir_fecha(){
+    string dia, mes, anho;
     cout<<"Ingrese fecha-> "; cout<<"Dia: "; cin>>dia; 
     cout<<"Mes: "; cin>>mes; 
     cout<<"Anho: "; cin>>anho; 
-    return convertToUnixTimestamp((anho)+"-"+to_string(mes)+"-"+to_string(dia));
+    return convertToUnixTimestamp(anho+"-"+mes+"-"+dia);
 }
 
 string pedir_string(string atributo){
@@ -79,6 +79,8 @@ void console(){
    }while (alternativa>0 && 13<alternativa);
 
     vector<int> res;
+    int n1,n2;
+    time_t c1, c2;
 
     switch (alternativa)
    {
@@ -86,51 +88,48 @@ void console(){
         cout<<"hola";
         break;
    case 2:
-        cout<<string1->search(pedir_string(atributos[0]));
+        cadena_bloques->get_block(string1->search(pedir_string(atributos[0])));
         break;
     case 3:
-        cout<<string2->search(pedir_string(atributos[1]));
+        cadena_bloques->get_block(string2->search(pedir_string(atributos[1])));
         break;
     case 4:
-        cout<<numero->search(pedir_entero(atributos[2]));
+        cadena_bloques->get_block(numero->search(pedir_entero(atributos[2])));
         break;
     case 5:
-        cout<<fecha->search(pedir_fecha());
+        cadena_bloques->get_block(fecha->search(pedir_fecha()));
         break;
-    case 6:
-        //vector<int> res;
-        res = avl1->search_by_range(pedir_entero(atributos[2]),pedir_entero(atributos[2]));
-        
-        cout<<"Bloques: ";
-        for (auto i:res) cout<<i<<" ";
-        cout<<endl;
-
+        case 6:
+            n1 = pedir_entero(atributos[2]+" 1");
+           n2 = pedir_entero(atributos[2]+" 2");
+        res = avl1->search_by_range(n1,n2);
+        cout<<"\tBloques: \n";
+        for (auto i:res) cadena_bloques->get_block(i); cout<<"\n"; // cout<<i<<" ";
         break;
 
     case 7:
-        //vector<int> result2;
-        res=avl2->search_by_range(pedir_fecha(),pedir_fecha());
+        c1 = pedir_fecha();
+        c2 = pedir_fecha();
+        res=avl2->search_by_range(c1,c2);
         //imprimiendo el vector de tuplas
-        cout<<"Valores: ";
-        for (long long i:res) cout<<i<<" ";
-        cout<<endl;
-
+        cout<<"\tBloques: \n";
+        for (auto i:res) cadena_bloques->get_block(i); cout<<"\n"; // cout<<i<<" ";
         break;
 
     case 8:
-        cout<<avl1->minValue();
+        cadena_bloques->get_block(avl1->minValue());
         break;
 
     case 9:
-        cout<<avl2->minValue();
+        cadena_bloques->get_block(avl2->minValue());
         break;
 
     case 10:
-        cout<<avl1->maxValue();
+        cadena_bloques->get_block(avl1->maxValue());
         break;
 
     case 11:
-        cout<<avl2->maxValue();
+        cadena_bloques->get_block(avl2->maxValue());
         break;
 
     case 12:

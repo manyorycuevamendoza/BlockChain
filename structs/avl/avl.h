@@ -34,12 +34,12 @@ public:
         return height(this->root);
     }
 
-    Entry<TK, TV> minValue() {
-        return minValue(this->root);
+    TK minValue() {
+        return minValue(this->root).key;
     }
 
-    Entry<TK, TV> maxValue() {
-        return maxValue(this->root);
+    TK maxValue() {
+        return maxValue(this->root).key;
     }
 
     bool isBalanced() {

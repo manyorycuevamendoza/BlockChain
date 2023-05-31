@@ -70,23 +70,20 @@ class BlockChain{
           delete[] digest;
         
         }
-       /*
-        string insert(T s1,T s2, T s3, T s4){
-          return s1 + insert(...data_extra);;
-        }
 
-        template <class... Typenames> // caso general
-        string insert(T s1, Typenames... data_extra){
-          return s1 + "," insert(...data_extra);;
-        }
-        */
-
-        vector <T> get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
+        void get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
                 Block<T>* temp = head->next;
                 for (int i=0;i<ind;i++){
                     temp = temp->next;
                 }
-                return temp->get_data();
+                int i = 0;
+                for (auto x:temp->data) {
+                    cout<<atributos[i%values]<<": "<<temp->data[i]<<" - ";
+                    if (i%values==values-1){ // ultimo elemento
+                        cout<<endl;
+                    }
+                    i++;
+                }
         }
 
         void print_huellas(){
