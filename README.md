@@ -117,6 +117,7 @@ Los datos que tenemos en este caso son de transacciones, tenemos el cliente, el 
 </p>
 
 ## Bibliografía
+
 - Domínguez Gómez, J. (n.d.). Criptografía: Función SHA-256. https://academy.bit2me.com/wp-content/uploads/2019/10/Criptography_SHA_256_es.pdf
 
 ‌- ecanorea. (2021, October 19). Qué es el blockchain y cómo funciona. Plain Concepts. https://www.plainconcepts.com/es/blockchain-guia-principiantes/
