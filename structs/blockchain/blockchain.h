@@ -121,6 +121,10 @@ class BlockChain{
           return true;
         }
 
+        int get_size(){
+            return this->nodes;
+        }
+
         ~BlockChain(){
             if(head) head->killSelf();
             delete [] atributos;

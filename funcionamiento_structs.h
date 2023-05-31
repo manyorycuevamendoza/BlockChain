@@ -40,24 +40,32 @@ int pedir_entero(string atributo){
     cout<<"Ingrese "<<atributo<<": "; int num; cin>>num; return num;
 }
 
+void agregar_registro(){
+    vector <string> data;
+    int opcion = 1;
+    string s1,s2;
+    int s3;
+    time_t s4;
+    int size = cadena_bloques->get_size();
+    do {
+        s1 = pedir_string(atributos[0]); string1->insert(s1,size);
+        s2 = pedir_string(atributos[1]); string2->insert(s2,size);
+        s3 = pedir_entero(atributos[2]); numero->insert(s3,size);
+        s4 = pedir_fecha(); fecha->insert(s4,size);
+
+        data.push_back(s1);
+        data.push_back(s2);
+        data.push_back(to_string(s3));
+        data.push_back(to_string(s4));
+        cout<<"¿Desea agregar otro registro? ";
+        opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
+    } while (opcion==1);
+    cadena_bloques->insert(data); // insertamos el dato en blockchain
+
+}
 
 
 void console(){
-    /*funciones : 
-        1. agregar registro, 
-        2. buscar por atributo[0] // cout<<"Buscar por "<<atributo[0];
-        3. buscar por atributo[1]
-        4. buscar por atributo[2]
-        5. buscar por atributo[3]
-        6. buscar por rango en atributo[2] // monto 
-        7. buscar por rango en atributo[3] // fecha
-        8. buscar minimo por atributo[2] // monto 
-        9. buscar minimo por atributo[3]// fecha
-        10. buscar maximo por atributo[2]// monto 
-        11. buscar maximo por atributo[3]// fecha
-        12. mostrar todos los bloques (blockchain->print(huellas))
-        13. recalculo en cascada
-    */
    int alternativa;
    do{
         cout<<"[1]. agregar registro"<<endl; 
@@ -85,7 +93,8 @@ void console(){
     switch (alternativa)
    {
    case 1:
-        cout<<"hola";
+        agregar_registro();
+        cadena_bloques->display();
         break;
    case 2:
         cadena_bloques->get_block(string1->search(pedir_string(atributos[0])));
