@@ -61,17 +61,17 @@ void console(){
    int alternativa;
    do{
         cout<<"[1]. agregar registro"<<endl; 
-        cout<<"[2]. buscar por atributo al emisor "<<endl;
-        cout<<"[3]. buscar por atributo al receptor "<<endl;
-        cout<<"[4]. buscar por atributo al monto "<<endl;
-        cout<<"[5]. buscar por atributo al fecha "<<endl;
-        cout<<"[6]. buscar por rango en monto"<<endl;
-        cout<<"[7]. buscar por rango en fecha"<<endl;
-        cout<<"[8]. buscar minimo por atributo de monto"<<endl;
-        cout<<"[9]. buscar minimo por atributo de fecha"<<endl;
-        cout<<"[10]. buscar maximo por atributo de monto"<<endl;
-        cout<<"[11]. buscar maximo por atributo de fecha"<<endl;
-        cout<<"[12]. mostrar todos los bloques (blockchain->print(huellas))"<<endl;
+        cout<<"[2]. buscar por "<<atributos[0]<<endl;
+        cout<<"[3]. buscar por "<<atributos[1]<<endl;
+        cout<<"[4]. buscar por "<<atributos[2]<<endl;
+        cout<<"[5]. buscar por "<<atributos[3]<<endl;
+        cout<<"[6]. buscar por rango en "<<atributos[2]<<endl;
+        cout<<"[7]. buscar por rango en "<<atributos[3]<<endl;
+        cout<<"[8]. buscar minimo por "<<atributos[2]<<endl;
+        cout<<"[9]. buscar minimo por "<<atributos[3]<<endl;
+        cout<<"[10]. buscar maximo por "<<atributos[2]<<endl;
+        cout<<"[11]. buscar maximo por "<<atributos[3]<<endl;
+        cout<<"[12]. mostrar todos los bloques"<<endl;
         cout<<"[13]. recalculo en cascada"<<endl;
         cin>>alternativa;
 
