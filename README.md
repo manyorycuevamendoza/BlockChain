@@ -99,24 +99,28 @@ Simula un blockchain basandose en el circular list con sentinela, la estructura 
 </p>
 
 ## Interfaz grafica
-Usamos la interfaz gráfica de usuario GUI, ya que es una interfaz que nos permite interactuar con elun sistema utilizando elementos visuales, como ventanas, botones, menús y otros componentes gráficos. Tambien, proporciona una forma intuitiva y visualmente atractiva de interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
-
+Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos permite crear una interfaz gráfica de usuario (GUI). Con la interfaz gráfica, podemos interactuar con el sistema mediante elementos visuales como ventanas, botones, menús y otros componentes gráficos. Esta interfaz nos proporciona una forma intuitiva y atractiva visualmente para interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
 En la interfas grafica creamos un "menu" con opciones para crear un bloque o ver los archivos.
 <p align="center">
   <img src="images/gui_entrada.jpg" alt="nonce0000" width="400">
 </p>
 
-En el bloque tenemos el numero del bloque, el numero del nonce, los datos u el codigo hash
+En el bloque tenemos el numero del bloque, el numero del nonce, los datos y el codigo hash.
 
 <p align="center">
   <img src="images/gui_bloques.jpg" alt="nonce0000" width="400">
 </p>
 
-Los datos que tenemos en este caso son datos de una transaccion, tenemos el cliente, el lugar, el monto y la fecha.
+Los datos que tenemos en este caso son de transacciones, tenemos el cliente, el lugar, el monto y la fecha de transacción.
 <p align="center">
   <img src="images/gui_datos.jpg" alt="nonce0000" width="400">
 </p>
 
-
-
 ## Bibliografía
+- Domínguez Gómez, J. (n.d.). Criptografía: Función SHA-256. https://academy.bit2me.com/wp-content/uploads/2019/10/Criptography_SHA_256_es.pdf
+
+‌- ecanorea. (2021, October 19). Qué es el blockchain y cómo funciona. Plain Concepts. https://www.plainconcepts.com/es/blockchain-guia-principiantes/
+
+‌- Matesanz, V. (2022, January 11). Qué es el blockchain, cómo funciona y cuál es su relación con las criptos [Guía Fácil]. Finect; Finect. https://www.finect.com/usuario/vanesamatesanz/articulos/que-blockchain-criptomonedas-guia-facil#:~:text=El%20blockchain%20es%20un%20ecosistema,forma%20segura%2C%20r%C3%A1pida%20y%20descentralizada.
+
+‌
