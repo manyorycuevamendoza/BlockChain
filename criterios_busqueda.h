@@ -22,7 +22,7 @@ template <class TK,class TV>
 vector <TK> range_search(AVLTree2<TK,TV>* arbol, TV begin, TV end);
 
 
-void readCSV(const string archivo, string* atributos, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha){
+void readCSV(const string archivo, string* atributos, BlockChain<string>* cadena_bloques, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha){
     std::ifstream file(archivo);
     if (!file.is_open()) {
         std::cout << "Failed to open the file." << std::endl;
@@ -38,26 +38,33 @@ void readCSV(const string archivo, string* atributos, AVLTree2<int,int>* avl1, A
         std::getline(ss, item, ','); // primer string
         atributos[i] = item;
     }
-
+    
     while (std::getline(file, line)) {
+        vector <string> values;
+
         std::stringstream ss(line);
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); 
+        values.push_back(item);
         
         std::getline(ss, item, ','); 
         string2->insert(item,count);
+        values.push_back(item);
         
         std::getline(ss, item, ',');//monto
         int number=stoi(item); 
         avl1->insert(count,number); // key: nro bloque  //  value:monto -- lo ordena por monto(por value)
         numero->insert(number,count);
+        values.push_back(item);
        
         std::getline(ss, item, ','); //--fecha
         time_t date = convertToUnixTimestamp(item); 
         avl2->insert(count,date); // key: nro bloque   //  value:fecha -- lo ordena por fecha(por value)
         fecha->insert(date,count);
+        values.push_back(item);
 
         count ++; // nro de bloque aumenta
+        cadena_bloques->insert(values);
     } 
 
     file.close(); 
