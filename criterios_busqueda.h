@@ -39,33 +39,32 @@ void readCSV(const string archivo, string* atributos,int col, BlockChain<string>
         atributos[i] = item;
     }
     cadena_bloques->set_atributos(atributos,col);
-    
+    string* values = new string[4];//vector <string> values;
     while (std::getline(file, line)) {
-        vector <string> values;
-
+        int i=0;
         std::stringstream ss(line);
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); 
-        values.push_back(item);
+        values[i++] = item; //values.push_back(item);
         
         std::getline(ss, item, ','); 
         string2->insert(item,count);
-        values.push_back(item);
+        values[i++] = item; //values.push_back(item);
         
         std::getline(ss, item, ',');//monto
         int number=stoi(item); 
         avl1->insert(count,number); // key: nro bloque  //  value:monto -- lo ordena por monto(por value)
         numero->insert(number,count);
-        values.push_back(item);
+        values[i++] = item; //values.push_back(item);
        
         std::getline(ss, item, ','); //--fecha
         time_t date = convertToUnixTimestamp(item); 
         avl2->insert(count,date); // key: nro bloque   //  value:fecha -- lo ordena por fecha(por value)
         fecha->insert(date,count);
-        values.push_back(item);
+        values[i++] = item; //values.push_back(item);
 
         count ++; // nro de bloque aumenta
-        cadena_bloques->insert(values);
+        cadena_bloques->insert(values,i-1);
     } 
 
     file.close(); 

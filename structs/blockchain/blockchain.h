@@ -13,11 +13,12 @@ class BlockChain{
         int values; // cantidad de atributos
 
     public:
-        BlockChain(){ 
+        BlockChain(int columnas=0){ 
             this->head=new Block<T>();//Node() es el sentinela
             this->head->next=this->head;
             this->head->prev=this->head;
             this->nodes=0;
+            this->values = columnas;
         }
 
         BlockChain(string* _atributos, int _n){ 
@@ -37,26 +38,25 @@ class BlockChain{
         }
 
         template <class... Typenames>
-        void insert_str(vector<T> data, T data1,Typenames... data_extra){
-          data.push_back(data1);
-          insert_str(data, data_extra...);
+        void insert_string(int size,T data,Typenames... data_extra){ //al final recibe cantidad de valores
+          T* result = new T[size];
+          result[0] = data; // agregamos primer elemento
+          insert_str(1,size,result, data_extra...);
         }
 
         template <class... Typenames>
-        void insert_string(string data,Typenames... data_extra){
-          vector <T> result;
-          result.push_back(data);
-          insert_str(result, data_extra...);
+        void insert_str(int indice,int size,T* data,T data1,Typenames... data_extra){ // recibe indice en el que se va a añadir
+          data[indice] = data1; // agregamos valor en posicion especificada
+          insert_str(indice+1,size,data, data_extra...);
         }
-
         
-        void insert_str(vector<T> data, T data1){ // caso para 2
-          data.push_back(data1);
-          insert(data);
+        void insert_str(int indice,int size,T* data, T data1){ // caso cuando solo falta añadir 1
+          data[indice] = data1;
+          insert(data,size);
         }
 
-        void insert(vector<T> data){
-            Block<T>* temp = new Block<T>(data,this->nodes);
+        void insert(T* data,int size){
+            Block<T>* temp = new Block<T>(data,size,this->nodes);
             temp->next=this->head; //hacemos que el nodo se cuelgue
             temp->prev=this->head->prev; //hacemos que el nodo se cueelgue del prev del head
             this->head->prev->next=temp;//hacemos que el nodo se cuelgue siguiente y atrás
@@ -82,12 +82,15 @@ class BlockChain{
                     temp = temp->next;
                 }
                 int i = 0;
-                for (auto x:temp->data) {
+                for (int i=0; i<temp->cant_data; i++) {
+                  cout<<temp->data[i]<<"\t";
+                  /*
                     cout<<atributos[i%values]<<": "<<temp->data[i]<<" - ";
                     if (i%values==values-1){ // ultimo elemento
                         cout<<endl;
                     }
                     i++;
+                    */
                 }
                 cout<<"\n";
         }
@@ -105,13 +108,19 @@ class BlockChain{
           Block<T>* temp = head->next;
           while(temp!=head) {
             cout<<"Bloque nro: "<<temp->nro<<endl;
-            int cant = temp->data.size();
-            for (int i=0;i<cant;i++){//recorriendo cada atributo
+        
+            for (int i=0;i<temp->cant_data;i++){//recorriendo cada atributo
+            
+              //cout<<temp->data[i]<<"\t"; // impresión simple
+              
+              //impresion con atributos
               cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
               if (i%values==values-1){ // ultimo elemento
                 cout<<endl;
               }
+              
             }
+            
             cout<<"Nonce: "<<temp->nonce<<"\t";
             cout<<"Huella: "<<temp->huella<<endl;
             cout<<" ---------------------------------- "<<endl;

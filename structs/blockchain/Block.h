@@ -1,13 +1,15 @@
 #include <iostream>
 #include <string>
-#include <vector>
+//#include <vector>
 #include "SHA256.h"
 using namespace std;
 
 template <class T>
 struct Block
 {
-    vector <T> data; // SHA256 solo funciona con strings
+    //vector <T> data; // SHA256 solo funciona con strings
+    T* data;
+    int cant_data; // nro de valores por bloque
     int nro;
     string huella; // hash(huellapadre+datos) = huella
     string huella_padre;
@@ -26,26 +28,30 @@ struct Block
         huella_padre = huella = nonce = "";
     }
     
-    Block(vector<T> _data,int _nro) {
-        nro = _nro;
+    Block(T* _data,int size_data,int _nro_bloque) {
+        nro = _nro_bloque;
         nonce = "";
         next = prev = nullptr;
 
+        //para valores que almacenará el bloque
+        cant_data = size_data;
+        data = new T[cant_data];
+
         huella = to_string(nro);
         
-        for (auto a:_data) {
-        data.push_back(a);
-        huella += a;
+        for (int i=0; i<cant_data; i++) {
+            data[i] = _data[i];
+            huella += _data[i];
         } //huella tiene valor concatenado de todos los elementos
         huella_padre="";
     }
 
     void print_huella(){
-        for (auto x:data) cout<<x<<" ";
+        for (int i=0; i<cant_data; i++) cout<<data[i]<<" ";
         cout<<" Huella: "<<huella<<endl;
     }
 
-    vector<T> get_data(){
+    T* get_data(){
         return data;
     }
 

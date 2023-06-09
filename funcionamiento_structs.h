@@ -51,7 +51,9 @@ int pedir_entero(string atributo){
 }
 
 void agregar_registro(){
-    vector <string> data;
+    /*
+    string* data = new string[16];//vector <string> data;
+    int i=0;
     int opcion = 1;
     string s1,s2;
     int s3;
@@ -71,8 +73,8 @@ void agregar_registro(){
         cout<<"\n¿Desea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
-    cadena_bloques->insert(data); // insertamos el dato en blockchain
-
+    cadena_bloques->insert(data,4); // insertamos el dato en blockchain (4 por el nro de columnas)
+*/
 }
 
 int pedir_opcion(){
