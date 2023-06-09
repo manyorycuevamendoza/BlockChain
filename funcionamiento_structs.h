@@ -50,36 +50,45 @@ int pedir_entero(string atributo){
     cout<<"Ingrese "<<atributo<<": "; int num; cin>>num; return num;
 }
 
-template <typename T>
-T* resize(T* values,int size){
-    T* copia = new T[size];
-    for (int i=0; i<size; i++) copia[i] = values[i];
-    delete [] values;
-    
-    T* result = new T[size*2];
-    for (int i=0; i<size; i++) result[i] = copia[i];
-    delete [] result;
-    return values;
-}
-
 void agregar_registro(){
-    string* data = new string[16]; int ind=0;//vector <string> data;
+    int size_data =4 ;
+    string* data = new string[size_data]; int ind=0;//vector <string> data;
     int opcion = 1;
     string s1,s2;
     int s3;
     string s4;
     int size = cadena_bloques->get_size();
     do {
+       if (ind == size_data) { //resize
+        string* copia = new string[size_data];
+        for (int i = 0; i < size_data; i++)
+            copia[i] = data[i];
+
+        delete[] data; // Liberar la memoria del arreglo original
+
+        data = new string[size_data * 2];
+        for (int i = 0; i < size_data; i++)
+            data[i] = copia[i];
+
+        size_data *= 2;
+        delete[] copia;
+    }
+
+
         s1 = pedir_string(atributos[0]); string1->insert(s1,size);
         s2 = pedir_string(atributos[1]); string2->insert(s2,size);
         s3 = pedir_entero(atributos[2]); numero->insert(s3,size); avl1->insert(size,s3);
         s4 = fecha_string();
         time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(size,date);
-
+        cout<<"Here"<<ind;
         data[ind++] = s1; //data.push_back(s1);
+        cout<<"a";
         data[ind++] = s2; //data.push_back(s2);
+        cout<<"a";
         data[ind++] = to_string(s3); //data.push_back(to_string(s3));
+        cout<<"a";
         data[ind++] = s4; //data.push_back(s4);
+        cout<<"a";
         cout<<"\n¿Desea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
