@@ -50,10 +50,20 @@ int pedir_entero(string atributo){
     cout<<"Ingrese "<<atributo<<": "; int num; cin>>num; return num;
 }
 
+template <typename T>
+T* resize(T* values,int size){
+    T* copia = new T[size];
+    for (int i=0; i<size; i++) copia[i] = values[i];
+    delete [] values;
+    
+    T* result = new T[size*2];
+    for (int i=0; i<size; i++) result[i] = copia[i];
+    delete [] result;
+    return values;
+}
+
 void agregar_registro(){
-    /*
-    string* data = new string[16];//vector <string> data;
-    int i=0;
+    string* data = new string[16]; int ind=0;//vector <string> data;
     int opcion = 1;
     string s1,s2;
     int s3;
@@ -66,15 +76,14 @@ void agregar_registro(){
         s4 = fecha_string();
         time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(size,date);
 
-        data.push_back(s1);
-        data.push_back(s2);
-        data.push_back(to_string(s3));
-        data.push_back(s4);
+        data[ind++] = s1; //data.push_back(s1);
+        data[ind++] = s2; //data.push_back(s2);
+        data[ind++] = to_string(s3); //data.push_back(to_string(s3));
+        data[ind++] = s4; //data.push_back(s4);
         cout<<"\n¿Desea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
-    cadena_bloques->insert(data,4); // insertamos el dato en blockchain (4 por el nro de columnas)
-*/
+    cadena_bloques->insert(data,ind); // insertamos el dato en blockchain (4 por el nro de columnas)
 }
 
 int pedir_opcion(){
