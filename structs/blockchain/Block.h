@@ -1,3 +1,5 @@
+#ifndef BLOCK_H
+#define BLOCK_H
 #include <iostream>
 #include <string>
 //#include <vector>
@@ -46,6 +48,21 @@ struct Block
         huella_padre="";
     }
 
+    void recalculate(){
+        huella = "";
+        huella = to_string(nro); // nro de bloque
+        for (auto dato:data) huella += dato; //pasamos todos los datos
+        huella += huella_padre; //añadimos la huella del padre
+
+        //modificando la huella
+        SHA256 sha;
+        uint8_t * digest = sha.digest();
+
+        //actualizando huella y nonce
+        nonce=sha.SHA256::findNonce(huella+huella_padre,huella);
+        delete[] digest;
+    }
+
     void print_huella(){
         for (int i=0; i<cant_data; i++) cout<<data[i]<<" ";
         cout<<" Huella: "<<huella<<endl;
@@ -56,3 +73,5 @@ struct Block
     }
 
 };
+
+#endif

@@ -64,7 +64,7 @@ void readCSV(const string archivo, string* atributos,int col, BlockChain<string>
         values[i++] = item; //values.push_back(item);
 
         count ++; // nro de bloque aumenta
-        cadena_bloques->insert(values,i-1);
+        cadena_bloques->insert(values,i); // VERIFICAR
     } 
 
     file.close(); 

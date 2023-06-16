@@ -1,7 +1,9 @@
 #ifndef BLOCKCHAIN_H
 #define BLOCKCHAIN_H
 #include "Block.h"
-#include <vector>
+#include "../../structs/tabla_hash/chainhash.h"
+//#include "../structs/tabla_hash/chainhash.h"
+//#include "../structs/avl/date.h"
 
 template <class T>
 class BlockChain{
@@ -11,6 +13,8 @@ class BlockChain{
         int nodes; 
         string* atributos;
         int values; // cantidad de atributos
+
+
 
     public:
         BlockChain(int columnas=0){ 
@@ -83,14 +87,11 @@ class BlockChain{
                 }
                 int i = 0;
                 for (int i=0; i<temp->cant_data; i++) {
-                  cout<<temp->data[i]<<"\t";
-                  /*
-                    cout<<atributos[i%values]<<": "<<temp->data[i]<<" - ";
+                  //cout<<temp->data[i]<<"\t";
+                    cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
                     if (i%values==values-1){ // ultimo elemento
-                        cout<<endl;
+                      cout<<endl;
                     }
-                    i++;
-                    */
                 }
                 cout<<"\n";
         }
@@ -125,6 +126,18 @@ class BlockChain{
             cout<<"Huella: "<<temp->huella<<endl;
             cout<<" ---------------------------------- "<<endl;
             temp = temp->next;
+          }
+        }
+
+        void recalculo_cascada(){
+          //  caso sin padre
+          Block<T>* temp = head->next;
+
+          while (temp!=head){ //se recorre cada bloque
+            temp->huella_padre = temp->prev->huella; // huella del bloque anterior
+            temp->huella = temp->huella_padre;
+            temp->recalculate();
+            temp = temp->next; //avanzamos a la sig posicion
           }
         }
 

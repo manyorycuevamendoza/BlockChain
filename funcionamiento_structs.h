@@ -35,7 +35,11 @@ time_t pedir_fecha(){
 string fecha_string(){
     string dia, mes, anho;
     cout<<"Ingrese fecha-> "; cout<<"Dia: "; cin>>dia;
+    if (dia.length()==1) dia = "0"+dia;
+
     cout<<"Mes: "; cin>>mes;
+    if (mes.length()==1) mes = "0"+mes;
+
     cout<<"Anho: "; cin>>anho;
     return anho+"-"+mes+"-"+dia;
 }
@@ -43,6 +47,7 @@ string fecha_string(){
 string pedir_string(string atributo){
     cout<<"Ingrese "<<atributo<<": ";
     string atr; cin>>atr;
+    atr[0] = toupper(atr[0]);
     return atr;
 }
 
@@ -80,15 +85,11 @@ void agregar_registro(){
         s3 = pedir_entero(atributos[2]); numero->insert(s3,size); avl1->insert(size,s3);
         s4 = fecha_string();
         time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(size,date);
-        cout<<"Here"<<ind;
         data[ind++] = s1; //data.push_back(s1);
-        cout<<"a";
         data[ind++] = s2; //data.push_back(s2);
-        cout<<"a";
         data[ind++] = to_string(s3); //data.push_back(to_string(s3));
-        cout<<"a";
         data[ind++] = s4; //data.push_back(s4);
-        cout<<"a";
+    
         cout<<"\n¿Desea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
@@ -125,6 +126,7 @@ void console(){
         vector<int> res;
         int n1,n2;
         time_t c1, c2;
+        
 
         switch (opc){
             case 1:
@@ -136,7 +138,10 @@ void console(){
             case 4:
                 cadena_bloques->get_block(numero->search(pedir_entero(atributos[2]))); break;
             case 5:
-                cadena_bloques->get_block(fecha->search(pedir_fecha())); break;
+                c1 = convertToUnixTimestamp(fecha_string());
+                cout<<c1<<endl;
+                cadena_bloques->get_block(fecha->search(c1));
+                 break;
             case 6:
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");

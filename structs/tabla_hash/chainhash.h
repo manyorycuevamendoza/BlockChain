@@ -1,6 +1,5 @@
-//
-// Created by ASUS on 20/05/2023.
-//
+#ifndef CHAIN_HASH_H
+#define CHAIN_HASH_H
 #include <iostream>
 #include <functional>
 #include "forward_list.h"
@@ -102,3 +101,5 @@ private: // ver rehashing
 
 
 };
+
+#endif
