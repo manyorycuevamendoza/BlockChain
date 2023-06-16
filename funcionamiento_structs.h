@@ -108,7 +108,6 @@ void console(){
                 cadena_bloques->get_block(numero->search(pedir_entero(atributos[2]))); break;
             case 5:
                 c1 = convertToUnixTimestamp(fecha_string());
-                cout<<c1<<endl;
                 cadena_bloques->get_block(fecha->search(c1));
                  break;
             case 6:
