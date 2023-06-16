@@ -29,7 +29,7 @@ struct Entry {
 };
 
 template <typename TK, typename TV>
-struct NodeT {
+struct NodeT { //
     Entry<TK, TV> data;
     NodeT* left;
     NodeT* right;
