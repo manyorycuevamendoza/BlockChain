@@ -60,6 +60,7 @@ vector<int> testBoyerMoore(string Texto, string Patron)
 
 }
 
+/*
 int main(){
     string texto = "holaholahol";
     string patron = "hola";
@@ -69,3 +70,5 @@ int main(){
     cout << endl;
     return 0;
 }
+
+*/

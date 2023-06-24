@@ -6,7 +6,7 @@
 #include "structs/blockchain/blockchain.h"
 #include "structs/tabla_hash/chainhash.h"
 #include "structs/avl/date.h"
-//#include "structs/boyer_moree/boyer_moree.h"
+#include "structs/boyer_moree/boyer_moree.h"
 using namespace std;
 void readCSV(const string, AVLTree2<int,int>* , AVLTree2<int,long>* , ChainHash<string,int>* , ChainHash<string,int>* , ChainHash<int,int>* , ChainHash<long,int>* );
 
@@ -112,4 +112,9 @@ TK max_value(AVLTree2<TK,TV>* arbol){
 template <class TK,class TV>
 TK min_value(AVLTree2<TK,TV>* arbol){
     return arbol->minValue().key;
+}
+
+//llamando a alk funcion del boyer moore
+vector<int> boyer_moore(string Texto, string Patron){
+    return testBoyerMoore(Texto,Patron);
 }

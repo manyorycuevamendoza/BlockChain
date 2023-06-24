@@ -18,6 +18,8 @@ ChainHash<string,int>* string2 = new ChainHash<string,int>(); //segundo string
 ChainHash<int,int>* numero = new ChainHash<int,int>(); //para monto id/monto
 ChainHash<long,int>* fecha = new ChainHash<long,int>(); //para fecha/id>
 
+
+
 void begin(){
     string archivo = "tests/test2.csv";
     readCSV(archivo,atributos,columnas,cadena_bloques,avl1,avl2, string1, string2, numero, fecha); // creando estructuras
@@ -79,11 +81,12 @@ int pedir_opcion(){
         cout<<"[9]. buscar minimo por "<<atributos[3]<<endl;
         cout<<"[10]. buscar maximo por "<<atributos[2]<<endl;
         cout<<"[11]. buscar maximo por "<<atributos[3]<<endl;
-        cout<<"[12]. mostrar todos los bloques"<<endl;
-        cout<<"[13]. recalculo en cascada"<<endl;
-        cout<<"[14]. Salir"<<endl;
+        cout<<"[12]. bucar el patron: "<<endl;
+        cout<<"[13]. mostrar todos los bloques"<<endl;
+        cout<<"[14]. recalculo en cascada"<<endl;
+        cout<<"[15]. Salir"<<endl;
         cin>>alternativa;
-    }while (alternativa>0 && 14<alternativa);
+    }while (alternativa>0 && 15<alternativa);
     return alternativa;
 }
 
@@ -135,20 +138,24 @@ void console(){
 
             case 11:
                 cadena_bloques->get_block(avl2->maxValue()); break;
-
+                
             case 12:
+                //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
+                res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
+                cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+            case 13:
                 cadena_bloques->display(); break;
 
-            case 13:
+            case 14:
                 cout<<"hola"; break;
 
             default:
                 cout<<"Ejecución finalizada"<<endl;
                 break;
         }
-        if (opc==14) break;
+        if (opc==15) break;
         sleep(3);
-    }while (opc!=14);
+    }while (opc!=15);
 
 }
 
