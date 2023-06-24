@@ -15,6 +15,7 @@ private:
 
     struct ExtractionResult
     {
+        
         TK key;
         Node<TK> *right_tree;
         Node<TK> *left_tree;
@@ -30,24 +31,36 @@ public:
 
     bool search(TK key)
     {
+        cout<<"Buscando "<<key<<endl;
         return search(root, key);
     }
 
     void insert(TK key)
     {
+        cout<<"Insertando dentro de insert: "<<key<<endl;
         if (root == nullptr)
         {
+            cout<<"Creando raiz\n"<<"porque root == nullptr\n"<<endl;
             root = new Node<TK>(M, true);
             root->keys[0] = key;
             root->count = 1;
         }
         else
         {
+            cout<<"Insertando dentro de insert porque root != nullptr\n"<<endl;
+            cout<<"Extraer resultado de insertar, con puntero *dividir resultado "<<key<<" en root\n";
             ExtractionResult *split_result = insert(root, key);
             if (split_result != nullptr)
             {
+                cout<<"dividir result no es nullptr\n";
+                cout<<"Creando nuevo nodo con M = "<<M<<endl;
                 Node<TK> *parent = new Node<TK>(M, false);
+
+                cout<<"insertandp en parent: "<<endl;
+                cout<<"parent->keys[0]: "<<parent->keys[0]<<"= split_result->key: "<<split_result->key<<endl;
                 parent->keys[0] = split_result->key;
+
+                cout<<"Insertando root en parent: "<<root->keys[0]<<endl;
                 parent->children[0] = root;
                 parent->children[1] = split_result->right_tree;
                 parent->count = 1;
