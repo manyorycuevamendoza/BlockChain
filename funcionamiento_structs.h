@@ -81,10 +81,11 @@ int pedir_opcion(){
         cout<<"[9]. buscar minimo por "<<atributos[3]<<endl;
         cout<<"[10]. buscar maximo por "<<atributos[2]<<endl;
         cout<<"[11]. buscar maximo por "<<atributos[3]<<endl;
-        cout<<"[12]. bucar el patron: "<<endl;
-        cout<<"[13]. mostrar todos los bloques"<<endl;
-        cout<<"[14]. recalculo en cascada"<<endl;
-        cout<<"[15]. Salir"<<endl;
+        cout<<"[12]. patricia: "<<endl;
+        cout<<"[13]. bucar el patron: "<<endl;
+        cout<<"[14]. mostrar todos los bloques"<<endl;
+        cout<<"[15]. recalculo en cascada"<<endl;
+        cout<<"[16]. Salir"<<endl;
         cin>>alternativa;
     }while (alternativa>0 && 15<alternativa);
     return alternativa;
