@@ -138,24 +138,23 @@ void console(){
 
             case 11:
                 cadena_bloques->get_block(avl2->maxValue()); break;
-                
             case 12:
+                cout<<"añadir patricia: "; break;
+            case 13:
                 //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
                 res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
                 cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-            case 13:
-                cadena_bloques->display(); break;
-
             case 14:
+                cadena_bloques->display(); break;
+            case 15:
                 cout<<"hola"; break;
-
             default:
                 cout<<"Ejecución finalizada"<<endl;
                 break;
         }
-        if (opc==15) break;
+        if (opc==16) break;
         sleep(3);
-    }while (opc!=15);
+    }while (opc!=16);
 
 }
 
