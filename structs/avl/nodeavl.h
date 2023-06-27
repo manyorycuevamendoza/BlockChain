@@ -45,3 +45,33 @@ struct NodeT { //
 };
 
 #endif
+
+/*
+template <typename TK, typename TV>
+struct Node{
+    Entry<TK, TV>* data;
+    Node<TK, TV>** children;
+    int count;
+    bool leaf;
+
+    Node(): data(nullptr), children(nullptr), count(0), leaf(true){}
+
+    Node(int M, bool _leaf = true){
+        count = 0;
+        leaf = _leaf;
+        data = new Entry<TK, TV>[M-1];
+        children = new Node<TK, TV>*[M];
+        for(int i=0;i<M;i++) children[i] = nullptr;
+    }
+
+    void display(){
+        for (int i = 0; i < count; ++i)
+            cout<<data[i]<<", ";
+        cout<<endl;
+    }
+
+    ~Node(){
+        delete[] data;
+        delete[] children;
+    }
+*/

@@ -32,10 +32,11 @@ int main(){
     cout<<"Insertando 80\n"; btree->insert(80); 
     cout<<"Insertando 90\n"; btree->insert(90); 
     cout<<"Insertando 95\n"; btree->insert(95);
+    /*
     cout<<"Insertando 105\n"; btree->insert(105); 
     cout<<"Insertando 5\n"; btree->insert(5); 
     cout<<"Insertando 6\n"; btree->insert(6);
-
+*/
 
     btree->display_pretty();
 
