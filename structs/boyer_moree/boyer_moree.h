@@ -57,7 +57,6 @@ vector<int> testBoyerMoore(string Texto, string Patron)
          << " ns" << endl;
     return result;
 
-
 }
 
 /*
