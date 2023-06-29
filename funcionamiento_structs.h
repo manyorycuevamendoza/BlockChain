@@ -96,7 +96,8 @@ void console(){
     do {
         int opc = pedir_opcion();
 
-        vector<int> res;
+        //vector<int> res;
+        CircularArray<int> res;
         int n1,n2;
         time_t c1, c2;
         
@@ -118,14 +119,22 @@ void console(){
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");
                 res = avl1->search_by_range(n1,n2);
-                cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+                //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+                for (int i=0; i<res.size(); i++){
+                    cadena_bloques->get_block(res[i]);
+                }
                 break;
 
             case 7:
                 c1 = pedir_fecha();
                 c2 = pedir_fecha();
                 res=avl2->search_by_range(c1,c2);
-                cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+                //cout<<res<<endl;
+
+                //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+                for (int i=0; i<res.size(); i++){
+                    cadena_bloques->get_block(res[i]);
+                }
                 break;
 
             case 8:
@@ -153,7 +162,7 @@ void console(){
                 cout<<"Ejecución finalizada"<<endl;
                 break;
         }
-        if (opc==16) { cout<<opc;break;}
+        if (opc==16) { break;}
         //sleep(3);
     }while (opc!=16);
 

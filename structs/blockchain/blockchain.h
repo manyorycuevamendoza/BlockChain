@@ -86,8 +86,10 @@ class BlockChain{
                     temp = temp->next;
                 }
                 //int i = 0;
+                cout<<"\nBloque nro "<<ind<<": \t";
                 for (int i=0; i<temp->cant_data; i++) {
                   //cout<<temp->data[i]<<"\t";
+                  
                     cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
                     if (i%values==values-1){ // ultimo elemento
                       cout<<endl;

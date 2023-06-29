@@ -8,9 +8,10 @@
 #endif //PROYECTO_PRUEBA_H
 
 #include "nodeavl.h"
-#include <vector>
+//#include <vector>
 //#include <stack>
 #include "../tabla_hash/forward_list.h"
+#include "../circular_array/circular_array.h"
 using namespace std;
 template <typename TK, typename TV>
 class AVLTree2 {
@@ -74,8 +75,10 @@ public:
         return if_not_found_predecesor(root, entry).value;
     }
 
-    vector<TK> search_by_range(TV begin, TV end) {
-        vector<TK> result;
+    //vector<TK> search_by_range(TV begin, TV end) {
+    CircularArray<TK> search_by_range(TV begin, TV end) {
+        //vector<TK> result;
+        CircularArray<TK> result;
         if (!find(begin))
             begin = if_not_found_succesor(begin);
         if (!find(end))
@@ -108,7 +111,8 @@ private:
     void balance(NodeT<TK, TV>*& node);
     void left_rota(NodeT<TK, TV>*& node);
     void right_rota(NodeT<TK, TV>*& node);
-    vector<TK> search_by_range(vector <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
+    //vector<TK> search_by_range(vector <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
+    CircularArray<TK> search_by_range(CircularArray <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
     Entry<TK, TV> if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
     Entry<TK, TV> if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 };
@@ -333,7 +337,8 @@ Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Ent
 }
 
 template <typename TK, typename TV>
-vector<TK> AVLTree2<TK, TV>::search_by_range(vector<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
+//vector<TK> AVLTree2<TK, TV>::search_by_range(vector<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
+CircularArray<TK> AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
     if (node != nullptr) {
         if (node->data.value >= begin)
             search_by_range(vec,node->left, begin, end);
