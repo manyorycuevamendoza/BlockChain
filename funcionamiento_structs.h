@@ -1,6 +1,6 @@
 
 #include "pedir_datos.h"
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdio.h>
 void console();
 
@@ -87,7 +87,7 @@ int pedir_opcion(){
         cout<<"[15]. recalculo en cascada"<<endl;
         cout<<"[16]. Salir"<<endl;
         cin>>alternativa;
-    }while (alternativa>0 && 15<alternativa);
+    }while (alternativa>0 && 16<alternativa);
     return alternativa;
 }
 
@@ -143,8 +143,8 @@ void console(){
                 cout<<"añadir patricia: "; break;
             case 13:
                 //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
-                res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
-                cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+                //res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
+                //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
             case 14:
                 cadena_bloques->display(); break;
             case 15:
@@ -153,8 +153,8 @@ void console(){
                 cout<<"Ejecución finalizada"<<endl;
                 break;
         }
-        if (opc==16) break;
-        sleep(3);
+        if (opc==16) { cout<<opc;break;}
+        //sleep(3);
     }while (opc!=16);
 
 }

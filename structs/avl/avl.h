@@ -9,7 +9,8 @@
 
 #include "nodeavl.h"
 #include <vector>
-#include <stack>
+//#include <stack>
+#include "../tabla_hash/forward_list.h"
 using namespace std;
 template <typename TK, typename TV>
 class AVLTree2 {
@@ -301,10 +302,11 @@ Entry<TK, TV> AVLTree2<TK, TV>::successor(NodeT<TK, TV>* node, Entry<TK, TV> ent
 
 template <typename TK, typename TV>
 Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry) {
-    stack<Entry<TK,TV>> mstack;
+    //stack<Entry<TK,TV>> mstack;
+    ForwardList<Entry<TK,TV>> mstack;
     while(node!= nullptr){
         if(node->data.value > entry.value){
-            mstack.push(node->data);
+            mstack.push_front(node->data);
             node = node -> left;
         }
         else if(node->data.value < entry.value){
@@ -316,13 +318,14 @@ Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_succesor(NodeT<TK, TV>* node, Entry
 
 template <typename TK, typename TV>
 Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry) {
-    stack<Entry<TK,TV>> mstack;
+    //stack<Entry<TK,TV>> mstack;
+    ForwardList<Entry<TK,TV>> mstack;
     while(node!= nullptr){
         if(node->data.value > entry.value){
             node = node -> left;
         }
         else if(node->data.value < entry.value){
-            mstack.push(node->data);
+            mstack.push_front(node->data);
             node = node->right;
         }
     }

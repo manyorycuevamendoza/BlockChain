@@ -123,6 +123,10 @@ class ForwardList {
             return temp->data;
         }
 
+        T top(){ //siempre retornamos el ttop porque es el ultimo el que insertamos, un forward list imita a un satck
+            return head->data;
+        }
+
         
 
 };

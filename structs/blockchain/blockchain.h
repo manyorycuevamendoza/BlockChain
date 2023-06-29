@@ -85,7 +85,7 @@ class BlockChain{
                 for (int i=0;i<ind;i++){
                     temp = temp->next;
                 }
-                int i = 0;
+                //int i = 0;
                 for (int i=0; i<temp->cant_data; i++) {
                   //cout<<temp->data[i]<<"\t";
                     cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
