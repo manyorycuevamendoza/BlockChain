@@ -1,6 +1,6 @@
 
 #include "pedir_datos.h"
-//#include <unistd.h>
+#include <unistd.h>
 #include <stdio.h>
 void console();
 
@@ -173,16 +173,13 @@ void console(){
                     cadena_bloques->get_block(res[i]);
                 }
                 
-                cout<<"HEre";
                 break;
 
             case 7:
                 c1 = pedir_fecha();
                 c2 = pedir_fecha();
                 avl2->search_by_range(res,c1,c2);
-                
-                //cout<<res<<endl;
-                //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
+            
                 for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
                 }
@@ -237,7 +234,7 @@ void console(){
             res.clear();
         }
         if (opc==17) { break;}
-        //sleep(3);
+        sleep(3);
     }while (opc!=17);
 
 }

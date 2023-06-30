@@ -47,12 +47,12 @@ public:
     //retorna el id value
     TV search(TK key) {
         if (!find(key)) {
-            cerr <<"Elemento no encontrado\n";
+            cout <<"Elemento no encontrado\n"; 
+            return -1;
         }
         int index=hasher(key)%capacity;
         Entry2<TK,TV> entry (key,TV());
         return array[index].top(entry).value; //porque nosostros "si ingresamos un mismo key debe salir el mismo código"--->ESTABILIDAD
-        return TV();
     }
 
 

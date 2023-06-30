@@ -81,21 +81,23 @@ class BlockChain{
         }
 
         void get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
-                Block<T>* temp = head->next;
-                for (int i=0;i<ind;i++){
-                    temp = temp->next;
-                }
-                //int i = 0;
-                cout<<"\nBloque nro "<<ind<<": \t";
-                for (int i=0; i<temp->cant_data; i++) {
-                  //cout<<temp->data[i]<<"\t";
-                  
-                    cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
-                    if (i%values==values-1){ // ultimo elemento
-                      cout<<endl;
-                    }
-                }
-                cout<<"\n";
+          if (ind<0){return;}
+
+          Block<T>* temp = head->next;
+          for (int i=0;i<ind;i++){
+              temp = temp->next;
+          }
+          //int i = 0;
+          cout<<"\nBloque nro "<<ind<<": \t";
+          for (int i=0; i<temp->cant_data; i++) {
+            //cout<<temp->data[i]<<"\t";
+            
+              cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
+              if (i%values==values-1){ // ultimo elemento
+                cout<<endl;
+              }
+          }
+          cout<<"\n";
         }
 
         bool exist_block(int ind){
