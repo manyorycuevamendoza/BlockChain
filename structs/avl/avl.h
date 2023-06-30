@@ -351,7 +351,7 @@ void AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, NodeT<TK, TV>* no
         if (node->data.value >= begin)
             search_by_range(vec,node->left, begin, end);
         if (node->data.value >= begin && node->data.value <= end){
-            vec.push_back(node->data.key);
+            if (!vec.find(node->data.key))vec.push_back(node->data.key);
         }            
         if (node->data.value <= end)
             search_by_range(vec,node->right, begin, end);

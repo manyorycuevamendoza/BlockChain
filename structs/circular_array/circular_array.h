@@ -65,6 +65,16 @@ public:
         
     }
 
+    bool find(T data){ // determina si ya se encuentra el elemento o no
+        int ind = front; 
+        
+        for (int i=0; i<size(); i++){
+            if(array[ind]==data) return true;
+            ind = next(ind); 
+        }
+        return false;
+    }
+
     T pop_front(){
         /*si array está vacío y yo le envio un string
         if (is_empty()) return "error";

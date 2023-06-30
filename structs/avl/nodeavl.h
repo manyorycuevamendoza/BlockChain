@@ -42,6 +42,7 @@ struct NodeT { //
         if (right != nullptr) right->killSelf();
         delete this;
     }
+
 };
 
 #endif

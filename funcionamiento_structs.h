@@ -149,7 +149,7 @@ int pedir_opcion(){
 }
 
 void console(){
-    int opc; //para la opcion
+    int opc = 0; //para la opcion
     do {
         int opc = pedir_opcion();
 
