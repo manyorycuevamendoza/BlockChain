@@ -8,7 +8,7 @@
 #include "structs/avl/date.h"
 #include "structs/boyer_moree/boyer_moree.h"
 using namespace std;
-void readCSV(const string, AVLTree2<int,int>* , AVLTree2<int,long>* , ChainHash<string,int>* , ChainHash<string,int>* , ChainHash<int,int>* , ChainHash<long,int>* );
+void readCSV(const string archivo, string* atributos,int col, BlockChain<string>* cadena_bloques, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha );
 
 template <class TK, class TV>
 TV search(ChainHash<TK,TV>*, TK);
