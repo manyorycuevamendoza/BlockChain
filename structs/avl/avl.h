@@ -1,11 +1,5 @@
-//
-// Created by Dario on 25/05/2023.
-//
-
-#ifndef PROYECTO_PRUEBA_H
-#define PROYECTO_PRUEBA_H
-
-#endif //PROYECTO_PRUEBA_H
+#ifndef AVL_H
+#define AVL_H
 
 #include "nodeavl.h"
 //#include <vector>
@@ -75,11 +69,8 @@ public:
         return if_not_found_predecesor(root, entry).value;
     }
 
-    //vector<TK> search_by_range(TV begin, TV end) {
-    //CircularArray<TK> search_by_range(TV begin, TV end) {
+    
     void search_by_range(CircularArray<TK>& result, TV begin, TV end) {
-        //vector<TK> result;
-        //CircularArray<TK> result;
         result.clear();
         if (!find(begin))
             begin = if_not_found_succesor(begin);
@@ -356,3 +347,5 @@ void AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, NodeT<TK, TV>* no
         return; 
     }
 }
+
+#endif 
