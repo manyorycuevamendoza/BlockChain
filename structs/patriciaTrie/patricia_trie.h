@@ -35,6 +35,8 @@ public:
     //imprime ordenado
     string toString(string sep);
     void toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep);
+    vector<string> start_with(const string& preffix, TrieNode* node, vector<string>& result);
+    vector<string> start_with(string preffix);
 };
 
 void TriePatricia::insert(string key){
@@ -193,6 +195,31 @@ void TriePatricia::toString_recursivo(TrieNode* node, string prefijo, string& ch
         if(node->children[i])
             toString_recursivo(node->children[i], prefijo + node->children[i]->preffix, chain, sep);
     }
+}
+
+vector<string> TriePatricia::start_with(string preffix) {
+    TrieNode* node = root;
+    vector<string> result;
+    for(char c : preffix){
+        if(node->children[c-'a'])
+            node = node->children[c-'a'];
+    }
+
+    return start_with(preffix,node,result);
+}
+
+vector<string> TriePatricia::start_with(const string& preffix, TrieNode* node, vector<string>& result) {
+    if(node->endWord)
+        result.push_back(preffix);
+
+    for(int i=0;i<ALPHA_SIZE;i++){
+        if(node->children[i]){
+            string newpreffix = preffix + node->children[i]->preffix;
+            start_with(newpreffix, node->children[i], result);
+        }
+    }
+
+    return result;
 }
 
 #endif
