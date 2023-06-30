@@ -166,20 +166,20 @@ void console(){
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");
                 
-                res = avl1->search_by_range(n1,n2);
+                avl1->search_by_range(res,n1,n2);
                 
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
                 for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
                 }
-                res.clear();
+                
                 cout<<"HEre";
                 break;
 
             case 7:
                 c1 = pedir_fecha();
                 c2 = pedir_fecha();
-                res=avl2->search_by_range(c1,c2);
+                avl2->search_by_range(res,c1,c2);
                 
                 //cout<<res<<endl;
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";

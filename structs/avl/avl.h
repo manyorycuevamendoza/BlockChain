@@ -77,16 +77,17 @@ public:
 
     //vector<TK> search_by_range(TV begin, TV end) {
     //CircularArray<TK> search_by_range(TV begin, TV end) {
-    CircularArray<TK> search_by_range(TV begin, TV end) {
+    void search_by_range(CircularArray<TK>& result, TV begin, TV end) {
         //vector<TK> result;
-        CircularArray<TK> result;
+        //CircularArray<TK> result;
+        result.clear();
         if (!find(begin))
             begin = if_not_found_succesor(begin);
         if (!find(end))
             end = if_not_found_predecesor(end);
         
         search_by_range(result,root, begin, end);
-        return result;
+        //return result;
     }
 
     ~AVLTree2() {
