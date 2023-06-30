@@ -35,6 +35,7 @@ public:
         size++;
     }
 
+
     int get_size(){
         return size;
     }
@@ -59,6 +60,13 @@ public:
     void display(){
         for(int i=0;i<bucket_count();i++){
             array[i].display();
+        }
+    }
+    
+    void remove(TK key, TV value){
+        int index = hasher(key)%capacity;
+        if (array[index].find(Entry2<TK,TV>(key,value))){
+            array[index].remove(Entry2<TK,TV>(key,value));
         }
     }
 
