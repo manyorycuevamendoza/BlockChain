@@ -85,7 +85,8 @@ public:
         if (!find(end))
             end = if_not_found_predecesor(end);
         
-        return search_by_range(result,root, begin, end);
+        search_by_range(result,root, begin, end);
+        return result ;
     }
 
     ~AVLTree2() {
@@ -114,7 +115,7 @@ private:
     void left_rota(NodeT<TK, TV>*& node);
     void right_rota(NodeT<TK, TV>*& node);
     //vector<TK> search_by_range(vector <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
-    CircularArray<TK> search_by_range(CircularArray <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
+    void search_by_range(CircularArray <TK>& vec, NodeT<TK, TV>* node, TV begin, TV end);
     Entry<TK, TV> if_not_found_succesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
     Entry<TK, TV> if_not_found_predecesor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 };
@@ -340,7 +341,7 @@ Entry<TK, TV> AVLTree2<TK, TV>::if_not_found_predecesor(NodeT<TK, TV>* node, Ent
 
 template <typename TK, typename TV>
 //vector<TK> AVLTree2<TK, TV>::search_by_range(vector<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
-CircularArray<TK> AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
+void AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, NodeT<TK, TV>* node, TV begin, TV end) {
     if (node != nullptr) {
         if (node->data.value >= begin)
             search_by_range(vec,node->left, begin, end);
@@ -350,20 +351,7 @@ CircularArray<TK> AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, Node
         if (node->data.value <= end)
             search_by_range(vec,node->right, begin, end);
     }
-    return vec;
-}
-/*
-template <typename TK, typename TV>
-string AVLTree2<TK, TV>::search_by_range(NodeT<TK, TV>* node, TV begin, TV end) {
-    string result = "";
-    if (node != nullptr) {
-        if (node->data.value > begin)
-            result += search_by_range(node->left, begin, end);
-        if (node->data.value >= begin && node->data.value <= end)
-            result += to_string(node->data.key) + " - " + to_string(node->data.value) + ' ';
-        if (node->data.value < end)
-            result += search_by_range(node->right, begin, end);
+    else{
+        return; 
     }
-    return result;
 }
-*/
