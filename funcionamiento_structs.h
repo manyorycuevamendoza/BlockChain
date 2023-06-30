@@ -69,17 +69,30 @@ void agregar_registro(){
 
 string* nuevos_datos(int& cant_datos, int nro_block){
     string* datos;
-    int size_datos = cadena_bloques->get_block(datos,nro_block);
+    int size_datos = cadena_bloques->get_block(datos,nro_block); // recibe todos los datos
+    
+    int ind = -1; // para saber qué dato vamos a eliminar por iteracion (en el caso de +1 fila)
+
     while (size_datos>0){// eliminamos todo lo relacionado con el anterior bloque
         
-        // eliminacion en hash
+        // eliminamos clientes   // ind = 0, 4, 8 , ...
+        string1->remove(datos[++ind],nro_block); // eliminacion en hash
+        cout<<ind;
 
-        //eliminacion en avl
-        avl1->remove(nro_block,stoi(datos[2]));
-        avl2->remove(nro_block,convertToUnixTimestamp(datos[3]));
+        // eliminamos lugar  // ind = 1, 5, 9, ...
+        string2->remove(datos[++ind],nro_block); // eliminacion en hash
+        cout<<ind;
+
+        // eliminamos monto // ind = 2, 6, 10,...
+        numero->remove(stoi(datos[++ind]),nro_block); // eliminacion en hash
+        avl1->remove(nro_block,stoi(datos[ind])); // eliminacion en avl
+        cout<<ind;
+        // eliminamos fecha // ind = 3, 7, 11,...
+        fecha->remove(convertToUnixTimestamp(datos[++ind]),nro_block);//eliminacion en hash
+        avl2->remove(nro_block,convertToUnixTimestamp(datos[ind])); // eliminacion en avl
+        cout<<ind;
         
-        size_datos-=columnas; // eliminamos un registro por iteracion
-        
+        size_datos-=columnas; // eliminamos un registro por iteracion 
     }
     
     // para pedir datos
