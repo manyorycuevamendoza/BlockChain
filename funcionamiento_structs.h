@@ -142,11 +142,11 @@ void console(){
         int opc = pedir_opcion();
 
         //vector<int> res;
-        CircularArray<int> res;
+       CircularArray<int> res; 
         int n1,n2;
         time_t c1, c2;
         int cant_datos = 0;
-        string* new_data = nullptr;
+        string* new_data = new string[4];
 
         switch (opc){
             case 1:
@@ -164,14 +164,15 @@ void console(){
             case 6:
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");
-                avl1->displayPretty();
+                
                 res = avl1->search_by_range(n1,n2);
                 
-                cout<<"a";
+             
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
                 for (int i=0; i<res.size(); i++){
                     cadena_bloques->get_block(res[i]);
                 }
+            
                 break;
                 
 
@@ -179,8 +180,8 @@ void console(){
                 c1 = pedir_fecha();
                 c2 = pedir_fecha();
                 res=avl2->search_by_range(c1,c2);
+                
                 //cout<<res<<endl;
-                cout<<"a"<<endl;
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
                 for (int i=0; i<res.size(); i++){
                     cadena_bloques->get_block(res[i]);
