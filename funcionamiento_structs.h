@@ -68,8 +68,21 @@ void agregar_registro(){
 }
 
 string* nuevos_datos(int& cant_datos, int nro_block){
-    // eliminamos todo lo relacionado con el anterior bloque
+    string* datos;
+    cout<<"aquiu";
+    int size_datos = cadena_bloques->get_block(datos,nro_block);
+    while (size_datos>0){// eliminamos todo lo relacionado con el anterior bloque
+        
+        // eliminacion en hash
 
+        //eliminacion en avl
+        avl1->remove(nro_block,stoi(datos[2]));
+        avl2->remove(nro_block,convertToUnixTimestamp(datos[3]));
+        avl2->displayPretty();
+        size_datos-=columnas; // eliminamos un registro por iteracion
+        
+    }
+    cout<<"aquiu";
     // para pedir datos
     int size_data = 4;
     string* data = new string[size_data]; 

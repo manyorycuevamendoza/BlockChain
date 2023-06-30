@@ -31,6 +31,7 @@ public:
     }
 
     TK minValue() {
+        displayPretty();
         return minValue(this->root).key;
     }
 
@@ -46,8 +47,9 @@ public:
         return size(this->root);
     }
 
-    void remove(TK key) {
-        remove(this->root, key);
+    void remove(TK key,TV value) {
+        cout<<"key: "<<key<<" - "<<"value: "<<value<<endl;
+        remove(this->root, key, value);
     }
 
     void displayPretty() {
@@ -96,7 +98,7 @@ private:
     Entry<TK, TV> minValue(NodeT<TK, TV>* node);
     Entry<TK, TV> maxValue(NodeT<TK, TV>* node);
     int size(NodeT<TK, TV>* node);
-    void remove(NodeT<TK, TV>*& node, TK key);
+    void remove(NodeT<TK, TV>*& node, TK key, TV value);
     void displayPretty(NodeT<TK, TV>* node, int level);
     Entry<TK, TV> successor(NodeT<TK, TV>* node, Entry<TK, TV> entry);
 
@@ -240,36 +242,43 @@ void AVLTree2<TK, TV>::right_rota(NodeT<TK, TV>*& parent) {
 }
 
 template <typename TK, typename TV>
-void AVLTree2<TK, TV>::remove(NodeT<TK, TV>*& node, TK key) {
+void AVLTree2<TK, TV>::remove(NodeT<TK, TV>*& node, TK key, TV value) {
     if (node == nullptr)
         return;
-    else if (key < node->data.key)
-        remove(node->left, key);
-    else if (key > node->data.key)
-        remove(node->right, key);
-    else {
+    else if (value < node->data.value)
+        remove(node->left, key,value);
+    else if (value > node->data.value)
+        remove(node->right, key,value);
+    else if (key==node->data.key && value==node->data.value) {
         if (node->left == nullptr && node->right == nullptr) {
             delete node;
             node = nullptr;
+            return;
         }
         else if (node->left != nullptr && node->right == nullptr) {
             NodeT<TK, TV>* temp = node;
             node = node->left;
             delete temp;
+            return;
         }
         else if (node->left == nullptr && node->right != nullptr) { //only right child
             NodeT<TK, TV>* temp = node;
             node = node->right;
             delete temp;
+            return;
         }
         else { //two children
             Entry<TK, TV> succesor = minValue(node->right);
             node->data = succesor;
-            remove(node->right, succesor.key);
+            remove(node->right, succesor.key,succesor.value);
         }
 
         updateHeight(node);
         balance(node);
+    }
+    else{
+        remove(node->left, key,value);
+        remove(node->right, key,value);
     }
 }
 

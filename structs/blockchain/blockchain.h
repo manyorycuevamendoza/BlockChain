@@ -80,6 +80,17 @@ class BlockChain{
         
         }
 
+        int get_block(string*& result, int ind){
+          Block<T>* temp = head->next;
+          for (int i=0;i<ind;i++){
+              temp = temp->next;
+          }
+
+          result = new string[temp->cant_data];
+          for (int i=0; i<temp->cant_data; i++) result[i] = temp->data[i];
+          return temp->cant_data;
+        }
+
         void get_block(int ind){ // retorna un bloque de acuerdo a un indice que se pasa
           if (ind<0){return;}
 
