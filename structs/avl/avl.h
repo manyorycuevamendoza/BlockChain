@@ -73,13 +73,18 @@ public:
     
     void search_by_range(CircularArray<TK>& result, TV begin, TV end) {
         result.clear();
+        
         if (!find(begin))
             begin = if_not_found_succesor(begin);
+        if (begin>end) return; // para caso en el que no existe en ese rango
+
         if (!find(end))
             end = if_not_found_predecesor(end);
+    
         
-        search_by_range(result,root, begin, end);
-        //return result;
+    
+        if (begin<=end) search_by_range(result,root, begin, end);
+    
     }
 
     ~AVLTree2() {
