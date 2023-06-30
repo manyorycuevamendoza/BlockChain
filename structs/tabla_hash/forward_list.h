@@ -92,6 +92,29 @@ class ForwardList {
             size++;
         }
 
+        void remove(T data){
+            NodeF<T>* temp = head;
+            if (head->data.same_key(data)){ // eliminamos si es primer dato
+                head = head->next;
+                temp->next = nullptr;
+                temp->killSelf();
+            }
+            
+            NodeF<T>* prev = head;
+
+            while(temp->next){ // buscamos el dato a eliminar
+                temp = temp->next;
+                if (temp->data.same_key(data)){ // eliminamos
+                    NodeF<T>* elim = prev; //nodo a eliminar
+                    prev -> next = elim -> next;
+                    elim->next = nullptr;
+                    elim->killSelf();
+                    this -> size--;
+                }
+                prev = temp;
+            }
+        }
+
         void display(){//funcion para mostrar la lista
             NodeF<T>* temp = head;
             while(temp != nullptr){
