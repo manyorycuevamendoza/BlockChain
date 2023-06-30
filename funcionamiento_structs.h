@@ -67,6 +67,50 @@ void agregar_registro(){
     cadena_bloques->insert(data,ind); // insertamos el dato en blockchain (4 por el nro de columnas)
 }
 
+string* nuevos_datos(int& cant_datos, int nro_block){
+    // eliminamos todo lo relacionado con el anterior bloque
+
+    // para pedir datos
+    int size_data = 4;
+    string* data = new string[size_data]; 
+    int opcion = 1;
+    string s1,s2;
+    int s3;
+    string s4;
+    int size = cadena_bloques->get_size();
+    do {
+       if (cant_datos == size_data) { //resize
+        string* copia = new string[size_data];
+        for (int i = 0; i < size_data; i++)
+            copia[i] = data[i];
+
+        delete[] data; // Liberar la memoria del arreglo original
+
+        data = new string[size_data * 2];
+        for (int i = 0; i < size_data; i++)
+            data[i] = copia[i];
+
+        size_data *= 2;
+        delete[] copia;
+    }
+
+
+        s1 = pedir_string(atributos[0]); string1->insert(s1,nro_block);
+        s2 = pedir_string(atributos[1]); string2->insert(s2,nro_block);
+        s3 = pedir_entero(atributos[2]); numero->insert(s3,nro_block); avl1->insert(nro_block,s3);
+        s4 = fecha_string();
+        time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(nro_block,date);
+        data[cant_datos++] = s1; //data.push_back(s1);
+        data[cant_datos++] = s2; //data.push_back(s2);
+        data[cant_datos++] = to_string(s3); //data.push_back(to_string(s3));
+        data[cant_datos++] = s4; //data.push_back(s4);
+    
+        cout<<"\n¿Desea agregar otro registro? ";
+        opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
+    } while (opcion==1);
+    return data;
+}
+
 int pedir_opcion(){
     int alternativa;
     do{
@@ -81,13 +125,14 @@ int pedir_opcion(){
         cout<<"[9]. buscar minimo por "<<atributos[3]<<endl;
         cout<<"[10]. buscar maximo por "<<atributos[2]<<endl;
         cout<<"[11]. buscar maximo por "<<atributos[3]<<endl;
-        cout<<"[12]. patricia: "<<endl;
-        cout<<"[13]. bucar el patron: "<<endl;
+        cout<<"[12]. patricia"<<endl;
+        cout<<"[13]. bucar el patron"<<endl;
         cout<<"[14]. mostrar todos los bloques"<<endl;
         cout<<"[15]. recalculo en cascada"<<endl;
-        cout<<"[16]. Salir"<<endl;
+        cout<<"[16]. Modificar bloque"<<endl;
+        cout<<"[17]. Salir"<<endl;
         cin>>alternativa;
-    }while (alternativa>0 && 16<alternativa);
+    }while (alternativa>0 && 17<alternativa);
     return alternativa;
 }
 
@@ -100,7 +145,8 @@ void console(){
         CircularArray<int> res;
         int n1,n2;
         time_t c1, c2;
-        
+        int cant_datos = 0;
+        string* new_data = nullptr;
 
         switch (opc){
             case 1:
@@ -118,19 +164,23 @@ void console(){
             case 6:
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");
+                avl1->displayPretty();
                 res = avl1->search_by_range(n1,n2);
+                
+                cout<<"a";
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
                 for (int i=0; i<res.size(); i++){
                     cadena_bloques->get_block(res[i]);
                 }
                 break;
+                
 
             case 7:
                 c1 = pedir_fecha();
                 c2 = pedir_fecha();
                 res=avl2->search_by_range(c1,c2);
                 //cout<<res<<endl;
-
+                cout<<"a"<<endl;
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
                 for (int i=0; i<res.size(); i++){
                     cadena_bloques->get_block(res[i]);
@@ -151,6 +201,7 @@ void console(){
             case 12:
                 cout<<"añadir patricia: "; break;
             case 13:
+                cout<<"a"; break;
                 //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
                 //res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
@@ -158,13 +209,32 @@ void console(){
                 cadena_bloques->display(); break;
             case 15:
                 cout<<"hola"; break;
+
+            case 16:
+            
+                cout<<"Inserte nro de bloque a actualizar: ";
+                cin>>n1;
+
+                if (cadena_bloques->exist_block(n1)){
+                    //avl1->remove(n1);
+                    //avl2->remove(n1);
+                    new_data = nuevos_datos(cant_datos,n1);
+                    cadena_bloques->modificar_bloque(n1, new_data,cant_datos);
+                    
+                    delete [] new_data; cant_datos=0; new_data = nullptr;
+                }
+                else cout<<"Bloque no existe\n";
+                
+             
+                break; 
+
             default:
                 cout<<"Ejecución finalizada"<<endl;
                 break;
         }
-        if (opc==16) { break;}
+        if (opc==17) { break;}
         //sleep(3);
-    }while (opc!=16);
+    }while (opc!=17);
 
 }
 

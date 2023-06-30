@@ -76,6 +76,7 @@ public:
     }
 
     //vector<TK> search_by_range(TV begin, TV end) {
+    //CircularArray<TK> search_by_range(TV begin, TV end) {
     CircularArray<TK> search_by_range(TV begin, TV end) {
         //vector<TK> result;
         CircularArray<TK> result;
@@ -83,6 +84,7 @@ public:
             begin = if_not_found_succesor(begin);
         if (!find(end))
             end = if_not_found_predecesor(end);
+        
         return search_by_range(result,root, begin, end);
     }
 
@@ -342,8 +344,9 @@ CircularArray<TK> AVLTree2<TK, TV>::search_by_range(CircularArray<TK>& vec, Node
     if (node != nullptr) {
         if (node->data.value >= begin)
             search_by_range(vec,node->left, begin, end);
-        if (node->data.value >= begin && node->data.value <= end)
+        if (node->data.value >= begin && node->data.value <= end){
             vec.push_back(node->data.key);
+        }            
         if (node->data.value <= end)
             search_by_range(vec,node->right, begin, end);
     }

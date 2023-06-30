@@ -51,7 +51,11 @@ struct Block
     void recalculate(){
         huella = "";
         huella = to_string(nro); // nro de bloque
-        for (auto dato:data) huella += dato; //pasamos todos los datos
+
+        for (int i=0; i<cant_data; i++){
+            huella += data[i];
+        }
+        //for (auto dato:data) huella += dato; //pasamos todos los datos
         huella += huella_padre; //añadimos la huella del padre
 
         //modificando la huella
@@ -71,6 +75,7 @@ struct Block
     T* get_data(){
         return data;
     }
+
 
 };
 

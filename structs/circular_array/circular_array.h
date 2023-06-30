@@ -34,10 +34,9 @@ public:
         }
 
         if (front==-1) front=0; //en caso sea el primer elemento
-
         back = next(back);
-
         array[back] = data;
+        
     }
 
     void insert(T data, int pos){

@@ -98,6 +98,10 @@ class BlockChain{
                 cout<<"\n";
         }
 
+        bool exist_block(int ind){
+          return ind<nodes? true:false;  
+        }
+
         void print_huellas(){
           Block<T>* temp = head->next;
           while(temp!=head) {
@@ -106,6 +110,7 @@ class BlockChain{
             temp = temp->next;
           }
         }
+
 
         void display(){
           Block<T>* temp = head->next;
@@ -131,10 +136,7 @@ class BlockChain{
           }
         }
 
-        void recalculo_cascada(){
-          //  caso sin padre
-          Block<T>* temp = head->next;
-
+        void recalculo_cascada(Block<T>* temp){
           while (temp!=head){ //se recorre cada bloque
             temp->huella_padre = temp->prev->huella; // huella del bloque anterior
             temp->huella = temp->huella_padre;
@@ -156,6 +158,26 @@ class BlockChain{
             return this->nodes;
         }
 
+        // para proof of work
+        void modificar_bloque(int ind, string* _data, int values){
+          if (ind>=nodes) {cout<<"No existe este bloque"; return; }
+
+          Block<T>* temp = head->next;
+          
+          for (int i=0; i<ind; i++){
+            temp=temp->next;
+          }
+          
+          temp->cant_data = values;
+          
+          string* t = temp->data;
+          temp->data = new string [values]; delete [] t;
+          
+          for (int i=0; i<values; i++){
+            temp->data[i] = _data[i];
+          }
+          recalculo_cascada(temp);
+        }
         ~BlockChain(){
             if(head) head->killSelf();
             delete [] atributos;
