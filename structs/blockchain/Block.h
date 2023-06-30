@@ -57,7 +57,7 @@ struct Block
         }
         //for (auto dato:data) huella += dato; //pasamos todos los datos
         huella += huella_padre; //añadimos la huella del padre
-
+        //cout<<"Huella: "<<huella<<endl;
         //modificando la huella
         SHA256 sha;
         uint8_t * digest = sha.digest();

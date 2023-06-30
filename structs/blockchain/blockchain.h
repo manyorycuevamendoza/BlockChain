@@ -136,12 +136,19 @@ class BlockChain{
           }
         }
 
+        void recalculo_cascada(){
+          recalculo_cascada(head->next);
+        }
+
         void recalculo_cascada(Block<T>* temp){
-          while (temp!=head){ //se recorre cada bloque
-            temp->huella_padre = temp->prev->huella; // huella del bloque anterior
-            temp->huella = temp->huella_padre;
-            temp->recalculate();
-            temp = temp->next; //avanzamos a la sig posicion
+          Block<T>* recorrido = temp;
+          while (recorrido!=head){ //se recorre cada bloque
+            
+            recorrido->huella_padre = recorrido->prev->huella; // huella del bloque anterior
+            //temp->huella = temp->huella_padre;
+            recorrido->recalculate();
+            recorrido = recorrido->next; //avanzamos a la sig posicion
+            
           }
         }
 
@@ -176,7 +183,8 @@ class BlockChain{
           for (int i=0; i<values; i++){
             temp->data[i] = _data[i];
           }
-          recalculo_cascada(temp);
+          //temp->recalculate(); // recalculo del mismo bloque
+          recalculo_cascada(temp); // (otra opcion: para corregir en cascada ni bien se actualiza) NO QUITAR
         }
         ~BlockChain(){
             if(head) head->killSelf();

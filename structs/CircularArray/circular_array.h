@@ -13,8 +13,8 @@ private:
     
 public:
     CircularArray(int _capacity = 10);
-    virtual ~CircularArray(){
-        delete array;
+    ~CircularArray(){
+        delete [] array;
     }
     void push_front(T data){
         if (is_full()){ //en caso esté lleno el array

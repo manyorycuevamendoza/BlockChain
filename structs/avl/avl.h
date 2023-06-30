@@ -86,7 +86,7 @@ public:
             end = if_not_found_predecesor(end);
         
         search_by_range(result,root, begin, end);
-        return result ;
+        return result;
     }
 
     ~AVLTree2() {

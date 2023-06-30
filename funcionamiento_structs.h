@@ -142,7 +142,7 @@ void console(){
         int opc = pedir_opcion();
 
         //vector<int> res;
-       CircularArray<int> res; 
+        CircularArray<int> res;
         int n1,n2;
         time_t c1, c2;
         int cant_datos = 0;
@@ -160,21 +160,21 @@ void console(){
             case 5:
                 c1 = convertToUnixTimestamp(fecha_string());
                 cadena_bloques->get_block(fecha->search(c1));
-                 break;
+                break;
+
             case 6:
                 n1 = pedir_entero(atributos[2]+" 1");
                 n2 = pedir_entero(atributos[2]+" 2");
                 
                 res = avl1->search_by_range(n1,n2);
                 
-             
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-                for (int i=0; i<res.size(); i++){
+                for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
                 }
-            
+                res.clear();
+                cout<<"HEre";
                 break;
-                
 
             case 7:
                 c1 = pedir_fecha();
@@ -183,9 +183,10 @@ void console(){
                 
                 //cout<<res<<endl;
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-                for (int i=0; i<res.size(); i++){
+                for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
                 }
+                
                 break;
 
             case 8:
@@ -209,7 +210,7 @@ void console(){
             case 14:
                 cadena_bloques->display(); break;
             case 15:
-                cout<<"hola"; break;
+                cadena_bloques->recalculo_cascada(); break;
 
             case 16:
             
@@ -232,6 +233,8 @@ void console(){
             default:
                 cout<<"Ejecución finalizada"<<endl;
                 break;
+            
+            res.clear();
         }
         if (opc==17) { break;}
         //sleep(3);
