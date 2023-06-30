@@ -31,7 +31,6 @@ public:
     }
 
     TK minValue() {
-        displayPretty();
         return minValue(this->root).key;
     }
 
@@ -48,7 +47,7 @@ public:
     }
 
     void remove(TK key,TV value) {
-        cout<<"key: "<<key<<" - "<<"value: "<<value<<endl;
+        //cout<<"key: "<<key<<" - "<<"value: "<<value<<endl;
         remove(this->root, key, value);
     }
 
