@@ -98,6 +98,8 @@ class ForwardList {
                 head = head->next;
                 temp->next = nullptr;
                 temp->killSelf();
+                this -> size--;
+                return;
             }
             
             NodeF<T>* prev = head;
