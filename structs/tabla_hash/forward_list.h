@@ -110,6 +110,7 @@ class ForwardList {
                     elim->next = nullptr;
                     elim->killSelf();
                     this -> size--;
+                    return;
                 }
                 prev = temp;
             }

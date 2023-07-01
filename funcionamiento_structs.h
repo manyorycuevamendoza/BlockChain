@@ -242,6 +242,7 @@ void console(){
                 if (cadena_bloques->exist_block(n1)){
                     //avl1->remove(n1);
                     //avl2->remove(n1);
+                    cant_datos = 0;
                     new_data = nuevos_datos(cant_datos,n1);
                     cadena_bloques->modificar_bloque(n1, new_data,cant_datos);
                     
