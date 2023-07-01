@@ -23,8 +23,9 @@ time_t convertToUnixTimestamp(const std::string& date) {
 */
 time_t pedir_fecha(){
     string dia, mes, anho;
-    cout<<"Ingrese fecha-> "; cout<<"Dia: "; cin>>dia; 
-    cout<<"Mes: "; cin>>mes; 
+    cout<<"Ingrese fecha-> "; cout<<"Dia: "; cin>>dia;  if (dia.length()==1) dia = "0"+dia;
+
+    cout<<"Mes: "; cin>>mes; if (mes.length()==1) mes = "0"+mes;
     cout<<"Anho: "; cin>>anho; 
     return convertToUnixTimestamp(anho+"-"+mes+"-"+dia);
 }

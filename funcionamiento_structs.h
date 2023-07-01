@@ -61,7 +61,7 @@ void agregar_registro(){
         data[ind++] = to_string(s3); //data.push_back(to_string(s3));
         data[ind++] = s4; //data.push_back(s4);
     
-        cout<<"\n¿Desea agregar otro registro? ";
+        cout<<"\n\tDesea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
     cadena_bloques->insert(data,ind); // insertamos el dato en blockchain (4 por el nro de columnas)
@@ -75,22 +75,23 @@ string* nuevos_datos(int& cant_datos, int nro_block){
 
     while (size_datos>0){// eliminamos todo lo relacionado con el anterior bloque
         
-        // eliminamos clientes   // ind = 0, 4, 8 , ...
+        // eliminamos clientes   
         string1->remove(datos[++ind],nro_block); // eliminacion en hash
-        cout<<ind;
+        //cout<<ind; // ind = 0, 4, 8 , ...
 
-        // eliminamos lugar  // ind = 1, 5, 9, ...
+        // eliminamos lugar  
         string2->remove(datos[++ind],nro_block); // eliminacion en hash
-        cout<<ind;
+        //cout<<ind; // ind = 1, 5, 9, ...
 
         // eliminamos monto // ind = 2, 6, 10,...
         numero->remove(stoi(datos[++ind]),nro_block); // eliminacion en hash
         avl1->remove(nro_block,stoi(datos[ind])); // eliminacion en avl
-        cout<<ind;
-        // eliminamos fecha // ind = 3, 7, 11,...
+        //cout<<ind;  // ind = 1, 5, 9, ...
+
+        // eliminamos fecha 
         fecha->remove(convertToUnixTimestamp(datos[++ind]),nro_block);//eliminacion en hash
         avl2->remove(nro_block,convertToUnixTimestamp(datos[ind])); // eliminacion en avl
-        cout<<ind;
+        //cout<<ind; // ind = 3, 7, 11,...
         
         size_datos-=columnas; // eliminamos un registro por iteracion 
     }
@@ -124,7 +125,9 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         s2 = pedir_string(atributos[1]); string2->insert(s2,nro_block);
         s3 = pedir_entero(atributos[2]); numero->insert(s3,nro_block); avl1->insert(nro_block,s3);
         s4 = fecha_string();
-        time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(nro_block,date);
+        
+        time_t date = convertToUnixTimestamp(s4); fecha->insert(date,nro_block); avl2->insert(nro_block,date);
+    
         data[cant_datos++] = s1; //data.push_back(s1);
         data[cant_datos++] = s2; //data.push_back(s2);
         data[cant_datos++] = to_string(s3); //data.push_back(to_string(s3));
@@ -183,8 +186,9 @@ void console(){
             case 4:
                 cadena_bloques->get_block(numero->search(pedir_entero(atributos[2]))); break;
             case 5:
-                c1 = convertToUnixTimestamp(fecha_string());
-                cadena_bloques->get_block(fecha->search(c1));
+                //c1 = pedir_fecha();
+                //cout<<"Fecha: "<<c1<<endl; 
+                cadena_bloques->get_block(fecha->search(pedir_fecha()));
                 break;
 
             case 6:
@@ -254,7 +258,7 @@ void console(){
                 break; 
 
             default:
-                cout<<"Ejecución finalizada"<<endl;
+                cout<<"Programa finalizado"<<endl;
                 break;
             
             res.clear();

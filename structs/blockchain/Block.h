@@ -31,7 +31,7 @@ struct Block
     }
     
     Block(T* _data,int size_data,int _nro_bloque) {
-        nro = _nro_bloque;
+        nro = _nro_bloque; 
         nonce = "";
         next = prev = nullptr;
 
@@ -44,26 +44,29 @@ struct Block
         for (int i=0; i<cant_data; i++) {
             data[i] = _data[i];
             huella += _data[i];
-        } //huella tiene valor concatenado de todos los elementos
+        } //huella tiene valor concatenado de todos los elementos (orden: nro, data)
         huella_padre="";
     }
 
     void recalculate(){
         huella = "";
-        huella = to_string(nro); // nro de bloque
+        huella = to_string(nro); // nro de bloque 
 
         for (int i=0; i<cant_data; i++){
             huella += data[i];
         }
         //for (auto dato:data) huella += dato; //pasamos todos los datos
-        huella += huella_padre; //añadimos la huella del padre
-        //cout<<"Huella: "<<huella<<endl;
+        //huella += huella_padre; //añadimos la huella del padre
+        
+        //(huella: nro+data+huella_padre)
+        
         //modificando la huella
         SHA256 sha;
         uint8_t * digest = sha.digest();
 
         //actualizando huella y nonce
-        nonce=sha.SHA256::findNonce(huella+huella_padre,huella);
+        nonce=sha.SHA256::findNonce(huella+huella_padre,huella); //aquí se envia huella del padre
+        
         delete[] digest;
     }
 

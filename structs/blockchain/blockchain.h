@@ -69,12 +69,12 @@ class BlockChain{
             this->nodes++;
 
           //actualizar huella del padre
-          temp->huella_padre = temp->prev->huella;
+          temp->huella_padre = temp->prev->huella; 
 
           SHA256 sha;
           uint8_t * digest = sha.digest();
 
-          //actualizando huella y nonce
+          //actualizando huella y nonce (huella: nro+data+huella_padre)
           temp->nonce=sha.SHA256::findNonce(temp->huella+temp->huella_padre,temp->huella);
           delete[] digest;
         
@@ -99,16 +99,20 @@ class BlockChain{
               temp = temp->next;
           }
           //int i = 0;
-          cout<<"\nBloque nro "<<ind<<": \t";
+          cout<<"\nBloque nro "<<ind<<": \n";
           for (int i=0; i<temp->cant_data; i++) {
             //cout<<temp->data[i]<<"\t";
             
               cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
-              if (i%values==values-1){ // ultimo elemento
+              /*
+              if (i%values==values-1){ // ultimo elemento (solo para imprimir el salto de linea, pero ya se hace fuera del for)
                 cout<<endl;
               }
+              */
           }
-          cout<<"\n";
+          cout<<"\n\tNonce: "<<temp->nonce;
+          cout<<"\n\tHuella: "<<temp->huella; 
+          cout<<"\n\n";
         }
 
         bool exist_block(int ind){
@@ -149,23 +153,23 @@ class BlockChain{
           }
         }
 
-        void recalculo_cascada(){
+        void recalculo_cascada(){ // recalculo general
           recalculo_cascada(head->next);
         }
 
-        void recalculo_cascada(Block<T>* temp){
+        void recalculo_cascada(Block<T>* temp){ // desde un bloque en especifico
           Block<T>* recorrido = temp;
           while (recorrido!=head){ //se recorre cada bloque
             
             recorrido->huella_padre = recorrido->prev->huella; // huella del bloque anterior
             //temp->huella = temp->huella_padre;
-            recorrido->recalculate();
+            recorrido->recalculate(); // huella = nro + data // notar que huella_padre ya tiene su valor correcto
             recorrido = recorrido->next; //avanzamos a la sig posicion
             
           }
         }
 
-        bool proof_of_work(){
+        bool proof_of_work(){ // verifica si se cumple el proof_of_work
           Block<T>* temp = head->next->next; // empezamos desde segundo
           while (temp!=head){
             if (temp->prev->huella!=temp->huella_padre) return false;
