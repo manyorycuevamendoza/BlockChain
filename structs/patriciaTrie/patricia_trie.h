@@ -38,7 +38,7 @@ public:
     string toString(string sep);
     void toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep);
     //CircularArray<TK> start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
-    void start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
+    void start_with(CircularArray<TK>& result, TrieNode* node);
     void start_with(CircularArray<TK>& result, string preffix);
 };
 
@@ -82,6 +82,7 @@ void TriePatricia<TK>::insert(TK id,string key){
                             temp->preffix.pop_back();
                         }
                         temp->endWord = nuevo->endWord = true; 
+                        nuevo->id = id; // se asigna id (nro bloque)
 
                         // liberamos los hijos de nuevo
                         for (int i=0;i<ALPHA_SIZE;i++) {
@@ -107,7 +108,8 @@ void TriePatricia<TK>::insert(TK id,string key){
                     TrieNode* nuevo = new TrieNode();
                     nuevo->preffix = "";
                     for (int i = ind_prefix; i<size; i++) nuevo->preffix+=key[i]; //lo que se debe añadir
-                    nuevo->endWord = true; 
+                    nuevo->endWord = true;
+                    nuevo->id = id; // se asigna id (nro bloque) 
                     //std::cout<<"Temp: "<<temp->preffix<<"\tEn else: "<<nuevo->preffix<<std::endl;
 
                     // enviar lo que se encuentra despues del prefijo como otro hijo
@@ -130,6 +132,7 @@ void TriePatricia<TK>::insert(TK id,string key){
                             otro_hijo->children[i] = temp->children[i];
                             temp->children[i] = nullptr;
                         }
+                        otro_hijo->id = temp->id;
                        // temp = temp->children[int(otro_hijo->prefix[0])];
                         temp->children[int(otro_hijo->preffix[0])] = otro_hijo; // añadimos el hijo
                         temp->children[int(nuevo->preffix[0])] = nuevo;     
@@ -146,6 +149,7 @@ void TriePatricia<TK>::insert(TK id,string key){
     nuevo->preffix = "";
     for (int i = ind_prefix; i<size; i++) nuevo->preffix+=key[i]; //lo que se debe añadir
     nuevo->endWord = true; 
+    nuevo->id = id; // se asigna id (nro bloque)
     temp->children[int(nuevo->preffix[0])] = nuevo;
     //std::cout<<"Fuera del while: "<<nuevo->preffix<<"\tTemp: "<<temp->preffix<<std::endl;
 }
@@ -202,7 +206,7 @@ string TriePatricia<TK>::toString(string sep){
 template <typename TK>
 void TriePatricia<TK>::toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep){
     if(node->endWord)
-        chain += prefijo + sep;
+        chain += prefijo + " - id: "+ to_string(node->id) + sep;
     for(int i=0;i<ALPHA_SIZE;i++){
         if(node->children[i])
             toString_recursivo(node->children[i], prefijo + node->children[i]->preffix, chain, sep);
@@ -212,25 +216,42 @@ void TriePatricia<TK>::toString_recursivo(TrieNode* node, string prefijo, string
 template <typename TK>
 void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
     result.clear();
-    for (int i=0; i<int(preffix.size()); i++) preffix[i] = tolower(preffix[i]);
+    int size = preffix.size();
+
+    for (int i=0; i<size; i++) preffix[i] = tolower(preffix[i]);
     cout<<"preffix: "<<preffix<<endl;
     TrieNode* node = root;
-    for(auto c : preffix){
-        cout<<"for - "<<c<<endl;
-        if(node->children[int(c-'a')]) {
-            node = node->children[int(c-'a')];
+
+    // vamos hacia el nodo que inicia con la cadena dada
+    int count = 0;
+    int i = 0;
+    bool finish = false;
+    while (i<size && !finish){
+        node = node->children[preffix[i]]; // cambia de nodo
+        if (node){ // nodo existe
+            
+            for (char c:node->preffix){ // recorremos su preffix
+                if (c==preffix[i]) i++; // avanzamos un indice
+                else finish = true;
+            }
         }
-        else return;
+        else {
+            cout<<"No existen cadenas que inicien con "<<preffix<<endl;
+            return;
+        }
+        /*
+        if (node->children[i]->preffix[i] == preffix[i]) count++;
+        else finish = true;
+        */
     }
-    
-    //result = start_with(result,preffix,node);
-    cout<<"terminado";
-    start_with(result,"",root);
+    cout<<"nodo: "<<node->preffix<<endl;
+    start_with(result,node);
 }
 
 template <typename TK>
 //CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
-void TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
+void TriePatricia<TK>::start_with(CircularArray<TK>& result, TrieNode* node) { 
+
     if(node->endWord){
         result.push_back(node->id); // añadimos el id
         cout<<"coincide : "<<node->id<<endl;
@@ -238,10 +259,14 @@ void TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preff
 
     for(int i=0;i<ALPHA_SIZE;i++){
         if(node->children[i]){
-            //string newpreffix = preffix + node->children[i]->preffix;
-            string newpreffix = to_string(char(i+'a'));
-            cout<<"newpreffix: "<<newpreffix<<endl;
-            start_with(result,newpreffix, node->children[i]);
+            /*
+            if(node->children[i]->endWord){
+                result.push_back(node->children[i]->id); // añadimos el id
+                cout<<"coincide : "<<node->id<<endl;
+            }
+            */
+            cout<<"preffix: "<<node->children[i]->preffix<<" - id: "<<node->children[i]->id<<endl;
+            start_with(result, node->children[i]);
         }
     }
 }

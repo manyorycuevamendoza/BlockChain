@@ -108,11 +108,23 @@ void agregar_registro(){
     }
 
 
-        s1 = pedir_string(atributos[0]); string1->insert(s1,size);
-        s2 = pedir_string(atributos[1]); string2->insert(s2,size);
-        s3 = pedir_entero(atributos[2]); numero->insert(s3,size); avl1->insert(size,s3);
-        s4 = fecha_string();
-        time_t date = convertToUnixTimestamp(s4); fecha->insert(date,size); avl2->insert(size,date);
+        s1 = pedir_string(atributos[0]); // string1
+            string1->insert(s1,size);
+            inicia_string1->insert(size,s1);
+
+        s2 = pedir_string(atributos[1]);  //string2
+            string2->insert(s2,size);
+            inicia_string2->insert(size,s2);
+
+        s3 = pedir_entero(atributos[2]); // entero(monto)
+            numero->insert(s3,size); 
+            avl1->insert(size,s3);
+
+        s4 = fecha_string(); // fecha
+        time_t date = convertToUnixTimestamp(s4); 
+            fecha->insert(date,size); 
+            avl2->insert(size,date);
+
         data[ind++] = s1; //data.push_back(s1);
         data[ind++] = s2; //data.push_back(s2);
         data[ind++] = to_string(s3); //data.push_back(to_string(s3));
@@ -297,8 +309,7 @@ void console(){
                 for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
                 }
-
-                cout<<inicia_string1->toString(" ");
+                //cout<<"cadenas: "<<inicia_string1->toString(" ");
                 break;
 
             case 13:
