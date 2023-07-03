@@ -41,7 +41,8 @@ public:
     void start_with(CircularArray<TK>& result, string preffix);
 };
 
-void TriePatricia::insert(string key){
+template <typename TK>
+void TriePatricia<TK>::insert(string key){
     if (!root) root = new TrieNode(); // creamos en caso sea nullptr
     int ind_prefix = 0; // para recorrer key
     int size = int(key.size()); // para tamaño de string key
@@ -144,7 +145,8 @@ void TriePatricia::insert(string key){
     //std::cout<<"Fuera del while: "<<nuevo->preffix<<"\tTemp: "<<temp->preffix<<std::endl;
 }
 
-bool TriePatricia::search(string key){
+template <typename TK>
+bool TriePatricia<TK>::search(string key){
     int size = int(key.size());
     int ind_prefix = 0;  // para recorrer el prefijo
     TrieNode* temp = root; // para recorrer cada nodo
@@ -161,7 +163,8 @@ bool TriePatricia::search(string key){
 }
 
 
-void TriePatricia::remove(string key){
+template <typename TK>
+void TriePatricia<TK>::remove(string key){
     if (!root) return; // caso base
     int size = int(key.size());
     int ind_prefix = 0; // para recorrer el prefijo
@@ -183,14 +186,16 @@ void TriePatricia::remove(string key){
 
 
 
-string TriePatricia::toString(string sep){
+template <typename TK>
+string TriePatricia<TK>::toString(string sep){
     //print();
     string chain = "";
     toString_recursivo(root, "", chain, sep);
     return chain;
 }
 
-void TriePatricia::toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep){
+template <typename TK>
+void TriePatricia<TK>::toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep){
     if(node->endWord)
         chain += prefijo + sep;
     for(int i=0;i<ALPHA_SIZE;i++){
@@ -200,7 +205,7 @@ void TriePatricia::toString_recursivo(TrieNode* node, string prefijo, string& ch
 }
 
 template <typename TK>
-void TriePatricia::start_with(CircularArray<TK>& result, string preffix) {
+void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
     result.clear();
     TrieNode* node = root;
     for(char c : preffix){
@@ -211,7 +216,7 @@ void TriePatricia::start_with(CircularArray<TK>& result, string preffix) {
 }
 
 template <typename TK>
-CircularArray<TK> TriePatricia::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
+CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
     if(node->endWord)
         result.push_back(preffix);
 

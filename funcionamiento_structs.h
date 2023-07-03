@@ -18,7 +18,7 @@ ChainHash<string,int>* string2 = new ChainHash<string,int>(); //segundo string
 ChainHash<int,int>* numero = new ChainHash<int,int>(); //para monto id/monto
 ChainHash<long,int>* fecha = new ChainHash<long,int>(); //para fecha/id>
 
-
+//patricia
 
 void begin(){
     string archivo = "tests/test2.csv";
