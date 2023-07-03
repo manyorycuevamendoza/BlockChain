@@ -6,6 +6,7 @@ using namespace std;
 
 const unsigned ALPHA_SIZE = 256;//tamanio del alfabeto
 
+template <typename TK>
 class TriePatricia{
 private:
     struct TrieNode{         
@@ -198,6 +199,7 @@ void TriePatricia::toString_recursivo(TrieNode* node, string prefijo, string& ch
     }
 }
 
+template <typename TK>
 void TriePatricia::start_with(CircularArray<TK>& result, string preffix) {
     result.clear();
     TrieNode* node = root;
@@ -208,6 +210,7 @@ void TriePatricia::start_with(CircularArray<TK>& result, string preffix) {
     result = start_with(result,preffix,node);
 }
 
+template <typename TK>
 CircularArray<TK> TriePatricia::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
     if(node->endWord)
         result.push_back(preffix);
