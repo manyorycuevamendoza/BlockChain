@@ -1,6 +1,7 @@
 #ifndef PATRICIA_TRIE_H
 #define PATRICIA_TRIE_H
 #include <iostream>
+#include "../circular_array/circular_array.h"
 using namespace std;
 
 const unsigned ALPHA_SIZE = 256;//tamanio del alfabeto
@@ -35,8 +36,8 @@ public:
     //imprime ordenado
     string toString(string sep);
     void toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep);
-    vector<string> start_with(const string& preffix, TrieNode* node, vector<string>& result);
-    vector<string> start_with(string preffix);
+    CircularArray<TK> start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
+    void start_with(CircularArray<TK>& result, string preffix);
 };
 
 void TriePatricia::insert(string key){
@@ -197,28 +198,26 @@ void TriePatricia::toString_recursivo(TrieNode* node, string prefijo, string& ch
     }
 }
 
-vector<string> TriePatricia::start_with(string preffix) {
+void TriePatricia::start_with(CircularArray<TK>& result, string preffix) {
+    result.clear();
     TrieNode* node = root;
-    vector<string> result;
     for(char c : preffix){
         if(node->children[c-'a'])
             node = node->children[c-'a'];
     }
-
-    return start_with(preffix,node,result);
+    result = start_with(result,preffix,node);
 }
 
-vector<string> TriePatricia::start_with(const string& preffix, TrieNode* node, vector<string>& result) {
+CircularArray<TK> TriePatricia::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
     if(node->endWord)
         result.push_back(preffix);
 
     for(int i=0;i<ALPHA_SIZE;i++){
         if(node->children[i]){
             string newpreffix = preffix + node->children[i]->preffix;
-            start_with(newpreffix, node->children[i], result);
+            start_with(result, newpreffix, node->children[i]);
         }
     }
-
     return result;
 }
 
