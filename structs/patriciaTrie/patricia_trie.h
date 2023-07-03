@@ -13,6 +13,7 @@ private:
         TrieNode **children;           
         string preffix;
         bool endWord; //indica si es final de una palabra
+        TK id; // para representar el numero de bloque
 
         TrieNode(){
             children = new TrieNode*[ALPHA_SIZE](); endWord=false; preffix="";
@@ -29,20 +30,20 @@ private:
     
 public:
     TriePatricia(): root(nullptr) {}
-
-    void insert(string key);
+    void insert(TK id, string key);
     bool search(string key);
     void remove(string key);
     
     //imprime ordenado
     string toString(string sep);
     void toString_recursivo(TrieNode* node, string prefijo, string& chain, string sep);
-    CircularArray<TK> start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
+    //CircularArray<TK> start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
+    void start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node);
     void start_with(CircularArray<TK>& result, string preffix);
 };
 
 template <typename TK>
-void TriePatricia<TK>::insert(string key){
+void TriePatricia<TK>::insert(TK id,string key){
     if (!root) root = new TrieNode(); // creamos en caso sea nullptr
     int ind_prefix = 0; // para recorrer key
     int size = int(key.size()); // para tamaño de string key
@@ -50,6 +51,8 @@ void TriePatricia<TK>::insert(string key){
     if (!root->children[int(key[ind_prefix])]){ // caso base
         TrieNode* nuevo = new TrieNode(); nuevo->preffix = key; nuevo->endWord = true;
         root->children[int(key[ind_prefix])] = nuevo;
+        
+        nuevo->id = id; // se asigna id (nro bloque)
         //std::cout<<"Base: "<<nuevo->preffix<<std::endl;
         return; 
     } 
@@ -212,13 +215,15 @@ void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
         if(node->children[c-'a'])
             node = node->children[c-'a'];
     }
-    result = start_with(result,preffix,node);
+    //result = start_with(result,preffix,node);
+    start_with(result,preffix,node);
 }
 
 template <typename TK>
-CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
+//CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
+void TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
     if(node->endWord)
-        result.push_back(preffix);
+        result.push_back(node->id); // añadimos el id
 
     for(int i=0;i<ALPHA_SIZE;i++){
         if(node->children[i]){
@@ -226,7 +231,6 @@ CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const 
             start_with(result, newpreffix, node->children[i]);
         }
     }
-    return result;
 }
 
 #endif

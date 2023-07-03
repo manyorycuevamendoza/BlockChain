@@ -8,17 +8,21 @@ const int columnas = 4;
 string* atributos = new string [columnas]; // atributos de cada bloque
 BlockChain<string>* cadena_bloques = new BlockChain<string>(); // blockchain
 
-//arboles
+//arboles (2: no string<> date, int)
 AVLTree2<int,int>* avl1 = new AVLTree2<int,int>(); // id monto
 AVLTree2<int,long>* avl2 = new AVLTree2<int,long>(); //id fechas
 
-//table_hash
+//table_hash (4: todas las columnas)
 ChainHash<string,int>* string1 = new ChainHash<string,int>(); //primer string
 ChainHash<string,int>* string2 = new ChainHash<string,int>(); //segundo string
 ChainHash<int,int>* numero = new ChainHash<int,int>(); //para monto id/monto
 ChainHash<long,int>* fecha = new ChainHash<long,int>(); //para fecha/id>
 
-//patricia
+//patricia (2: strings)
+TriePatricia<int>* inicia_string1 = new TriePatricia<int>();
+TriePatricia<int>* inicia_string2 = new TriePatricia<int>();
+
+//boyer (2: strings)
 
 void begin(){
     string archivo = "tests/test2.csv";
@@ -143,24 +147,26 @@ int pedir_opcion(){
     int alternativa;
     do{
         cout<<"[1]. agregar registro"<<endl;
-        cout<<"[2]. buscar por "<<atributos[0]<<endl;
+        cout<<"[2]. buscar por "<<atributos[0]<<endl; // hash
         cout<<"[3]. buscar por "<<atributos[1]<<endl;
         cout<<"[4]. buscar por "<<atributos[2]<<endl;
         cout<<"[5]. buscar por "<<atributos[3]<<endl;
-        cout<<"[6]. buscar por rango en "<<atributos[2]<<endl;
+        cout<<"[6]. buscar por rango en "<<atributos[2]<<endl; // avl
         cout<<"[7]. buscar por rango en "<<atributos[3]<<endl;
-        cout<<"[8]. buscar minimo por "<<atributos[2]<<endl;
+        cout<<"[8]. buscar minimo por "<<atributos[2]<<endl; // avl
         cout<<"[9]. buscar minimo por "<<atributos[3]<<endl;
-        cout<<"[10]. buscar maximo por "<<atributos[2]<<endl;
+        cout<<"[10]. buscar maximo por "<<atributos[2]<<endl; // avl
         cout<<"[11]. buscar maximo por "<<atributos[3]<<endl;
-        cout<<"[12]. patricia"<<endl;
-        cout<<"[13]. bucar el patron"<<endl;
-        cout<<"[14]. mostrar todos los bloques"<<endl;
-        cout<<"[15]. recalculo en cascada"<<endl;
-        cout<<"[16]. Modificar bloque"<<endl;
-        cout<<"[17]. Salir"<<endl;
+        cout<<"[12]. "<< atributos[0] << " inicia con "<<endl; // patricia
+        cout<<"[13]. "<< atributos[1] << " inicia con "<<endl;
+        cout<<"[14]. buscar patron en "<<atributos[0] <<endl; // boyer
+        cout<<"[15]. buscar patron en "<<atributos[1] <<endl; 
+        cout<<"[16]. mostrar todos los bloques"<<endl;
+        cout<<"[17]. recalculo en cascada"<<endl;
+        cout<<"[18]. Modificar bloque"<<endl;
+        cout<<"[19]. Salir"<<endl;
         cin>>alternativa;
-    }while (alternativa>0 && 17<alternativa);
+    }while (alternativa>0 && 19<alternativa); // mientras no se ingrese opcion correcta
     return alternativa;
 }
 
@@ -226,20 +232,27 @@ void console(){
 
             case 11:
                 cadena_bloques->get_block(avl2->maxValue()); break;
+
             case 12:
-                cout<<"añadir patricia: "; break;
+                cout<<"patricia 1: "; break;
             case 13:
-                cout<<"a"; break;
+                cout<<"patricia 2: "; break;
+            case 14:
+                cout<<"boyer 1"; break;
                 //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
                 //res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-            case 14:
-                cadena_bloques->display(); break;
+
             case 15:
-                cadena_bloques->recalculo_cascada(); break;
+                cout<<"boyer 2"; break;
 
             case 16:
-            
+                cadena_bloques->display(); break;
+
+            case 17:
+                cadena_bloques->recalculo_cascada(); break;
+
+            case 18:
                 cout<<"Inserte nro de bloque a actualizar: ";
                 cin>>n1;
 
@@ -254,18 +267,18 @@ void console(){
                 }
                 else cout<<"Bloque no existe\n";
                 
-             
                 break; 
 
+            
             default:
                 cout<<"Programa finalizado"<<endl;
                 break;
             
             res.clear();
         }
-        if (opc==17) { break;}
+        if (opc==19) { break;}
         sleep(3);
-    }while (opc!=17);
+    }while (opc!=19);
 
 }
 
