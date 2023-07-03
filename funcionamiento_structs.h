@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 void console();
+void readCSV(const string archivo);
 
 const int columnas = 4;
 string* atributos = new string [columnas]; // atributos de cada bloque
@@ -26,8 +27,60 @@ TriePatricia<int>* inicia_string2 = new TriePatricia<int>();
 
 void begin(){
     string archivo = "tests/test2.csv";
-    readCSV(archivo,atributos,columnas,cadena_bloques,avl1,avl2, string1, string2, numero, fecha); // creando estructuras
+    //readCSV(archivo,atributos,columnas,cadena_bloques,avl1,avl2, string1, string2, numero, fecha); // creando estructuras
+    readCSV(archivo);
     console();
+}
+
+void readCSV(const string archivo){
+    std::ifstream file(archivo);
+    if (!file.is_open()) {
+        std::cout << "Failed to open the file." << std::endl;
+        return;
+    }
+
+    int count =0;
+    std::string line;
+    std::string item;
+    std::getline(file, line); // recibir atributos
+    std::stringstream ss(line);
+    for (int i=0;i<4;i++){
+        std::getline(ss, item, ','); // primer string
+        atributos[i] = item;
+    }
+    cadena_bloques->set_atributos(atributos,columnas);
+    string* values = new string[4];//vector <string> values;
+    while (std::getline(file, line)) {
+        int i=0;
+        std::stringstream ss(line);
+        std::getline(ss, item, ','); // primer string
+        string1->insert(item,count); // hash
+        //boyer
+        inicia_string1->insert(count,item); //patricia
+        values[i++] = item; //values.push_back(item);
+        
+        std::getline(ss, item, ',');  // 2da columna
+        string2->insert(item,count); // hash
+        inicia_string2->insert(count,item); //patricia
+        values[i++] = item; //values.push_back(item);
+        
+        std::getline(ss, item, ',');//3era columna: monto
+        int number=stoi(item); 
+        avl1->insert(count,number); // key: nro bloque  //  value:monto -- lo ordena por monto(por value)
+        numero->insert(number,count);
+        values[i++] = item; //values.push_back(item);
+       
+        std::getline(ss, item, ','); //4ta columna: fecha
+        time_t date = convertToUnixTimestamp(item); 
+        avl2->insert(count,date); // key: nro bloque   //  value:fecha -- lo ordena por fecha(por value)
+        fecha->insert(date,count);
+        values[i++] = item; //values.push_back(item);
+
+        count ++; // nro de bloque aumenta
+        cadena_bloques->insert(values,i); // VERIFICAR
+    } 
+
+    file.close(); 
 }
 
 void agregar_registro(){
@@ -181,6 +234,7 @@ void console(){
         time_t c1, c2;
         int cant_datos = 0;
         string* new_data = new string[4];
+        string data;
 
         switch (opc){
             case 1:
@@ -234,7 +288,19 @@ void console(){
                 cadena_bloques->get_block(avl2->maxValue()); break;
 
             case 12:
-                cout<<"patricia 1: "; break;
+                data = pedir_string("cadena"); 
+
+                //cambiamos a minuscula
+                for (int i=0; i<int(data.size()); i++) data[i] = tolower(data[i]);
+
+                inicia_string1->start_with(res, data);
+                for (int i=0; i<int(res.size()); i++){
+                    cadena_bloques->get_block(res[i]);
+                }
+
+                cout<<inicia_string1->toString(" ");
+                break;
+
             case 13:
                 cout<<"patricia 2: "; break;
             case 14:

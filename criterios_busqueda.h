@@ -24,6 +24,7 @@ template <class TK,class TV>
 vector <TK> range_search(AVLTree2<TK,TV>* arbol, TV begin, TV end);
 
 
+/*
 void readCSV(const string archivo, string* atributos,int col, BlockChain<string>* cadena_bloques, AVLTree2<int,int>* avl1, AVLTree2<int,long>* avl2, ChainHash<string,int>* string1, ChainHash<string,int>* string2, ChainHash<int,int>* numero, ChainHash<long,int>* fecha){
     std::ifstream file(archivo);
     if (!file.is_open()) {
@@ -90,9 +91,9 @@ void readCSV(const string archivo, string* atributos,int col, BlockChain<string>
     cout<<"Máximo: "<<avl1->maxValue().key<<endl;
     for (auto x:res) cout<<x<<" ";
     cout<<"Size: "<<res.size()<<endl;
-    */
+    
 }
- 
+ */
 
 template <class TK, class TV>
 TV search(ChainHash<TK,TV>* tabla, TK key) {

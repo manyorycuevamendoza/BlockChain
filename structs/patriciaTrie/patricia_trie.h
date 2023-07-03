@@ -45,6 +45,8 @@ public:
 template <typename TK>
 void TriePatricia<TK>::insert(TK id,string key){
     if (!root) root = new TrieNode(); // creamos en caso sea nullptr
+    for (int i=0; i<int(key.size()); i++) key[i] = tolower(key[i]); // para guardar todo en minuscula
+
     int ind_prefix = 0; // para recorrer key
     int size = int(key.size()); // para tamaño de string key
 
@@ -210,25 +212,36 @@ void TriePatricia<TK>::toString_recursivo(TrieNode* node, string prefijo, string
 template <typename TK>
 void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
     result.clear();
+    for (int i=0; i<int(preffix.size()); i++) preffix[i] = tolower(preffix[i]);
+    cout<<"preffix: "<<preffix<<endl;
     TrieNode* node = root;
-    for(char c : preffix){
-        if(node->children[c-'a'])
-            node = node->children[c-'a'];
+    for(auto c : preffix){
+        cout<<"for - "<<c<<endl;
+        if(node->children[int(c-'a')]) {
+            node = node->children[int(c-'a')];
+        }
+        else return;
     }
+    
     //result = start_with(result,preffix,node);
-    start_with(result,preffix,node);
+    cout<<"terminado";
+    start_with(result,"",root);
 }
 
 template <typename TK>
 //CircularArray<TK> TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
 void TriePatricia<TK>::start_with(CircularArray<TK>& result, const string& preffix, TrieNode* node) {
-    if(node->endWord)
+    if(node->endWord){
         result.push_back(node->id); // añadimos el id
+        cout<<"coincide : "<<node->id<<endl;
+    }
 
     for(int i=0;i<ALPHA_SIZE;i++){
         if(node->children[i]){
-            string newpreffix = preffix + node->children[i]->preffix;
-            start_with(result, newpreffix, node->children[i]);
+            //string newpreffix = preffix + node->children[i]->preffix;
+            string newpreffix = to_string(char(i+'a'));
+            cout<<"newpreffix: "<<newpreffix<<endl;
+            start_with(result,newpreffix, node->children[i]);
         }
     }
 }
