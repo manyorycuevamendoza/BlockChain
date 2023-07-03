@@ -313,7 +313,15 @@ void console(){
                 break;
 
             case 13:
-                cout<<"patricia 2: "; break;
+                data = pedir_string("cadena"); 
+
+                for (int i=0; i<int(data.size()); i++) data[i] = tolower(data[i]);
+
+                inicia_string2->start_with(res, data);
+                for (int i=0; i<int(res.size()); i++){
+                    cadena_bloques->get_block(res[i]);
+                }
+                break;
             case 14:
                 cout<<"boyer 1"; break;
                 //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron

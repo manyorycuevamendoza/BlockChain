@@ -104,11 +104,12 @@ class BlockChain{
             //cout<<temp->data[i]<<"\t";
             
               cout<<atributos[i%values]<<": "<<temp->data[i]<<"\t";
-              /*
+              
+              
               if (i%values==values-1){ // ultimo elemento (solo para imprimir el salto de linea, pero ya se hace fuera del for)
                 cout<<endl;
               }
-              */
+              
           }
           cout<<"\n\tNonce: "<<temp->nonce;
           cout<<"\n\tHuella: "<<temp->huella; 
