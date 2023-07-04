@@ -107,7 +107,8 @@ public:
     }
 
     int size(){
-        if (front>back) return (back+1) + (capacity-front);
+        if (back==front && front==-1) return 0;
+        else if (front>back) return (back+1) + (capacity-front);
         else return  back - front + 1;
     }
     

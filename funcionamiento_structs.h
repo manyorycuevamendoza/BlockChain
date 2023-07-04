@@ -146,10 +146,15 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         
         // eliminamos clientes   
         string1->remove(datos[++ind],nro_block); // eliminacion en hash
+        cout<<datos[ind]<<endl;
+        cout<<"cadenas antes de eliminar: "<<inicia_string1->toString(" ")<<endl;
+        inicia_string1->remove(datos[ind]); // eliminacion en patricia
+        cout<<"cadenas luego de eliminar: "<<inicia_string1->toString(" ")<<endl;
         //cout<<ind; // ind = 0, 4, 8 , ...
 
         // eliminamos lugar  
         string2->remove(datos[++ind],nro_block); // eliminacion en hash
+        inicia_string2->remove(datos[ind]); // eliminacion en patricia
         //cout<<ind; // ind = 1, 5, 9, ...
 
         // eliminamos monto // ind = 2, 6, 10,...
@@ -190,9 +195,17 @@ string* nuevos_datos(int& cant_datos, int nro_block){
     }
 
 
-        s1 = pedir_string(atributos[0]); string1->insert(s1,nro_block);
+        s1 = pedir_string(atributos[0]); 
+            string1->insert(s1,nro_block);
+            inicia_string1->insert(nro_block,s1);
+
         s2 = pedir_string(atributos[1]); string2->insert(s2,nro_block);
-        s3 = pedir_entero(atributos[2]); numero->insert(s3,nro_block); avl1->insert(nro_block,s3);
+            string1->insert(s1,nro_block);
+            inicia_string2->insert(nro_block,s2);
+
+        s3 = pedir_entero(atributos[2]); 
+            numero->insert(s3,nro_block); 
+            avl1->insert(nro_block,s3);
         s4 = fecha_string();
         
         time_t date = convertToUnixTimestamp(s4); fecha->insert(date,nro_block); avl2->insert(nro_block,date);
@@ -306,8 +319,14 @@ void console(){
                 for (int i=0; i<int(data.size()); i++) data[i] = tolower(data[i]);
 
                 inicia_string1->start_with(res, data);
-                for (int i=0; i<int(res.size()); i++){
+
+                if (int(res.size())==0){
+                    cout<<"No existen cadenas que inicien con "<<data<<endl;
+                }
+                else{
+                    for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
+                    }
                 }
                 //cout<<"cadenas: "<<inicia_string1->toString(" ");
                 break;
@@ -318,9 +337,16 @@ void console(){
                 for (int i=0; i<int(data.size()); i++) data[i] = tolower(data[i]);
 
                 inicia_string2->start_with(res, data);
-                for (int i=0; i<int(res.size()); i++){
-                    cadena_bloques->get_block(res[i]);
+                
+                if (int(res.size())==0){
+                    cout<<"No existen cadenas que inicien con "<<data<<endl;
                 }
+                else{
+                    for (int i=0; i<int(res.size()); i++){
+                        cadena_bloques->get_block(res[i]);
+                    }
+                }
+
                 break;
             case 14:
                 cout<<"boyer 1"; break;

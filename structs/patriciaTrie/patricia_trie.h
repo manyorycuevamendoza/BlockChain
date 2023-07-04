@@ -174,6 +174,7 @@ bool TriePatricia<TK>::search(string key){
 
 template <typename TK>
 void TriePatricia<TK>::remove(string key){
+    for (int i=0; i<int(key.size()); i++) key[i] = tolower(key[i]);
     if (!root) return; // caso base
     int size = int(key.size());
     int ind_prefix = 0; // para recorrer el prefijo
@@ -235,7 +236,8 @@ void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
             }
         }
         else{
-           cout<<"No existen cadenas que inicien con "<<preffix<<endl; return; 
+           //cout<<"No existen cadenas que inicien con "<<preffix<<endl; 
+           return; 
         }
         /*
         if (node->children[i]->preffix[i] == preffix[i]) count++;
@@ -243,7 +245,7 @@ void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
         */
     }
     if (i<size){
-        cout<<"No existen cadenas que inicien con "<<preffix<<endl; return;
+        //cout<<"No existen cadenas que inicien con "<<preffix<<endl; return;
     }
     //cout<<"nodo: "<<node->preffix<<endl;
     start_with(result,node);
