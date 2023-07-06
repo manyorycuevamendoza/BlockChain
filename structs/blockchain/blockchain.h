@@ -99,7 +99,9 @@ class BlockChain{
           for (int i=0;i<ind;i++){
               temp = temp->next;
           }
+          temp->display_block(this->atributos,this->values);
           //int i = 0;
+          /*
           temp->hasheado?cout<<"CORRECTO":cout<<"ERROR"; // para imprimir error
           cout<<temp->hasheado?"":"ERROR"; // para imprimir error
           cout<<"\n"; 
@@ -117,6 +119,7 @@ class BlockChain{
           cout<<"\n\tNonce: "<<temp->nonce;
           cout<<"\n\tHuella: "<<temp->huella; 
           cout<<"\n\n";
+          */
         }
 
         bool exist_block(int ind){
@@ -136,6 +139,11 @@ class BlockChain{
         void display(){
           Block<T>* temp = head->next;
           while(temp!=head) {
+            temp->display_block(this->atributos,this->values);
+            cout<<setfill('-')<<setw(80)<<"";
+            cout<<endl;
+            temp = temp->next;
+            /*
             cout<<"Bloque nro "<<temp->nro<<": \t\t\t";
             temp->hasheado?cout<<"CORRECTO":cout<<"ERROR"; // para imprimir error
             cout<<endl;
@@ -155,6 +163,7 @@ class BlockChain{
             cout<<"Huella: "<<temp->huella<<endl;
             cout<<" ---------------------------------- "<<endl;
             temp = temp->next;
+            */
           }
         }
 

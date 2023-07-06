@@ -2,6 +2,7 @@
 #define BLOCK_H
 #include <iostream>
 #include <string>
+#include <iomanip>
 //#include <vector>
 #include "SHA256.h"
 using namespace std;
@@ -81,6 +82,20 @@ struct Block
         return data;
     }
 
+    void display_block(string* atributos, int values){
+        cout<<"Bloque nro "<<this->nro<<": \t\t\t\t";
+        this->hasheado?cout<<"CORRECTO":cout<<"ERROR"; // para imprimir error
+        cout<<endl;
+        for (int i=0;i<this->cant_data;i++){//recorriendo cada atributo
+            //impresion con atributos:
+            //       atributo           :     valor
+            //cout<<atributos[i%values]<<": "<<data[i];
+            cout<<"| "<<atributos[i%values]<<": "<<data[i]<<"\t";
+            if (i%values==values-1)cout<<"|"<<endl; // ultimo elemento (por registro)
+        }
+        cout<<"Nonce: "<<this->nonce<<"\t";
+        cout<<"Huella: "<<this->huella<<endl<<endl;
+    }
 
 };
 
