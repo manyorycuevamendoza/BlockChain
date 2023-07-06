@@ -77,6 +77,7 @@ class BlockChain{
           //actualizando huella y nonce (huella: nro+data+huella_padre)
           temp->nonce=sha.SHA256::findNonce(temp->huella+temp->huella_padre,temp->huella);
           delete[] digest;
+          temp->hasheado = true; // tiene su codigo hash correcto
         
         }
 
@@ -99,7 +100,9 @@ class BlockChain{
               temp = temp->next;
           }
           //int i = 0;
-          cout<<"\nBloque nro "<<ind<<": \n";
+          temp->hasheado?cout<<"CORRECTO":cout<<"ERROR"; // para imprimir error
+          cout<<temp->hasheado?"":"ERROR"; // para imprimir error
+          cout<<"\n"; 
           for (int i=0; i<temp->cant_data; i++) {
             //cout<<temp->data[i]<<"\t";
             
@@ -133,8 +136,9 @@ class BlockChain{
         void display(){
           Block<T>* temp = head->next;
           while(temp!=head) {
-            cout<<"Bloque nro: "<<temp->nro<<endl;
-        
+            cout<<"Bloque nro "<<temp->nro<<": \t\t\t";
+            temp->hasheado?cout<<"CORRECTO":cout<<"ERROR"; // para imprimir error
+            cout<<endl;
             for (int i=0;i<temp->cant_data;i++){//recorriendo cada atributo
             
               //cout<<temp->data[i]<<"\t"; // impresión simple
@@ -161,12 +165,17 @@ class BlockChain{
         void recalculo_cascada(Block<T>* temp){ // desde un bloque en especifico
           Block<T>* recorrido = temp;
           while (recorrido!=head){ //se recorre cada bloque
-            
+            if (!recorrido->hasheado){ // cuando el bloque fue modificado
+              recorrido->huella_padre = recorrido->prev->huella; // huella del anterior
+              recorrido->recalculate(); // metodo de clase Block
+            }
+            recorrido = recorrido->next;
+            /*
             recorrido->huella_padre = recorrido->prev->huella; // huella del bloque anterior
             //temp->huella = temp->huella_padre;
             recorrido->recalculate(); // huella = nro + data // notar que huella_padre ya tiene su valor correcto
             recorrido = recorrido->next; //avanzamos a la sig posicion
-            
+            */
           }
         }
 
@@ -185,7 +194,7 @@ class BlockChain{
 
         // para proof of work
         void modificar_bloque(int ind, string* _data, int values){
-          if (ind>=nodes) {cout<<"No existe este bloque"; return; }
+          if (ind>=nodes || ind<0) {cout<<"No existe este bloque"; return; }
 
           Block<T>* temp = head->next;
           
@@ -201,8 +210,14 @@ class BlockChain{
           for (int i=0; i<values; i++){
             temp->data[i] = _data[i];
           }
+
+
+          while (temp!=head){
+            temp->hasheado = false; // la huella debe cambiar
+            temp = temp->next;
+          }
           //temp->recalculate(); // recalculo del mismo bloque
-          recalculo_cascada(temp); // (otra opcion: para corregir en cascada ni bien se actualiza) NO QUITAR
+          //recalculo_cascada(temp); // (otra opcion: para corregir en cascada ni bien se actualiza) NO BORRAR
         }
         ~BlockChain(){
             if(head) head->killSelf();

@@ -18,6 +18,7 @@ struct Block
     string nonce;
     Block* next;
     Block* prev;
+    bool hasheado; // atributo para saber si está bien hasheado
 
     public:
     void killSelf(){
@@ -68,6 +69,7 @@ struct Block
         nonce=sha.SHA256::findNonce(huella+huella_padre,huella); //aquí se envia huella del padre
         
         delete[] digest;
+        this->hasheado = true; //el codigo hash es correcto
     }
 
     void print_huella(){

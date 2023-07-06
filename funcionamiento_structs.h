@@ -49,6 +49,7 @@ void readCSV(const string archivo){
         atributos[i] = item;
     }
     cadena_bloques->set_atributos(atributos,columnas);
+
     string* values = new string[4];//vector <string> values;
     while (std::getline(file, line)) {
         int i=0;
@@ -146,10 +147,8 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         
         // eliminamos clientes   
         string1->remove(datos[++ind],nro_block); // eliminacion en hash
-        cout<<datos[ind]<<endl;
-        cout<<"cadenas antes de eliminar: "<<inicia_string1->toString(" ")<<endl;
+        //cout<<datos[ind]<<endl;
         inicia_string1->remove(datos[ind]); // eliminacion en patricia
-        cout<<"cadenas luego de eliminar: "<<inicia_string1->toString(" ")<<endl;
         //cout<<ind; // ind = 0, 4, 8 , ...
 
         // eliminamos lugar  
