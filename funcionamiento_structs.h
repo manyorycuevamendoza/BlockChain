@@ -290,10 +290,17 @@ void console(){
                 avl1->search_by_range(res,n1,n2);
                 
                 //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-                for (int i=0; i<int(res.size()); i++){
-                    cadena_bloques->get_block(res[i]);
+
+                if (int(res.size())==0){
+                    cout<<"No existen montos que se encuentren en el rango ["<<
+                    n1<<" - "<<n2<<"]"<<endl;
                 }
-                
+                else{
+                    for (int i=0; i<int(res.size()); i++){
+                    cadena_bloques->get_block(res[i]);
+                    }
+                }
+
                 break;
 
             case 7:
@@ -301,8 +308,13 @@ void console(){
                 c2 = pedir_fecha();
                 avl2->search_by_range(res,c1,c2);
             
-                for (int i=0; i<int(res.size()); i++){
+                if (int(res.size())==0){
+                    cout<<"No existen fechas que se encuentren en el rango especificado"<<endl;
+                }
+                else{
+                    for (int i=0; i<int(res.size()); i++){
                     cadena_bloques->get_block(res[i]);
+                    }
                 }
                 
                 break;
