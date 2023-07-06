@@ -50,9 +50,11 @@ void readCSV(const string archivo){
     }
     cadena_bloques->set_atributos(atributos,columnas);
 
-    string* values = new string[4];//vector <string> values;
+    // haremos que cada bloque lea 10 registros (si sobran se añadiran a un bloque extra)
+    int cantidad_registros = 10; //registros por bloque
+    string* values = new string[columnas*cantidad_registros]; // columnas = 4 (datos)
+    int i=0;
     while (std::getline(file, line)) {
-        int i=0;
         std::stringstream ss(line);
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); // hash
@@ -77,10 +79,16 @@ void readCSV(const string archivo){
         fecha->insert(date,count);
         values[i++] = item; //values.push_back(item);
 
-        count ++; // nro de bloque aumenta
-        cadena_bloques->insert(values,i); // VERIFICAR
+        if (i==columnas*cantidad_registros){
+            cadena_bloques->insert(values,i); // se inserta en el bloque (i: cant de elementos a insertar)
+            i = 0; //reinicia conteo de elementos (para nuevo bloque)
+            count++; // nro de bloque aumenta    
+        }
     } 
-
+    if (i!=0){ // aun quedan registros por insertar
+        cadena_bloques->insert(values,i); // se inserta en el bloque
+    }
+    delete [] values;
     file.close(); 
 }
 
