@@ -94,7 +94,7 @@ Esta estructura se utiliza para implementar eficientemenete una lista enlazada  
 #### Patricia Trie:
 Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es util, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parametros. Utilizamos esta estructura para poder retornar todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
 <p align="center">
-  <img src="images/tabla_hash.jpg" alt="hash table" width="400">
+  <img src="images/patricia.PNG" alt="patricia trie" width="200">
 </p>
 
 #### Blockchain:
