@@ -78,8 +78,7 @@ El objetivo del proyecto es implementar un sistema informático transaccional qu
 ## Propuesta
 ### ¿Qué estructuras usamos?
 ####  AVL:
-El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1.
-Usamos esta estructura para insertar, buscar y recorrer de manera eficiente el conjunto de datos el cual necesitamos mantener ordenado y balanceado.
+El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1. En esta estructura la utilizamos para poder guardar los montos y las fechas de las transferencias bancarias, ya que, estos datos son más fáciles que comparar al ser datos de tipo int. Los nodos tienen una estructura key value, es decir, guarda una clave, que sería el numero de id del bloque, y su respectivo valor. Usamos esta estructura para poder sacar el valor maximo y minimo de los bloques, ya que, el codigo es de implementación sencilla y de complejidad O(n log n). Además, implementamos la busqueda por rango ... (falta completar)
 
 <p align="center">
   <img src="images/avl.png" alt="AVL" width="400">
@@ -88,6 +87,12 @@ Usamos esta estructura para insertar, buscar y recorrer de manera eficiente el c
 
 #### Tabla hash:
 Esta estructura se utiliza para implementar eficientemenete una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rapiso a los valores a traves de las claves unicas que existen. 
+<p align="center">
+  <img src="images/tabla_hash.jpg" alt="hash table" width="400">
+</p>
+
+#### Patricia Trie:
+Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es util, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parametros. Utilizamos esta estructura para poder retornar todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
 <p align="center">
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
