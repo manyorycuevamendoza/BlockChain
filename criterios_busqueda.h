@@ -111,7 +111,3 @@ TK min_value(AVLTree2<TK,TV>* arbol){
 }
 
 
-//llamando a alk funcion del boyer moore
-vector<int> boyer_moore(string Texto, string Patron){
-    return testBoyerMoore(Texto,Patron);
-}

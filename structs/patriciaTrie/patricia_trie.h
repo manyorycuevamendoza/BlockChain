@@ -10,8 +10,8 @@ template <typename TK>
 class TriePatricia{
 private:
     struct TrieNode{         
-        TrieNode **children;           
-        string preffix;
+        TrieNode **children;//arreglo de punteros a TrieNode          
+        string preffix;//prefijo del nodo
         bool endWord; //indica si es final de una palabra
         TK id; // para representar el numero de bloque
 
@@ -58,7 +58,7 @@ void TriePatricia<TK>::insert(TK id,string key){
         //std::cout<<"Base: "<<nuevo->preffix<<std::endl;
         return; 
     } 
-   
+
     
     TrieNode* temp = root; //recorremos desde raiz
     while (temp->children[int(key[ind_prefix])]){// mientras que tenga un hijo asociado
@@ -69,7 +69,7 @@ void TriePatricia<TK>::insert(TK id,string key){
             //if (ind_prefix!=size-1){ // si es distinto a size-1
                 if (x==key[ind_prefix] && ind_prefix!=size) {
                     ind_prefix++; // si coinciden indice solo avanza
-                     
+
                     if (ind_prefix==size){ // se intenta insertar palabra similar con menos  longitud
                         if(ind==temp_size-1){ return; } //repetidos
                         TrieNode* nuevo = new TrieNode();  // creamos un nod basandonos en temp
@@ -227,7 +227,7 @@ void TriePatricia<TK>::start_with(CircularArray<TK>& result, string preffix) {
     int count = 0;
     int i = 0;
     bool finish = false;
-    while (i<size && !finish){
+    while (i<size && !finish){//revisa si existe el nodo
         node = node->children[preffix[i]]; // cambia de nodo
         if (node){ // nodo existe
             for (char c:node->preffix){ // recorremos su preffix
