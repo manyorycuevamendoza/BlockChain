@@ -86,31 +86,31 @@ El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la dif
 
 
 #### Tabla hash:
-Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a traves de las claves unicas que existen. 
+Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es útil para una inserción eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a través de las claves únicas que existen. 
 <p align="center">
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
 
 #### Patricia Trie:
-Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es util, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parametros. Utilizamos esta estructura para poder retornar todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
+Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es útil, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parámetros. Utilizamos esta estructura para poder retornar todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
 <p align="center">
   <img src="images/patricia.PNG" alt="patricia trie" width="200">
 </p>
 
 #### Blockchain:
-Simula un blockchain basandose en el circular list con sentinela, la estructura Block y la funcion de hash SHA256. Cada bloque cotiene datos, una huella que se calcula a partir de la huella del bloke anterior y los datos actuales y un nonce que encontramos mediante la funcion SHA256 para cumplir con el requisito de dificultad.
+Simula un blockchain basándose en el circular list con centinela, la estructura Block y la función de hash SHA256. Cada bloque contiene datos, una huella que se calcula a partir de la huella del bloque anterior y los datos actuales y un nonce que encontramos mediante la función SHA256 para cumplir con el requisito de dificultad.
 <p align="center">
   <img src="images/nonce.png" alt="nonce0000" width="400">
 </p>
 
 ## Interfaz grafica
 Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos permite crear una interfaz gráfica de usuario (GUI). Con la interfaz gráfica, podemos interactuar con el sistema mediante elementos visuales como ventanas, botones, menús y otros componentes gráficos. Esta interfaz nos proporciona una forma intuitiva y atractiva visualmente para interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
-En la interfas grafica creamos un "menu" con opciones para crear un bloque o ver los archivos.
+En la interfaz gráfica creamos un "menú" con opciones para crear un bloque o ver los archivos.
 <p align="center">
   <img src="images/gui_entrada.jpg" alt="nonce0000" width="400">
 </p>
 
-En el bloque tenemos el numero del bloque, el numero del nonce, los datos y el codigo hash.
+En el bloque tenemos el número del bloque, el número del nonce, los datos y el código hash.
 
 <p align="center">
   <img src="images/gui_bloques.jpg" alt="nonce0000" width="400">
