@@ -19,7 +19,7 @@ public:
     void update(const uint8_t * data, size_t length);
     void update(const std::string &data);
     uint8_t * digest();
-    std::string findNonce(const std::string& data,std::string& );
+    //std::string findNonce(const std::string& data,std::string& );
 
     static std::string toString(const uint8_t * digest);
 
@@ -211,29 +211,58 @@ std::string SHA256::toString(const uint8_t * digest) {
     return s.str();
 }
 
-std::string SHA256::findNonce(const std::string& data, std::string& huella) { 
-    int nonce = 0;
-    std::string nonceData;
+/*
+std::string findNonce(std::string data, std::string& huella) { 
+    uint32_t nonce = 0;
     std::string targetPrefix = "0000";
 
+
     while (true) {
-        nonceData = std::to_string(nonce) + data;
-        update(nonceData);
-        uint8_t* digestResult = digest();
-        std::string hash = toString(digestResult);
+        SHA256 sha;
+        sha.update(std::to_string(nonce) + data);
+        uint8_t * digestResult = sha.digest();
+        std::string hash = SHA256::toString(digestResult);
 
         if (hash.substr(0, 4) == targetPrefix) {
             //std::cout<<toString(digestResult);
-            huella = toString(digestResult);
-            std::cout<<"data: "<<data<<std::endl;
-            delete[] digestResult;
+            huella = SHA256::toString(digestResult);
+            std::cout<<"Huella todo: "<<std::to_string(nonce)+data<<std::endl;
+            std::cout<<"Huella: "<<huella<<std::endl<<std::endl;
             return std::to_string(nonce);
         }
 
         delete[] digestResult;
+        
         nonce++;
     }
 }
+*/
+/*
+std::string findNonce(std::string data,std::string &huella){
+  uint32_t nonce = 0;
+  SHA256 sha;
+    std::string targetPrefix = "0000";
+
+    while (true) {
+        sha.update(std::to_string(nonce) + data);
+        uint8_t * digestResult = sha.digest();
+        std::string hash = SHA256::toString(digestResult);
+
+        if (hash.substr(0, 4) == targetPrefix) {
+            //std::cout<<toString(digestResult);
+            huella = SHA256::toString(digestResult);
+            std::cout<<"Huella todo: "<<std::to_string(nonce)+data<<std::endl;
+            std::cout<<"Huella: "<<huella<<std::endl<<std::endl;
+            std::cout<<"Nonce: "<<nonce<<std::endl; return std::to_string(nonce);
+        }
+
+        delete[] digestResult;
+        
+        nonce++;
+    }
+}
+
+*/
 
 
 constexpr std::array<uint32_t,64> SHA256::K;

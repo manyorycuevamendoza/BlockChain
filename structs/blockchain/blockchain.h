@@ -72,11 +72,12 @@ class BlockChain{
           temp->huella_padre = temp->prev->huella; 
 
           SHA256 sha;
-          uint8_t * digest = sha.digest();
+          //uint8_t * digest = sha.digest();
 
           //actualizando huella y nonce (huella: nro+data+huella_padre)
-          temp->nonce=sha.SHA256::findNonce((temp->huella+temp->huella_padre),temp->huella);
-          delete[] digest;
+          //temp->nonce=findNonce((temp->huella+temp->huella_padre),temp->huella);
+          temp->nonce=findNonce(temp->huella);
+          //delete[] digest;
           temp->hasheado = true; // tiene su codigo hash correcto
         
         }
@@ -229,14 +230,19 @@ class BlockChain{
         cout << s << endl;
 
           //verificando si la huella sigue siendo correcta
+
+        
+        
+        
           SHA256 sha;
           sha.update(s);
           uint8_t * digest = sha.digest();//obtiendo huella de bolque
-          cout<<"Huella: "<<SHA256::toString(digest)<<endl;
+          cout<<"Huella: "<<sha.toString(digest)<<endl;
           if(SHA256::toString(digest) == temp->huella) {//si se sigue cumpliendo el proof of work
+            delete [] digest;
             return ;
           }
-
+          delete [] digest;
           while (temp!=head){//cuando no se cumple el proof of work
             temp->hasheado = false; // la huella debe cambiar
             temp = temp->next;
