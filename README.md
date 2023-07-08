@@ -86,7 +86,7 @@ El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la dif
 
 
 #### Tabla hash:
-Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rapiso a los valores a traves de las claves unicas que existen. 
+Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es util para una insercion eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a traves de las claves unicas que existen. 
 <p align="center">
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
