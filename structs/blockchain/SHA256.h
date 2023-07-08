@@ -211,6 +211,7 @@ std::string SHA256::toString(const uint8_t * digest) {
     return s.str();
 }
 
+
 /*
 std::string findNonce(std::string data, std::string& huella) { 
     uint32_t nonce = 0;

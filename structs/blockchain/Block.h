@@ -7,6 +7,7 @@
 #include "SHA256.h"
 using namespace std;
 
+
 string findNonce(string& huella){
     uint32_t nonce = 0;
     std::string targetPrefix = "0000";
@@ -21,9 +22,10 @@ string findNonce(string& huella){
         if (hash.substr(0, 4) == targetPrefix) {
             //std::cout<<toString(digestResult);
             huella = SHA256::toString(digestResult);
-            std::cout<<"Huella todo: "<<std::to_string(nonce)+data<<std::endl;
-            std::cout<<"Huella: "<<huella<<std::endl<<std::endl;
-            cout<<"Nonce: "<<nonce<<endl; return to_string(nonce);
+            //std::cout<<"Huella todo: "<<std::to_string(nonce)+data<<std::endl;
+            //std::cout<<"Huella: "<<huella<<std::endl<<std::endl;
+            //cout<<"Nonce: "<<nonce<<endl; 
+            return to_string(nonce);
         }
 
         delete[] digestResult;
@@ -83,19 +85,10 @@ struct Block
         for (int i=0; i<cant_data; i++){
             huella += data[i];
         }
-        //for (auto dato:data) huella += dato; //pasamos todos los datos
-        //huella += huella_padre; //añadimos la huella del padre
+
         
         //(huella: nro+data+huella_padre)
-
-        //modificando la huella
-        SHA256 sha;
-        //uint8_t * digest = sha.digest();
-        if(nro==4){
-            cout<<"Huella: "<<huella<<endl;
-            cout<<"Huella padre: "<<huella_padre<<endl;
-
-        }
+       
         huella += huella_padre;
         //actualizando huella y nonce
         //nonce=findNonce((huella+huella_padre),huella); //aquí se envia huella del padre

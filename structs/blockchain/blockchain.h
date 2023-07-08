@@ -217,27 +217,22 @@ class BlockChain{
           string* t = temp->data;
           temp->data = new string [values]; delete [] t;
 
-          //string  s=  ""; //es para verificar si la huella sigue siendo correcta (solo lo será se si modifica el bloquecon sus datos anteriores)
-          //como convertir de uint32_ta string: to_string(temp->nonce) o to_string((int)temp->nonce)
 
-          std::string s = temp->nonce;
+
+          std::string s = temp->nonce;  //es para verificar si la huella sigue siendo correcta (solo lo será se si modifica el bloquecon sus datos anteriores)
+
           s += to_string(temp->nro); // nro de bloque
           for (int i=0; i<values; i++){
             temp->data[i] = _data[i];
             s += _data[i];
           }
           s += temp->huella_padre; // añadimos la huella del padre
-        cout << s << endl;
 
           //verificando si la huella sigue siendo correcta
-
-        
-        
-        
           SHA256 sha;
           sha.update(s);
           uint8_t * digest = sha.digest();//obtiendo huella de bolque
-          cout<<"Huella: "<<sha.toString(digest)<<endl;
+          //cout<<"Huella: "<<sha.toString(digest)<<endl;
           if(SHA256::toString(digest) == temp->huella) {//si se sigue cumpliendo el proof of work
             delete [] digest;
             return ;
