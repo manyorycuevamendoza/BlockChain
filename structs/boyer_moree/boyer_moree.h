@@ -84,30 +84,4 @@ void BuscarPatron(string cadenaPrincipal, string patron, CircularArray<int> &arr
     }
 
 }
-
-/*
-int main(){
-                            //0    1   2    3   4    
-    string cadenaPrincipal = ".Hola.Ana.Hola.Ana.Anana";
-    string patron = "na";
-    CircularArray<int> array;
-    int index = -2;
-
-    BuscarPatron(cadenaPrincipal, patron, array, &index);
-
-    if (index == -1)
-    {
-        cout << "No hay coincidencia de patrón en la cadena principal";
-    }
-    else
-    {
-        cout << "El patrón se encuentra en la posición: ";
-        for (int i = 0; i <= index; i++)
-        {
-            cout << array[i] << " ";//1 3 4
-        }
-    }
-    return 0;
-}*/
-
 #endif

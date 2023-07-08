@@ -212,7 +212,7 @@ std::string SHA256::toString(const uint8_t * digest) {
 }
 
 std::string SHA256::findNonce(const std::string& data, std::string& huella) { 
-    uint32_t nonce = 0;
+    int nonce = 0;
     std::string nonceData;
     std::string targetPrefix = "0000";
 
@@ -225,6 +225,7 @@ std::string SHA256::findNonce(const std::string& data, std::string& huella) {
         if (hash.substr(0, 4) == targetPrefix) {
             //std::cout<<toString(digestResult);
             huella = toString(digestResult);
+            std::cout<<"data: "<<data<<std::endl;
             delete[] digestResult;
             return std::to_string(nonce);
         }

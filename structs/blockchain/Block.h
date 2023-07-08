@@ -61,16 +61,20 @@ struct Block
         //huella += huella_padre; //añadimos la huella del padre
         
         //(huella: nro+data+huella_padre)
-        
+
         //modificando la huella
         SHA256 sha;
         uint8_t * digest = sha.digest();
+        if(nro==4){
+            cout<<"Huella: "<<huella<<endl;
+            cout<<"Huella padre: "<<huella_padre<<endl;
 
+        }
         //actualizando huella y nonce
-        nonce=sha.SHA256::findNonce(huella+huella_padre,huella); //aquí se envia huella del padre
-        
+        nonce=sha.SHA256::findNonce((huella+huella_padre),huella); //aquí se envia huella del padre
         delete[] digest;
         this->hasheado = true; //el codigo hash es correcto
+
     }
 
     void print_huella(){

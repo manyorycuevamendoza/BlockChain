@@ -24,6 +24,8 @@ TriePatricia<int>* inicia_string1 = new TriePatricia<int>();
 TriePatricia<int>* inicia_string2 = new TriePatricia<int>();
 
 //boyer (2: strings)
+string Clientes;
+string Lugares;
 
 void begin(){
     string archivo = "tests/test2.csv";
@@ -58,13 +60,15 @@ void readCSV(const string archivo){
         std::stringstream ss(line);
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); // hash
-        //boyer
         inicia_string1->insert(count,item); //patricia
+        Clientes += "." + item;//boyer
         values[i++] = item; //values.push_back(item);
         
+    
         std::getline(ss, item, ',');  // 2da columna
         string2->insert(item,count); // hash
         inicia_string2->insert(count,item); //patricia
+        Lugares += "." + item;//boyer
         values[i++] = item; //values.push_back(item);
         
         std::getline(ss, item, ',');//3era columna: monto
@@ -368,13 +372,12 @@ void console(){
 
                 break;
             case 14:
-                cout<<"boyer 1"; break;
-                //llamando al algoritmo de boyer moorey que devuelve un vector con los indices de los bloques que contienen el patron
-                //res = testBoyerMoore(cadena_bloques->getInOrder(),pedir_string("patron"));
-                //cout<<"\tBloques: \n"; for (auto i:res) cadena_bloques->get_block(i); // cout<<i<<" ";
-
+                //imprimir todas las cadenas de clientes
+                cout<<"Clientes: "<<Clientes<<endl; break;
             case 15:
-                cout<<"boyer 2"; break;
+                //imprimir todas las cadenas de lugares
+                cout<<"Lugares: "<<Lugares<<endl; break;
+                break;
 
             case 16:
                 cadena_bloques->display(); break;
