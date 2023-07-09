@@ -78,21 +78,25 @@ El objetivo del proyecto es implementar un sistema informático transaccional qu
 ## Propuesta
 ### ¿Qué estructuras usamos?
 ####  AVL:
-El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1. En esta estructura la utilizamos para poder guardar los montos y las fechas de las transferencias bancarias, ya que, estos datos son más fáciles que comparar al ser datos de tipo int. Los nodos tienen una estructura key value, es decir, guarda una clave, que sería el numero de id del bloque, y su respectivo valor. Usamos esta estructura para poder sacar el valor maximo y minimo de los bloques, ya que, el codigo es de implementación sencilla y de complejidad O(n log n). Además, implementamos la busqueda por rango ... (falta completar)
+El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la diferencia de alturas entre los subarboles izquierdo y derecho de cada uno de los nodos es como maximo 1. En esta estructura la utilizamos para poder guardar los montos y las fechas de las transferencias bancarias, ya que, estos datos son más fáciles que comparar al ser datos de tipo int. Los nodos tienen una estructura key value, es decir, guarda una clave, que sería el numero de id del bloque, y su respectivo valor, y para ello utilizamos una estructura llamada Entry. Usamos esta estructura para implementar los criterios de búsqueda de maximo y minimo, ya que, el codigo es de implementación sencilla y de complejidad O(n log n). Además, implementamos el criterio de búsqueda del search_by_range.
 
 <p align="center">
   <img src="images/avl.png" alt="AVL" width="400">
 </p>
+<p align="center">
+  <img src="images/entry.PNG" alt="entry" width="200">
+</p>
+
 
 
 #### Tabla hash:
-Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es útil para una inserción eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a través de las claves únicas que existen. 
+Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es útil para una inserción eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a través de las claves únicas que existen. Utilizamos esta estructura para implementar el criterio de búsqueda search, ya que, tenemos un acceso directo al dato a buscar, ya sea emisor, receptor, monto o lugar de transacción
 <p align="center">
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
 
 #### Patricia Trie:
-Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es útil, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parámetros. Utilizamos esta estructura para poder retornar todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
+Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es útil, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parámetros. Utilizamos esta estructura para implementar el criterio de búsqueda de start_with, este retorna todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
 <p align="center">
   <img src="images/patricia.PNG" alt="patricia trie" width="200">
 </p>
