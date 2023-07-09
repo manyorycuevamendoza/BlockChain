@@ -125,6 +125,9 @@ Simula un blockchain basándose en el circular list con centinela, la estructura
 
 ## Interfaz grafica
 Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos permite crear una interfaz gráfica de usuario (GUI). Con la interfaz gráfica, podemos interactuar con el sistema mediante elementos visuales como ventanas, botones, menús y otros componentes gráficos. Esta interfaz nos proporciona una forma intuitiva y atractiva visualmente para interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
+### 🔗 Repo de la interfaz.
+[![github](https://img.shields.io/badge/github-0a0a0a?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ManOnPajamas/bchain_app)
+
 En la interfaz gráfica creamos un "menú" con opciones para crear un bloque o ver los archivos.
 <p align="center">
   <img src="images/gui_entrada.jpg" alt="nonce0000" width="400">
