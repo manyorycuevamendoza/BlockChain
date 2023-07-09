@@ -138,6 +138,7 @@ class BlockChain{
 
 
         void display(){
+          if (!this->nodes){cout<<"No hay bloques\n"; return;}
           Block<T>* temp = head->next;
           while(temp!=head) {
             temp->display_block(this->atributos,this->values);
@@ -189,17 +190,33 @@ class BlockChain{
           }
         }
 
-        bool proof_of_work(){ // verifica si se cumple el proof_of_work
-          Block<T>* temp = head->next->next; // empezamos desde segundo
-          while (temp!=head){
-            if (temp->prev->huella!=temp->huella_padre) return false;
-            temp = temp->next;
+        void remove_bloque(int pos){
+          Block<T>* temp = this->head->next;
+          
+          for ( int i = 0; i < pos; i++ ) temp = temp -> next;
+          Block<T>* siguiente = temp->next;
+          temp->prev->next=temp->next;
+          temp->next->prev=temp->prev;
+          
+          delete temp;
+          this->nodes--; // hasta aquí, se elimina como en double list
+
+          // los bloques que se encuentran despues deben disminuir su nro en uno y corregir su hash
+          while (siguiente!=head){
+            siguiente->nro--;
+
+            // se verifica el hash de forma optima
+            if (siguiente->prev->hasheado) { // en caso el anterior esté bien
+              siguiente->hasheado = siguiente->verificar_hash();
+            }
+            else siguiente->hasheado = false; // una vez que el anterior está mal, todos lo están
+
+            siguiente = siguiente->next;
           }
-          return true;
         }
 
         int get_size(){
-            return this->nodes;
+          return this->nodes;
         }
 
         // para proof of work

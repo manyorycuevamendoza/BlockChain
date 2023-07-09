@@ -51,7 +51,6 @@ struct Block
 
     public:
     void killSelf(){
-        if(next) next->killSelf();
         delete next;
         delete prev;
     }

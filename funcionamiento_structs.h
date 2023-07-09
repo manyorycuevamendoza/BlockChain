@@ -291,9 +291,10 @@ int pedir_opcion(){
         cout<<"[16]. mostrar todos los bloques"<<endl;
         cout<<"[17]. recalculo en cascada"<<endl;
         cout<<"[18]. Modificar bloque"<<endl;
-        cout<<"[19]. Salir"<<endl;
+        cout<<"[19]. Eliminar bloque"<<endl;
+        cout<<"[20]. Salir"<<endl;
         cin>>alternativa;
-    }while (alternativa>0 && 19<alternativa); // mientras no se ingrese opcion correcta
+    }while (alternativa>0 && 20<alternativa); // mientras no se ingrese opcion correcta
     return alternativa;
 }
 
@@ -442,16 +443,25 @@ void console(){
                 
                 break; 
 
-            
+            case 19:
+                cout<<"Inserte nro de bloque a eliminar: ";
+                cin>>n1;
+                if (cadena_bloques->exist_block(n1)){ // si bloque existe
+                    eliminar_datos_de_structs(n1);// eliminar en avl, hash, patricia, boyer
+                    cadena_bloques->remove_bloque(n1); // eliminamos el bloque
+                }
+                else cout<<"Bloque no existe"<<endl;
+                break;
+
             default:
                 cout<<"Programa finalizado"<<endl;
                 break;
             
             res.clear();
         }
-        if (opc==19) { break;}
+        if (opc==20) { break;}
         sleep(3);
-    }while (opc!=19);
+    }while (opc!=20);
 
 }
 
