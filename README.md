@@ -102,9 +102,10 @@ Esta estructura se utiliza para poder guardar el nombre de los emisores y los lu
 </p>
 
 #### Blockchain:
-Simula un blockchain basándose en el circular list con centinela, la estructura Block y la función de hash SHA256. Cada bloque contiene datos, una huella que se calcula a partir de la huella del bloque anterior y los datos actuales y un nonce que encontramos mediante la función SHA256 para cumplir con el requisito de dificultad.
+Simula un blockchain basándose en la lista doblemente enlazada con centinela, la estructura Block y la función de hash SHA256. Como necesitamos la huella del anterior blockchain, es necesario un puntero al anterior y uno al siguiente para que el insert sea mas sencillo. Para la estrategia de asegurar la integridad de su contenido, hacemos uso de templates genericos al insertar los datos; estos se guardan en un array dinámico de strings donde los vamos desempacando.
+
 <p align="center">
-  <img src="images/nonce.png" alt="nonce0000" width="400">
+  <img src="images/casogeneral.PNG" alt="casogeneral" width="200">
 </p>
 
 ##### Complejidades de los metodos:
