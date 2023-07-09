@@ -107,6 +107,19 @@ Simula un blockchain basándose en el circular list con centinela, la estructura
   <img src="images/nonce.png" alt="nonce0000" width="400">
 </p>
 
+##### Complejidades de los metodos:
+ i) Modificar bloque: Este metodo tendria una complejidad de O(ind + values + n) donde ind es la posicion del bloque, values la cantidad de datos nuevos que se van a asignar y n el número de bloques. Este n viene de la función verificar_hash donde recorre los bloques desde el actual al ultimo. En el peor de los casos tendría que recorrer todos los bloques, por lo tanto, es n.
+
+
+
+ ii) Eliminar bloque: Este metodo tendria una complejidad de O(pos + n) donde pos es la posición es la posición del bloque, que va desde el inicio hasta la posición, y n viene a ser el número de bloques que viene de la misma función verificar_hash.
+
+<p align="center">
+  <img src="images/Eliminar Bloque" alt="remove" width="500">
+</p> 
+
+
+
 ## Interfaz grafica
 Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos permite crear una interfaz gráfica de usuario (GUI). Con la interfaz gráfica, podemos interactuar con el sistema mediante elementos visuales como ventanas, botones, menús y otros componentes gráficos. Esta interfaz nos proporciona una forma intuitiva y atractiva visualmente para interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
 En la interfaz gráfica creamos un "menú" con opciones para crear un bloque o ver los archivos.
