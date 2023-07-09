@@ -83,10 +83,10 @@ El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la dif
 <p align="center">
   <img src="images/avl.png" alt="AVL" width="400">
 </p>
-<p align="center">
-  <img src="images/entry.PNG" alt="entry" width="200">
-</p>
 
+<p align="center">
+  <img src="images/AVL.PNG" alt="avl" width="400">
+</p>
 
 
 #### Tabla hash:
