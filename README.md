@@ -105,7 +105,21 @@ Esta estructura se utiliza para poder guardar el nombre de los emisores y los lu
 Simula un blockchain basándose en la lista doblemente enlazada con centinela, la estructura Block y la función de hash SHA256. Como necesitamos la huella del anterior blockchain, es necesario un puntero al anterior y uno al siguiente para que el insert sea mas sencillo. Para la estrategia de asegurar la integridad de su contenido, hacemos uso de templates genericos al insertar los datos; estos se guardan en un array dinámico de strings donde los vamos desempacando.
 
 <p align="center">
-  <img src="images/casogeneral.PNG" alt="casogeneral" width="200">
+  <img src="images/casogeneral.PNG" alt="casogeneral" width="400">
+</p>
+
+Aqui se pueden ver un caso general y un caso en donde los datos se desempacan de uno en uno. Una vez hecho esto, se llama a la función principal. En esta creamos un nuevo bloque con los datos correspondientes, lo enlazamos en la lista doblemente enlazada, aumnetamos la cantidad de nodos (que en este caso serían los bloques), actualizamos la huella del bloque anterior y buscamos un nonce correcto llamando a la función findnonce. 
+
+<p align="center">
+  <img src="images/insert_block.PNG" alt="casogeneral" width="400">
+</p>
+
+La forma en que implementamos el proof of work empieza evaluando desde el primer elemento, recorriendo los bloques de uno en uno con un puntero temporal hasta que llega al head (da toda una vuelta a la lista) y verifica que la variable hasheado sea true, si es que todos son true simplemente se recorre hasta el final de la lista. Caso contrario, el bloque que tiene el hasheado en false, llama a una función recalculate, donde el método del bloque concatena al nonce, los datos del bloque y la huella del padre para que se vuelva a encontrar un nonce y poder corregir la huella para que el hasheado de true. 
+
+Esto se repite hasta corregir todos los bloques desde el primer bloque donde se encontró el primer false hasta el final mediante un bucle while
+
+<p align="center">
+  <img src="images/proof.PNG" alt="casogeneral" width="500">
 </p>
 
 ##### Complejidades de los metodos:
