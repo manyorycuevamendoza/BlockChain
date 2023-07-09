@@ -115,7 +115,7 @@ Simula un blockchain basándose en el circular list con centinela, la estructura
 </p> 
 
 
- ii) Eliminar bloque: Este metodo tendria una complejidad de O(pos + n) donde pos es la posición es la posición del bloque, que va desde el inicio hasta la posición, y n viene a ser el número de bloques que viene de la misma función verificar_hash.
+ ii) Eliminar bloque: Este metodo tendria una complejidad de O(pos + n) donde pos es la posición del bloque, que va desde el inicio hasta la posición, y n viene a ser el número de bloques que viene de la misma función verificar_hash.
 
 <p align="center">
   <img src="images/remove.PNG" alt="remove" width="500">
