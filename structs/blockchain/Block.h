@@ -122,6 +122,29 @@ struct Block
         cout<<"Huella: "<<this->huella<<endl<<endl;
     }
 
+    bool verificar_hash(){
+        // hash = nonce + nro + data + huella_padre
+        std::string s = this->nonce;  //es para verificar si la huella sigue siendo correcta (solo lo será se si modifica el bloquecon sus datos anteriores)
+        s += to_string(this->nro); // nro de bloque
+
+        for (int i=0; i<this->cant_data;i++) s+= this->data[i];
+        s += this->huella_padre; // añadimos la huella del padre
+
+        SHA256 sha;
+        sha.update(s);
+        uint8_t * digest = sha.digest();//obtiendo huella de bolque
+        //cout<<"Huella: "<<sha.toString(digest)<<endl;
+        /*
+        if(SHA256::toString(digest) == this->huella) {//si se sigue cumpliendo el proof of work
+            delete [] digest;
+            return ;
+        }
+        */
+       string result = SHA256::toString(digest);
+       delete [] digest;
+        return  result == this->huella;
+    }
+
 };
 
 #endif

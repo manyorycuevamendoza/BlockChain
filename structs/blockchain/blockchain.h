@@ -219,27 +219,37 @@ class BlockChain{
 
 
 
-          std::string s = temp->nonce;  //es para verificar si la huella sigue siendo correcta (solo lo será se si modifica el bloquecon sus datos anteriores)
+          //std::string s = temp->nonce;  //es para verificar si la huella sigue siendo correcta (solo lo será se si modifica el bloquecon sus datos anteriores)
 
-          s += to_string(temp->nro); // nro de bloque
+          //s += to_string(temp->nro); // nro de bloque
           for (int i=0; i<values; i++){
             temp->data[i] = _data[i];
-            s += _data[i];
+            //s += _data[i];
           }
-          s += temp->huella_padre; // añadimos la huella del padre
+          //s += temp->huella_padre; // añadimos la huella del padre
 
           //verificando si la huella sigue siendo correcta
+          /*
           SHA256 sha;
           sha.update(s);
           uint8_t * digest = sha.digest();//obtiendo huella de bolque
           //cout<<"Huella: "<<sha.toString(digest)<<endl;
           if(SHA256::toString(digest) == temp->huella) {//si se sigue cumpliendo el proof of work
-            delete [] digest;
+            //delete [] digest;
             return ;
           }
           delete [] digest;
+          */
           while (temp!=head){//cuando no se cumple el proof of work
-            temp->hasheado = false; // la huella debe cambiar
+            if (temp->verificar_hash()) temp->hasheado = true;
+            else{
+              while (temp->next!=head){ // para terminar bien el primer while
+                temp->hasheado = false;
+                temp = temp->next;
+              } // hasta que el siguiente sea igual a head
+              temp->hasheado = false;  // para dar valor de false al ultimo
+            }
+            //temp->hasheado = false; // la huella debe cambiar
             temp = temp->next;
           }
           //temp->recalculate(); // recalculo del mismo bloque
