@@ -22,6 +22,10 @@ struct Entry2{
         return a.key==this->key;
     }
 
+    bool same_key_and_value(Entry2 a){
+        return a.key==this->key && a.value==this->value;
+    }
+
 
     friend ostream& operator<<(ostream& salida, Entry2<TK,TV> e){
         salida<<e.key<<" "<<e.value;
@@ -94,7 +98,7 @@ class ForwardList {
 
         void remove(T data){
             NodeF<T>* temp = head;
-            if (head->data.same_key(data)){ // eliminamos si es primer dato
+            if (head->data.same_key_and_value(data)){
                 head = head->next;
                 temp->next = nullptr;
                 temp->killSelf();
@@ -106,7 +110,7 @@ class ForwardList {
 
             while(temp->next){ // buscamos el dato a eliminar
                 temp = temp->next;
-                if (temp->data.same_key(data)){ // eliminamos
+                if (temp->data.same_key_and_value(data)){ // eliminamos
                     NodeF<T>* elim = prev; //nodo a eliminar
                     prev -> next = elim -> next;
                     elim->next = nullptr;
@@ -130,7 +134,7 @@ class ForwardList {
         bool find(T data){
             NodeF<T>* temp = head;
             while(temp){
-                if (temp->data.same_key(data)) return true;
+                if (temp->data.same_key_and_value(data)) return true;
                 temp =temp->next;
             }
             return false;

@@ -24,8 +24,8 @@ TriePatricia<int>* inicia_string1 = new TriePatricia<int>();
 TriePatricia<int>* inicia_string2 = new TriePatricia<int>();
 
 //boyer (2: strings)
-string Clientes;
-string Lugares;
+string Patrones_string1; // Clientes
+string Patrones_string2; // Lugares
 
 void begin(){
     string archivo = "tests/test2.csv";
@@ -61,14 +61,14 @@ void readCSV(const string archivo){
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); // hash
         inicia_string1->insert(count,item); //patricia
-        Clientes += "." + item;//boyer
+        Patrones_string1 += "." + item;//boyer
         values[i++] = item; //values.push_back(item);
         
     
         std::getline(ss, item, ',');  // 2da columna
         string2->insert(item,count); // hash
         inicia_string2->insert(count,item); //patricia
-        Lugares += "." + item;//boyer
+        Patrones_string2 += "." + item;//boyer
         values[i++] = item; //values.push_back(item);
         
         std::getline(ss, item, ',');//3era columna: monto
@@ -97,7 +97,7 @@ void readCSV(const string archivo){
 }
 
 void agregar_registro(){
-    int size_data =4 ;
+    int size_data = columnas ;
     string* data = new string[size_data]; int ind=0;//vector <string> data;
     int opcion = 1;
     string s1,s2;
@@ -124,10 +124,12 @@ void agregar_registro(){
         s1 = pedir_string(atributos[0]); // string1
             string1->insert(s1,size);
             inicia_string1->insert(size,s1);
+            
 
         s2 = pedir_string(atributos[1]);  //string2
             string2->insert(s2,size);
             inicia_string2->insert(size,s2);
+            
 
         s3 = pedir_entero(atributos[2]); // entero(monto)
             numero->insert(s3,size); 
@@ -149,7 +151,42 @@ void agregar_registro(){
     cadena_bloques->insert(data,ind); // insertamos el dato en blockchain (4 por el nro de columnas)
 }
 
+// para eliminar todos los datos de un bloque en todas las estructuras
+void eliminar_datos_de_structs(int nro_block){ 
+    string* datos;
+    int size_datos = cadena_bloques->get_block(datos,nro_block); // recibe todos los datos
+    int ind = -1; // para saber qué dato vamos a eliminar por iteracion (en el caso de +1 fila)
+
+    while (size_datos>0){// eliminamos todo lo relacionado con el anterior bloque
+        
+        // eliminamos clientes   
+        string1->remove(datos[++ind],nro_block); // eliminacion en hash
+        //cout<<datos[ind]<<endl;
+        inicia_string1->remove(datos[ind]); // eliminacion en patricia
+        //cout<<ind; // ind = 0, 4, 8 , ...
+
+        // eliminamos lugar  
+        string2->remove(datos[++ind],nro_block); // eliminacion en hash
+        inicia_string2->remove(datos[ind]); // eliminacion en patricia
+        //cout<<ind; // ind = 1, 5, 9, ...
+
+        // eliminamos monto // ind = 2, 6, 10,...
+        numero->remove(stoi(datos[++ind]),nro_block); // eliminacion en hash
+        avl1->remove(nro_block,stoi(datos[ind])); // eliminacion en avl
+        //cout<<ind;  // ind = 1, 5, 9, ...
+
+        // eliminamos fecha 
+        fecha->remove(convertToUnixTimestamp(datos[++ind]),nro_block);//eliminacion en hash
+        avl2->remove(nro_block,convertToUnixTimestamp(datos[ind])); // eliminacion en avl
+        //cout<<ind; // ind = 3, 7, 11,...
+        
+        size_datos-=columnas; // eliminamos un registro por iteracion 
+    }
+}
+
 string* nuevos_datos(int& cant_datos, int nro_block){
+    eliminar_datos_de_structs(nro_block);
+    /*
     string* datos;
     int size_datos = cadena_bloques->get_block(datos,nro_block); // recibe todos los datos
     
@@ -180,9 +217,10 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         
         size_datos-=columnas; // eliminamos un registro por iteracion 
     }
+    */
     
     // para pedir datos
-    int size_data = 4;
+    int size_data = columnas;
     string* data = new string[size_data]; 
     int opcion = 1;
     string s1,s2;
@@ -210,8 +248,8 @@ string* nuevos_datos(int& cant_datos, int nro_block){
             string1->insert(s1,nro_block);
             inicia_string1->insert(nro_block,s1);
 
-        s2 = pedir_string(atributos[1]); string2->insert(s2,nro_block);
-            string1->insert(s1,nro_block);
+        s2 = pedir_string(atributos[1]); 
+            string2->insert(s2,nro_block);
             inicia_string2->insert(nro_block,s2);
 
         s3 = pedir_entero(atributos[2]); 
@@ -276,7 +314,8 @@ void console(){
             case 1:
                 agregar_registro(); break;
             case 2:
-                cadena_bloques->get_block(string1->search(pedir_string(atributos[0]))); break;
+                cadena_bloques->get_block(string1->search(pedir_string(atributos[0]))); 
+                break;
             case 3:
                 cadena_bloques->get_block(string2->search(pedir_string(atributos[1]))); break;
             case 4:
@@ -373,10 +412,11 @@ void console(){
                 break;
             case 14:
                 //imprimir todas las cadenas de clientes
-                cout<<"Clientes: "<<Clientes<<endl; break;
+                cout<<"Clientes: "<<Patrones_string1<<endl; break;
+                
             case 15:
                 //imprimir todas las cadenas de lugares
-                cout<<"Lugares: "<<Lugares<<endl; break;
+                cout<<"Lugares: "<<Patrones_string2<<endl; break;
                 break;
 
             case 16:
