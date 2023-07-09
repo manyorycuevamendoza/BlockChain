@@ -111,14 +111,14 @@ Simula un blockchain basándose en el circular list con centinela, la estructura
  i) Modificar bloque: Este metodo tendria una complejidad de O(ind + values + n) donde ind es la posicion del bloque, values la cantidad de datos nuevos que se van a asignar y n el número de bloques. Este n viene de la función verificar_hash donde recorre los bloques desde el actual al ultimo. En el peor de los casos tendría que recorrer todos los bloques, por lo tanto, es n.
 
 <p align="center">
-  <img src="images/modificar" alt="modificar" width="500">
+  <img src="images/modificar.PNG" alt="modificar" width="500">
 </p> 
 
 
  ii) Eliminar bloque: Este metodo tendria una complejidad de O(pos + n) donde pos es la posición es la posición del bloque, que va desde el inicio hasta la posición, y n viene a ser el número de bloques que viene de la misma función verificar_hash.
 
 <p align="center">
-  <img src="images/remove" alt="remove" width="500">
+  <img src="images/remove,PNG" alt="remove" width="500">
 </p> 
 
 
