@@ -61,7 +61,7 @@ struct NodeF
 //creamos una clase para la lista
 template <typename T>
 class ForwardList {
-    public:
+public:
 
     T operator [](int e){ //operator como de indez
         NodeF<T>*temp = head;
@@ -76,86 +76,86 @@ class ForwardList {
         this->size = data->size;
     }
 
-    private:
-        NodeF<T>* head;//creamos un puntero al inicio de la lista
-        int size =0;
-    public:
-        ForwardList() {
-            head = nullptr;
-            size=0;
+private:
+    NodeF<T>* head;//creamos un puntero al inicio de la lista
+    int size =0;
+public:
+    ForwardList() {
+        head = nullptr;
+        size=0;
+    }
+
+    ~ForwardList(){
+        if(head) head->killSelf();
+    }
+
+    void push_front(T data){//funcion para insertar al inicio de la lista
+        NodeF<T>* nuevo = new NodeF<T>(data);
+        nuevo->next = head;
+        head = nuevo;
+        size++;
+    }
+
+    void remove(T data){
+        NodeF<T>* temp = head;
+        if (head->data.same_key(data)){
+            head = head->next;
+
+            //delete temp;
+            this -> size--;
+            return;
         }
 
-        ~ForwardList(){
-            if(head) head->killSelf();
-        }
+        NodeF<T>* prev = head;
 
-        void push_front(T data){//funcion para insertar al inicio de la lista
-            NodeF<T>* nuevo = new NodeF<T>(data);
-            nuevo->next = head;
-            head = nuevo;
-            size++;
-        }
-
-        void remove(T data){
-            NodeF<T>* temp = head;
-            if (head->data.same_key_and_value(data)){
-                head = head->next;
-                temp->next = nullptr;
-                temp->killSelf();
+        while(temp->next){ // buscamos el dato a eliminar
+            temp = temp->next;
+            if (temp->data.same_key(data)){ // eliminamos
+                NodeF<T>* elim = prev; //nodo a eliminar
+                prev -> next = elim -> next;
+                elim->next = nullptr;
+                //delete elim;
                 this -> size--;
                 return;
             }
-            
-            NodeF<T>* prev = head;
+            prev = temp;
+        }
+    }
 
-            while(temp->next){ // buscamos el dato a eliminar
-                temp = temp->next;
-                if (temp->data.same_key_and_value(data)){ // eliminamos
-                    NodeF<T>* elim = prev; //nodo a eliminar
-                    prev -> next = elim -> next;
-                    elim->next = nullptr;
-                    elim->killSelf();
-                    this -> size--;
-                    return;
-                }
-                prev = temp;
-            }
+    void display(){//funcion para mostrar la lista
+        NodeF<T>* temp = head;
+        while(temp != nullptr){
+            cout<<temp->data<<endl;
+            temp = temp->next;
         }
+        cout<<endl;
+    }
 
-        void display(){//funcion para mostrar la lista
-            NodeF<T>* temp = head;
-            while(temp != nullptr){
-                cout<<temp->data<<endl;
-                temp = temp->next;
-            }
-            cout<<endl;
+    bool find(T data){
+        NodeF<T>* temp = head;
+        while(temp){
+            if (temp->data.same_key(data)) return true;
+            temp =temp->next;
         }
+        return false;
+    }
 
-        bool find(T data){
-            NodeF<T>* temp = head;
-            while(temp){
-                if (temp->data.same_key_and_value(data)) return true;
-                temp =temp->next;
-            }
-            return false;
-        }
+    int get_size(){
+        return size;
+    }
 
-        int get_size(){
-            return size;
+    T top(T data){ //siempre retornamos el ttop porque es el ultimo el que insertamos, un forward list imita a un satck
+        NodeF<T>* temp = head;
+        while(temp) {
+            if (temp->data.same_key(data)) return temp->data;
+            temp = temp->next;
         }
+        return temp->data;
+    }
 
-        T top(T data){ //siempre retornamos el ttop porque es el ultimo el que insertamos, un forward list imita a un satck
-            NodeF<T>* temp = head;
-            while(temp) {
-                if (temp->data.same_key(data)) return temp->data;
-                temp = temp->next;
-            }
-            return temp->data;
-        }
-        
-        T top(){
-            return head->data;
-        }
+    T top(){
+        return head->data;
+    }
 
 };
 
