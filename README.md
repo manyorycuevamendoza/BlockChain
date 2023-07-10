@@ -98,7 +98,7 @@ Esta estructura se utiliza para implementar eficientemente una lista enlazada  y
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
 
-### Boyer Moree:
+#### Boyer Moree:
 El algoritmo es utilizado para buscar un patrón dentro de una cadena de texto de manera eficiente. La función BuscarPatron recibe dos parámetros: la cadena en la que se realizará la búsqueda y el patrón que se desea encontrar. 
 Se utiliza una estructura de datos (circular array) para almacenar los índices donde se encuentra el patrón en la cadena.
 El algoritmo recorre la cadena de texto de derecha a izquierda, empezando desde la última posición del patrón, si el carácter en la posición actual coincide con el último carácter del patrón, se realiza una comparación en orden inverso para verificar si se encuentra el patrón completo; si se encuentra una coincidencia, se agrega el índice correspondiente al array circular.
@@ -108,7 +108,7 @@ Tambien se proporcionan dos funciones adicionales en el código:
 	2. AgregarDespuesDelPunto: agrega contenido después de un punto específico en una cadena.
 La complejidad es O(longitud de la cadena + longitud del patrón), esto se debe a que el algoritmo realiza saltos en la posición de la cadena lo cual reduce la cantidad de comparaciones necesarias en cada iteración.
 
-### Circular Array:
+#### Circular Array:
 El algoritmo representa un arreglo circular. El arreglo se implementa como un array dinámico que puede contener cualquier tipo de dato dentro. 
 Proporciona funcionalidades como agregar elementos al frente y al final del arreglo, insertar elementos en una posición específica, buscar elementos, eliminar elementos del frente y del final, verificar si el arreglo está lleno o vacío, obtener el tamaño del arreglo, limpiar el arreglo y convertirlo en una cadena de texto. 
 Complejidad de las operaciones principales: 
