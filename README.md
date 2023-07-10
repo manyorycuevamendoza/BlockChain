@@ -13,7 +13,10 @@
     - [¿Qué estructuras usamos?](#qué-estructuras-usamos)
       1. [AVL](#avl)
       2. [Tabla hash](#tabla-hash)
-      3. [Blockchain](#blockchain)
+      3. [Boyer Moree](#Boyer-Moree)
+      5. [Circular Array](#Circular-Array)
+      4. [Blockchain](#blockchain)
+
   - [Interfaz grafica](#Interfaz-grafica)
   - [Bibliografía](#bibliografía)
 </details>
@@ -95,6 +98,31 @@ Esta estructura se utiliza para implementar eficientemente una lista enlazada  y
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
 
+#### Boyer Moree:
+El algoritmo es utilizado para buscar un patrón dentro de una cadena de texto de manera eficiente. La función BuscarPatron recibe dos parámetros: la cadena en la que se realizará la búsqueda y el patrón que se desea encontrar. 
+Se utiliza una estructura de datos (circular array) para almacenar los índices donde se encuentra el patrón en la cadena.
+El algoritmo recorre la cadena de texto de derecha a izquierda, empezando desde la última posición del patrón, si el carácter en la posición actual coincide con el último carácter del patrón, se realiza una comparación en orden inverso para verificar si se encuentra el patrón completo; si se encuentra una coincidencia, se agrega el índice correspondiente al array circular.
+Después de encontrar una coincidencia, se realiza un salto en la posición de la cadena de texto para evitar buscar el mismo patrón nuevamente. Se verifica si existen puntos en los extremos del patrón y se incrementa el contador de puntos en caso de encontrarlos, evitando contar el mismo punto dos veces.
+
+Tambien se proporcionan dos funciones adicionales en el código:
+1. eliminarContenidoDespuesDelPunto: elimina el contenido después del punto en una cadena a partir de un punto de inicio dado
+2. AgregarDespuesDelPunto: agrega contenido después de un punto específico en una cadena.
+ 
+La complejidad es O(longitud de la cadena + longitud del patrón), esto se debe a que el algoritmo realiza saltos en la posición de la cadena lo cual reduce la cantidad de comparaciones necesarias en cada iteración.
+
+#### Circular Array:
+El algoritmo representa un arreglo circular. El arreglo se implementa como un array dinámico que puede contener cualquier tipo de dato dentro. 
+Proporciona funcionalidades como agregar elementos al frente y al final del arreglo, insertar elementos en una posición específica, buscar elementos, eliminar elementos del frente y del final, verificar si el arreglo está lleno o vacío, obtener el tamaño del arreglo, limpiar el arreglo y convertirlo en una cadena de texto. 
+
+Complejidad de las operaciones principales: 
+- Agregar elementos al frente o al final O(1)
+- Insertar elementos O(n)
+- Buscar elementos O(n)
+- Eliminar elementos del frente o del final O(1)
+- Verificar si el arreglo está lleno o vacío O(1)
+- Obtener el tamaño del arreglo O(1)
+- Convertirlo en una cadena de texto O(n)
+  
 #### Patricia Trie:
 Esta estructura se utiliza para poder guardar el nombre de los emisores y los lugares en donde se realizó la transacción bancaria. Esta estructura es útil, ya que, en cada nodo de esta estructura guardamos los prefijos de estos parámetros. Utilizamos esta estructura para implementar el criterio de búsqueda de start_with, este retorna todos los emisores o lugares que empiecen con el mismo prefijo, ya que, es eficiente al tener una complejidad de O(n log n)
 <p align="center">
