@@ -22,11 +22,13 @@
 </details>
 
 ## Integrantes
-- Mariana Aurora Capuñay Correa
-- Manyory Estefany Cueva Mendoza
-- Gustavo Oscar Deza Raygada
-- Noé Ananias Paredes Rauraico
-- Dario Ricardo Nuñez Villacorta
+| Apellidos  | Nombres | Actividades realizadas |
+| ------------- | ------------- | ------------ |
+| Capuñay Correa  | Mariana Aurora | Recalculo en cascada (proof of work), pedir_datos.h, funcionamiento_structs.h | 
+| Cueva Mendoza  | Manyory Estefany | Boyer Moore y Tabla Hash |
+| Deza Raygada|  Gustavo Oscar| funcionamiento_structs.h y GUI |
+| Noé Ananias | Paredes Rauraico| struct Block, Blockchain
+| Nuñez Villacorta | Dario Ricardo   | Patricia Trie y AVL |
 
 ## Introducción
 ### ¿Qué es BlockChain?
