@@ -94,6 +94,10 @@ El arbol AVL es un tipo de arbol binario de busqueda balanceado en el que la dif
 
 #### Tabla hash:
 Esta estructura se utiliza para implementar eficientemente una lista enlazada  y una tabla hash. La lista enlazada es útil para una inserción eficiente al principio de la lista sin la necesidad de  un acceso aleatorio hacia los elementos. Por otro lado, la tabla hash se utiliza para almacenar clave-valor permitiendo un acceso rápido a los valores a través de las claves únicas que existen. Utilizamos esta estructura para implementar el criterio de búsqueda search, ya que, tenemos un acceso directo al dato a buscar, ya sea emisor, receptor, monto o lugar de transacción
+void insert():  O(1) 
+bool find(TK key): La complejidad total de esta función puede ser O(1) en el mejor caso (cuando no se encuentran colisiones) y O(n) en el peor caso (cuando hay colisiones y se deben recorrer todos los elementos en la lista).
+void rehashing : O(n * m + capacidad), donde n es el tamaño del ChainHashoriginal ym es el tamaño promedio de las listas.
+void remove: complejidad de O(n), donde n es el tamaño de la lista,
 <p align="center">
   <img src="images/tabla_hash.jpg" alt="hash table" width="400">
 </p>
