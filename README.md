@@ -129,14 +129,31 @@ Esto se repite hasta corregir todos los bloques desde el primer bloque donde se 
   <img src="images/modificar.PNG" alt="modificar" width="700">
 </p> 
 
-
  ii) Eliminar bloque: Este metodo tendria una complejidad de O(pos + n) donde pos es la posición del bloque, que va desde el inicio hasta la posición, y n viene a ser el número de bloques que viene de la misma función verificar_hash.
 
 <p align="center">
   <img src="images/remove.PNG" alt="remove" width="500">
 </p> 
 
+iii) Insertar bloque: Este metodo tendria una complejidad de O(n) donde n es el numero de iteraciones hasta que see consiga un nonce valido, es decir que empiece con 4 ceros. La función findNonce utiliza un bucle while que itera hasta encontrar un un hash con el prefio objetivo, que en el peor de los casos, sería n veces.
 
+<p align="center">
+  <img src="images/insert.PNG" alt="remove" width="400">
+</p> 
+
+<p align="center">
+  <img src="images/findNonce.PNG" alt="remove" width="400">
+</p> 
+
+iv) Recalculo en cascada: El metodo tendría una complejidad de O(m * n) donde m es la cantidad de bloques y n es el número de iteraciones hasta que se consiga un nonce válido. La función recalculo_cascada utiliza un while para recorrer la lista enlazada, que en el peor de los casos, recorrería todos los bloques que hay en la lista. Esta función utiliza a recalculate que reinica la huella del bloque, concatena el número del bloque con los datos y la huella del bloque padre con la huella actual, todas estas funciones son O(1) pero se vuelve a llamar a la función findNonce que itera hasta encontrar un hash con el prefijo objetivo que en el peor de los casos son n iteraciones.
+
+<p align="center">
+  <img src="images/recalculo_cascada.PNG" alt="remove" width="400">
+</p> 
+
+<p align="center">
+  <img src="images/recalculate.PNG" alt="remove" width="400">
+</p> 
 
 ## Interfaz grafica
 Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos permite crear una interfaz gráfica de usuario (GUI). Con la interfaz gráfica, podemos interactuar con el sistema mediante elementos visuales como ventanas, botones, menús y otros componentes gráficos. Esta interfaz nos proporciona una forma intuitiva y atractiva visualmente para interactuar con el software, en contraste con las interfaces de línea de comandos que requieren la entrada de texto.
