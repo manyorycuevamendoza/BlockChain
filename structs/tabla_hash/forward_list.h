@@ -55,6 +55,10 @@ struct NodeF
         delete this;
     }
 
+    ~NodeF(){
+
+    }
+
 
 };
 
@@ -97,29 +101,31 @@ public:
     }
 
     void remove(T data){
-        NodeF<T>* temp = head;
-        if (head->data.same_key(data)){
-            head = head->next;
-
-            //delete temp;
-            this -> size--;
-            return;
-        }
-
-        NodeF<T>* prev = head;
-
-        while(temp->next){ // buscamos el dato a eliminar
-            temp = temp->next;
-            if (temp->data.same_key(data)){ // eliminamos
-                NodeF<T>* elim = prev; //nodo a eliminar
-                prev -> next = elim -> next;
-                elim->next = nullptr;
-                //delete elim;
+        if (head){
+            NodeF<T>* temp = head;
+            if (head->data.same_key(data)){
+                if (head->next) head = head->next;
+                temp->next = nullptr;
+                delete temp;
                 this -> size--;
                 return;
             }
-            prev = temp;
+        
+
+            NodeF<T>* prev = head;
+            while(temp->next){ // buscamos el dato a eliminar
+                prev = temp;
+                temp = temp->next;
+                if (temp->data.same_key(data)){ // eliminamos
+                    prev -> next = temp -> next;
+                    temp->next = nullptr;
+                    delete temp;
+                    this -> size--;
+                    return;
+                }
+            }
         }
+        else return;
     }
 
     void display(){//funcion para mostrar la lista

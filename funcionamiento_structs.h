@@ -205,8 +205,8 @@ void eliminar_datos_de_structs(int nro_block){
     }
 
      //eliminamos Clientes o Lugares de boyer, llamando a la funcion eliminarContenidoDespuesDelPunto
-    eliminarContenidoDespuesDelPunto(Patrones_string1, nro_block);
-    eliminarContenidoDespuesDelPunto(Patrones_string2, nro_block);
+    Patrones_string1 = eliminarContenidoDespuesDelPunto(Patrones_string1, nro_block);
+    Patrones_string2 = eliminarContenidoDespuesDelPunto(Patrones_string2, nro_block);
      
 
 }
