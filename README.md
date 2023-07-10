@@ -196,6 +196,9 @@ Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos p
 ### 🔗 Repo de la interfaz.
 [![github](https://img.shields.io/badge/github-0a0a0a?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ManOnPajamas/bchain_app)
 
+## Tabla de complejidades
+
+![image](https://github.com/manyorycuevamendoza/BlockChain/assets/91238621/94002f57-8e28-4f15-a025-ee659df58a4f)
 
 ## Bibliografía
 
