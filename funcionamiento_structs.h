@@ -42,6 +42,8 @@ void readCSV(const string archivo){
     }
 
     int count =0;
+    string bloque_client="";
+    string bloque_lugar="";
     std::string line;
     std::string item;
     std::getline(file, line); // recibir atributos
@@ -61,14 +63,14 @@ void readCSV(const string archivo){
         std::getline(ss, item, ','); // primer string
         string1->insert(item,count); // hash
         inicia_string1->insert(count,item); //patricia
-        Patrones_string1 += "." + item;//boyer
+        bloque_client+=item+" "; //boyer
         values[i++] = item; //values.push_back(item);
         
     
         std::getline(ss, item, ',');  // 2da columna
         string2->insert(item,count); // hash
         inicia_string2->insert(count,item); //patricia
-        Patrones_string2 += "." + item;//boyer
+        bloque_lugar+=item+" "; //boyer
         values[i++] = item; //values.push_back(item);
         
         std::getline(ss, item, ',');//3era columna: monto
@@ -85,6 +87,11 @@ void readCSV(const string archivo){
 
         if (i==columnas*cantidad_registros){
             cadena_bloques->insert(values,i); // se inserta en el bloque (i: cant de elementos a insertar)
+            for( auto &item: bloque_client){item=tolower(item);}
+            Patrones_string1 += "." + bloque_client;//boyer
+            for( auto &item: bloque_lugar){item=tolower(item);}
+            Patrones_string2 += "." + bloque_lugar;//boyer
+            bloque_client=bloque_lugar="";
             i = 0; //reinicia conteo de elementos (para nuevo bloque)
             count++; // nro de bloque aumenta    
         }
@@ -101,6 +108,8 @@ void agregar_registro(){
     string* data = new string[size_data]; int ind=0;//vector <string> data;
     int opcion = 1;
     string s1,s2;
+    string bloque_cliente;
+    string bloque_lugar;
     int s3;
     string s4;
     int size = cadena_bloques->get_size();
@@ -124,12 +133,13 @@ void agregar_registro(){
         s1 = pedir_string(atributos[0]); // string1
             string1->insert(s1,size);
             inicia_string1->insert(size,s1);
+            bloque_cliente+=s1+" ";
             
 
         s2 = pedir_string(atributos[1]);  //string2
             string2->insert(s2,size);
             inicia_string2->insert(size,s2);
-            
+            bloque_lugar+=s2+" ";
 
         s3 = pedir_entero(atributos[2]); // entero(monto)
             numero->insert(s3,size); 
@@ -149,6 +159,17 @@ void agregar_registro(){
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
     cadena_bloques->insert(data,ind); // insertamos el dato en blockchain (4 por el nro de columnas)
+    //añade registro a cadenas de boyer
+    for(auto &item: bloque_cliente){
+        item=tolower(item);
+    }
+
+    for(auto &item: bloque_lugar){
+        item=tolower(item);
+    }
+    Patrones_string1+="."+bloque_cliente;
+    Patrones_string2+="."+bloque_lugar;
+
 }
 
 // para eliminar todos los datos de un bloque en todas las estructuras
@@ -182,6 +203,12 @@ void eliminar_datos_de_structs(int nro_block){
         
         size_datos-=columnas; // eliminamos un registro por iteracion 
     }
+
+     //eliminamos Clientes o Lugares de boyer, llamando a la funcion eliminarContenidoDespuesDelPunto
+    eliminarContenidoDespuesDelPunto(Patrones_string1, nro_block);
+    eliminarContenidoDespuesDelPunto(Patrones_string2, nro_block);
+     
+
 }
 
 string* nuevos_datos(int& cant_datos, int nro_block){
@@ -224,6 +251,8 @@ string* nuevos_datos(int& cant_datos, int nro_block){
     string* data = new string[size_data]; 
     int opcion = 1;
     string s1,s2;
+    string bloque_cliente;
+    string bloque_lugar;
     int s3;
     string s4;
     int size = cadena_bloques->get_size();
@@ -247,10 +276,12 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         s1 = pedir_string(atributos[0]); 
             string1->insert(s1,nro_block);
             inicia_string1->insert(nro_block,s1);
+            bloque_cliente+= s1+" ";
 
         s2 = pedir_string(atributos[1]); 
             string2->insert(s2,nro_block);
             inicia_string2->insert(nro_block,s2);
+            bloque_lugar+= s2+" ";
 
         s3 = pedir_entero(atributos[2]); 
             numero->insert(s3,nro_block); 
@@ -267,6 +298,10 @@ string* nuevos_datos(int& cant_datos, int nro_block){
         cout<<"\n¿Desea agregar otro registro? ";
         opcion = pedir_entero("opcion: 1. Si \t 2. No \t");
     } while (opcion==1);
+    //añadiendo datos a cadenas para boyer
+    Patrones_string2 = AgregarDespuesDelPunto(Patrones_string2, nro_block, bloque_lugar+".");
+    Patrones_string1 = AgregarDespuesDelPunto(Patrones_string1 , nro_block, bloque_cliente+".");
+
     return data;
 }
 
@@ -310,6 +345,8 @@ void console(){
         int cant_datos = 0;
         string* new_data = new string[4];
         string data;
+        string patron;
+        int cant_datos_=-2;
 
         switch (opc){
             case 1:
@@ -413,11 +450,35 @@ void console(){
                 break;
             case 14:
                 //imprimir todas las cadenas de clientes
-                cout<<"Clientes: "<<Patrones_string1<<endl; break;
+                cout<<"Clientes: "<<Patrones_string1<<endl;
+                
+                cout<<"Ingrese patron: "; cin>>patron;
+                //do while, el patron debe ser mayor a 2
+                while (patron.size()<2){
+                    cout<<"El patron debe ser mayor a 2 caracteres"<<endl;
+                    cout<<"Ingrese patron: "; cin>>patron;
+                }
+                
+                BuscarPatron(Patrones_string1, patron, res, &cant_datos_);
+                
+                if (int(res.size())==0){
+                    cout<<"No existen cadenas que inicien con "<<data<<endl;
+                }
+                else{
+                    for (int i=0; i<int(res.size()); i++){
+                        cadena_bloques->get_block(res[i]);
+                    }
+                }
+
+                break;
+                            
+
+
                 
             case 15:
                 //imprimir todas las cadenas de lugares
                 cout<<"Lugares: "<<Patrones_string2<<endl; break;
+                
                 break;
 
             case 16:
