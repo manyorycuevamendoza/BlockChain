@@ -1,5 +1,4 @@
 #include "funcionamiento_structs.h"
-#include "structs/patriciaTrie/patricia_trie.h"
 int main(){
     begin();
     /*
