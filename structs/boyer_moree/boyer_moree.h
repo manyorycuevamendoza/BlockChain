@@ -15,7 +15,6 @@ void BuscarPatron(string cadena, string patron, CircularArray <int>& array){
   int i = size_patron-1; // empezamos evaluando desde ultima posicion
   
   for (int j=0;j<i;j++) if (cadena[j]=='.') ultimo_punto++; // se corrige nro de ultimo punto encontrado
-  cout<<"Punto; "<<ultimo_punto<<endl;
   
   while (i!=size_cadena){ // mientras aun se pueda evaluar
     if (cadena[i]=='.') {ultimo_punto++;i++;}
@@ -30,7 +29,7 @@ void BuscarPatron(string cadena, string patron, CircularArray <int>& array){
       if (ind==size_patron){ // se encontró una coincidencia (se encontró patrón)
         if (!array.find(ultimo_punto)) {
           array.push_back(ultimo_punto);
-          cout<<ultimo_punto<<endl;
+          //cout<<ultimo_punto<<endl;
           
           // al hacer el salto, debe verificar si hay otro punto
           int pos_ultimo_punto = 0;

@@ -450,16 +450,14 @@ void console(){
                 break;
             case 14:
                 //imprimir todas las cadenas de clientes
-                cout<<"Clientes: "<<Patrones_string1<<endl;
+                cout<<"Ingrese patron para "<<atributos[0]<<": "; cin>>patron;
                 
-                cout<<"Ingrese patron: "; cin>>patron;
-                //do while, el patron debe ser mayor a 2
                 while (patron.size()<2){
-                    cout<<"El patron debe ser mayor a 2 caracteres"<<endl;
-                    cout<<"Ingrese patron: "; cin>>patron;
+                    cout<<"El patron debe ser mayor a 1 caracter"<<endl;
+                    cout<<"Ingrese patron para "<<atributos[0]<<": "; cin>>patron;
                 }
                 
-                BuscarPatron(Patrones_string1, patron, res, &cant_datos_);
+                BuscarPatron(Patrones_string1, patron, res);
                 
                 if (int(res.size())==0){
                     cout<<"No existen cadenas que inicien con "<<data<<endl;
@@ -477,7 +475,23 @@ void console(){
                 
             case 15:
                 //imprimir todas las cadenas de lugares
-                cout<<"Lugares: "<<Patrones_string2<<endl; break;
+                cout<<"Ingrese patron para "<<atributos[1]<<": "; cin>>patron;
+                
+                while (patron.size()<2){
+                    cout<<"El patron debe ser mayor a 1 caracter"<<endl;
+                    cout<<"Ingrese patron para "<<atributos[1]<<": "; cin>>patron;
+                }
+                
+                BuscarPatron(Patrones_string2, patron, res);
+                
+                if (int(res.size())==0){
+                    cout<<"No existen cadenas que inicien con "<<data<<endl;
+                }
+                else{
+                    for (int i=0; i<int(res.size()); i++){
+                        cadena_bloques->get_block(res[i]);
+                    }
+                }
                 
                 break;
 
@@ -518,8 +532,9 @@ void console(){
                 cout<<"Programa finalizado"<<endl;
                 break;
             
-            res.clear();
+            
         }
+        res.clear();
         if (opc==20) { break;}
         sleep(3);
     }while (opc!=20);
