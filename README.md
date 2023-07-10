@@ -105,10 +105,8 @@ El algoritmo recorre la cadena de texto de derecha a izquierda, empezando desde 
 Después de encontrar una coincidencia, se realiza un salto en la posición de la cadena de texto para evitar buscar el mismo patrón nuevamente. Se verifica si existen puntos en los extremos del patrón y se incrementa el contador de puntos en caso de encontrarlos, evitando contar el mismo punto dos veces.
 
 Tambien se proporcionan dos funciones adicionales en el código:
-
-	1. eliminarContenidoDespuesDelPunto: elimina el contenido después del punto en una cadena a partir de un punto de inicio dado
- 
-	2. AgregarDespuesDelPunto: agrega contenido después de un punto específico en una cadena.
+1. eliminarContenidoDespuesDelPunto: elimina el contenido después del punto en una cadena a partir de un punto de inicio dado
+2. AgregarDespuesDelPunto: agrega contenido después de un punto específico en una cadena.
  
 La complejidad es O(longitud de la cadena + longitud del patrón), esto se debe a que el algoritmo realiza saltos en la posición de la cadena lo cual reduce la cantidad de comparaciones necesarias en cada iteración.
 
