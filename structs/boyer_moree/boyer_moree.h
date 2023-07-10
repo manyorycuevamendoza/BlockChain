@@ -5,84 +5,42 @@
 #include "../circular_array/circular_array.h"
 using namespace std;
 
+void BuscarPatron(string cadena, string patron, CircularArray <int>& array){
 
-void CoincidenciaSufijoCompleto(int Cambio_array[], int arrayBorde[], string patron)
-{
-    int tamPatron = patron.size();
-    int i = tamPatron;
-    int j = tamPatron + 1;
-    arrayBorde[i] = j;
-
-    while (i > 0)
-    {
-        while (j <= tamPatron && patron[i - 1] != patron[j - 1])
-        {
-            if (Cambio_array[j] == 0)
-                Cambio_array[j] = j - i;
-            j = arrayBorde[j];
+  // obtenemos su size
+  int size_patron = patron.size();
+  int size_cadena = cadena.size();  
+  int ultimo_punto = -1; // para saber si ya se pasó un punto (y no contarlo dos veces)
+  
+  int i = size_patron-1; // empezamos evaluando desde ultima posicion
+  
+  for (int j=0;j<i;j++) if (cadena[j]=='.') ultimo_punto++; // se corrige nro de ultimo punto encontrado
+  cout<<"Punto; "<<ultimo_punto<<endl;
+  
+  while (i!=size_cadena){ // mientras aun se pueda evaluar
+    if (cadena[i]=='.') {ultimo_punto++;i++;}
+    else if (cadena[i]==patron[size_patron-1]){ // si ambos coinciden
+      int ind = 0; // para recorrer patron
+      while (ind<size_patron){ // verificamos en orden inverso  
+        if (cadena[i-ind]==patron[size_patron-1-ind]) ind++; // se compara igualdad
+        else {
+          ind=size_patron+1; // se le da un valor que no sea size_patron
         }
-        i--;
-        j--;
-        arrayBorde[i] = j;
-    }
-}
-
-void CoincidenciaSufijoParcial(int Cambio_array[], int arrayBorde[], string patron)
-{
-    int tamPatron = patron.size();
-    int j;
-    j = arrayBorde[0];
-
-    for (int i = 0; i < tamPatron; i++)
-    {
-        if (Cambio_array[i] == 0)
-            Cambio_array[i] = j;
-        if (i == j)
-            j = arrayBorde[j];
-    }
-}
-
-void BuscarPatron(string cadenaPrincipal, string patron, CircularArray<int> &array, int *index)
-{
-    int tamPatron = patron.size();
-    int tamCadena = cadenaPrincipal.size();
-    int arrayBorde[tamPatron + 1];
-    int Cambio_array[tamPatron + 1];
-
-    for (int i = 0; i <= tamPatron; i++)
-    {
-        Cambio_array[i] = 0;
-    }
-
-    CoincidenciaSufijoCompleto(Cambio_array, arrayBorde, patron);
-    CoincidenciaSufijoParcial(Cambio_array, arrayBorde, patron);
-
-    int Cambio = 0;
-    int  punto =0;
-    int contador=-1;
-//el array debe evaluar el punto donde pasa y tomarlo como un indice
-    while (Cambio <= (tamCadena - tamPatron)){
-        int j = tamPatron - 1;
-        
-        for (int i = 0; i < tamPatron; i++){
-            if (cadenaPrincipal[Cambio + i] == '.'){
-                contador++;
-            }
+      }
+      if (ind==size_patron){ // se encontró una coincidencia (se encontró patrón)
+        if (!array.find(ultimo_punto)) {
+          array.push_back(ultimo_punto);
+          cout<<ultimo_punto<<endl;
+          i+=(size_patron-1); // se avanza el valor de i
         }
-        //verificar si el patron y la cadena principal son iguales
-        while (j >= 0 && patron[j] == cadenaPrincipal[Cambio + j]){j--;punto=contador;}
-        if (j < 0){
-            (*index)++;
-            if(array.find(punto/2)==false){
-                array.push_back(punto/2);
-                //para aproximar el punto al momento de dividirlo usamos la funcion floor
-            }
-            Cambio += Cambio_array[0];
-        }
-        else{
-            Cambio += Cambio_array[j + 1];
-        }
+        else i++;
+      }
+      else i++;
+      
     }
+    else i++; //sino coinciden, se avanza uno
+  }
+  
 }
 
 std::string eliminarContenidoDespuesDelPunto(std::string cadena, int puntoInicio) {
@@ -134,7 +92,3 @@ std::string AgregarDespuesDelPunto(const std::string& cadena, int puntoInicio, s
 }
 
 #endif
-
-int main(){
-    
-}
