@@ -58,7 +58,7 @@ void BuscarPatron(string cadenaPrincipal, string patron, CircularArray<int> &arr
     CoincidenciaSufijoParcial(Cambio_array, arrayBorde, patron);
 
     int Cambio = 0;
-    int punto =0;
+    int  punto =0;
     int contador=-1;
 //el array debe evaluar el punto donde pasa y tomarlo como un indice
     while (Cambio <= (tamCadena - tamPatron)){
@@ -70,11 +70,12 @@ void BuscarPatron(string cadenaPrincipal, string patron, CircularArray<int> &arr
             }
         }
         //verificar si el patron y la cadena principal son iguales
-        while (j >= 0 && patron[j] == cadenaPrincipal[Cambio + j] || cadenaPrincipal[Cambio + j-1] == '.'){j--;punto=contador;}
+        while (j >= 0 && patron[j] == cadenaPrincipal[Cambio + j]){j--;punto=contador;}
         if (j < 0){
             (*index)++;
-            if(array.find(punto)==false){
-                array.push_back(punto);
+            if(array.find(punto/2)==false){
+                array.push_back(punto/2);
+                //para aproximar el punto al momento de dividirlo usamos la funcion floor
             }
             Cambio += Cambio_array[0];
         }
@@ -82,6 +83,58 @@ void BuscarPatron(string cadenaPrincipal, string patron, CircularArray<int> &arr
             Cambio += Cambio_array[j + 1];
         }
     }
-
 }
+
+std::string eliminarContenidoDespuesDelPunto(std::string cadena, int puntoInicio) {
+    int contadorPuntos = 0;
+    size_t indice = 0;
+
+    // Buscar el punto de inicio
+    while (contadorPuntos <= puntoInicio && indice < cadena.size()) {
+        if (cadena[indice] == '.') {
+            contadorPuntos++;
+        }
+        indice++;
+    }
+
+    // Buscar el siguiente punto
+    size_t siguientePunto = cadena.find('.', indice);
+    if (siguientePunto == std::string::npos) {
+        siguientePunto = cadena.size();
+    }
+
+    // Eliminar el contenido entre los puntos
+    cadena.erase(indice, siguientePunto - indice +1);
+
+    return cadena;
+}
+std::string AgregarDespuesDelPunto(const std::string& cadena, int puntoInicio, std::string contenidoAgregar) {
+    int contadorPuntos = 0;
+    size_t indice = 0;
+    std::string resultado;
+    for(auto &item:contenidoAgregar){
+        item=tolower(item);
+    }
+    // Buscar el punto de inicio
+    while (contadorPuntos <= puntoInicio && indice < cadena.size()) {
+        resultado += cadena[indice];
+        if (cadena[indice] == '.') {
+            contadorPuntos++;
+        }
+        indice++;
+    }
+
+    // Agregar el contenido después del punto de inicio
+    resultado += contenidoAgregar;
+
+    // Copiar el resto de la cadena desde el índice actual
+    resultado += cadena.substr(indice);
+
+    return resultado;
+}
+
 #endif
+
+int main(){
+    
+}
