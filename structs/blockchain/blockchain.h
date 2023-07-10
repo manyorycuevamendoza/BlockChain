@@ -246,7 +246,17 @@ class BlockChain{
           //s += temp->huella_padre; // añadimos la huella del padre
 
           //verificando si la huella sigue siendo correcta
-
+          /*
+          SHA256 sha;
+          sha.update(s);
+          uint8_t * digest = sha.digest();//obtiendo huella de bolque
+          //cout<<"Huella: "<<sha.toString(digest)<<endl;
+          if(SHA256::toString(digest) == temp->huella) {//si se sigue cumpliendo el proof of work
+            //delete [] digest;
+            return ;
+          }
+          delete [] digest;
+          */
           while (temp!=head){//cuando no se cumple el proof of work
             if (temp->verificar_hash()) temp->hasheado = true;
             else{
