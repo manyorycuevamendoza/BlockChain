@@ -48,7 +48,7 @@ public:
     //retorna el id value
     TV search(TK key) {
         if (!find(key)) {
-            cout <<"Elemento no encontrado\n"; 
+            cout <<"Elemento no encontrado\n";
             return -1;
         }
         int index=hasher(key)%capacity;
@@ -62,7 +62,7 @@ public:
             array[i].display();
         }
     }
-    
+
     void remove(TK key, TV value){
         int index = hasher(key)%capacity;
         if (array[index].find(Entry2<TK,TV>(key,value))){
