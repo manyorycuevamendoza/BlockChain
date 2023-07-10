@@ -160,21 +160,6 @@ Estamos desarrollando nuestro proyecto utilizando el framework Qt, el cual nos p
 ### 🔗 Repo de la interfaz.
 [![github](https://img.shields.io/badge/github-0a0a0a?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ManOnPajamas/bchain_app)
 
-En la interfaz gráfica creamos un "menú" con opciones para crear un bloque o ver los archivos.
-<p align="center">
-  <img src="images/gui_entrada.jpg" alt="nonce0000" width="400">
-</p>
-
-En el bloque tenemos el número del bloque, el número del nonce, los datos y el código hash.
-
-<p align="center">
-  <img src="images/gui_bloques.jpg" alt="nonce0000" width="400">
-</p>
-
-Los datos que tenemos en este caso son de transacciones, tenemos el cliente, el lugar, el monto y la fecha de transacción.
-<p align="center">
-  <img src="images/gui_datos.jpg" alt="nonce0000" width="400">
-</p>
 
 ## Bibliografía
 
