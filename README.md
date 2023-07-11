@@ -137,6 +137,10 @@ Esta estructura se utiliza para poder guardar el nombre de los emisores y los lu
   <img src="images/patricia.PNG" alt="patricia trie" width="200">
 </p>
 
+- void insert(TK id,string key):  O(n) donde n es el número total de nodos.
+- bool search(string key): O(size) donde size es el tamaño de la palabra que se esta buscando.
+- void remove(string key)) : O(size), donde size es el tamaño de la palabra que se quiere eliminar.
+
 #### Blockchain:
 Simula un blockchain basándose en la lista doblemente enlazada con centinela, la estructura Block y la función de hash SHA256. Como necesitamos la huella del anterior blockchain, es necesario un puntero al anterior y uno al siguiente para que el insert sea mas sencillo. Para la estrategia de asegurar la integridad de su contenido, hacemos uso de templates genericos al insertar los datos; estos se guardan en un array dinámico de strings donde los vamos desempacando.
 
